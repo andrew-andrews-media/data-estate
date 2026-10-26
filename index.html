@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology</title>
+<meta name="description" content="A vocabulary for describing a data estate, and an aggregate profile of one estate described with it. First release due November 2026.">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<style>
+:root {
+  --paper: #f6f8f7;
+  --ink: #1b2a36;
+  --muted: #5b6b77;
+  --line: #c9d3d9;
+  --accent: #1d6b5c;
+  --serif: "Iowan Old Style", Charter, "Bitstream Charter", "Sitka Text", "Palatino Linotype", Palatino, Georgia, serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, "Liberation Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #101a21;
+    --ink: #e3ebee;
+    --muted: #93a4ae;
+    --line: #2b3a44;
+    --accent: #7fcab6;
+  }
+}
+* { box-sizing: border-box; }
+html { background: var(--paper); }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+main { max-width: 38rem; margin: 0 auto; padding: 4.5rem 1rem 3rem; }
+h1 {
+  font-size: clamp(2.25rem, 8vw, 3rem);
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.25rem;
+}
+h2 { font-size: 1.3125rem; line-height: 1.3; font-weight: 600; margin: 3.25rem 0 1rem; }
+p { margin: 0 0 1rem; }
+.lede { font-size: 1.3125rem; line-height: 1.5; margin-bottom: 1.25rem; }
+.status { color: var(--muted); }
+code { font-family: var(--mono); font-size: 0.875em; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.base {
+  font-family: var(--mono);
+  font-size: clamp(1rem, 4.6vw, 1.375rem);
+  line-height: 1.4;
+  margin: 0 0 0.25rem;
+  overflow-wrap: anywhere;
+}
+.paths { margin: 0; }
+.paths > div {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0 1rem;
+  padding: 0.45rem 0 0.45rem 2rem;
+}
+.paths > div::before {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid var(--line);
+}
+.paths > div:last-child::before { bottom: auto; height: 1.3rem; }
+.paths > div::after {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  top: 1.3rem;
+  width: 1rem;
+  border-top: 1px solid var(--line);
+}
+.paths dt { font-family: var(--mono); font-size: 1rem; line-height: 1.7; color: var(--accent); }
+.paths dd { margin: 0; }
+.later { color: var(--muted); }
+footer { margin-top: 3.5rem; color: var(--muted); font-size: 1rem; }
+footer p { margin: 0 0 0.35rem; }
+@media (max-width: 34rem) {
+  main { padding-top: 3rem; }
+  .paths > div { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Data Estate Ontology</h1>
+<p class="lede">A vocabulary for describing a data estate, and an aggregate profile of one estate described with it.</p>
+<p class="status">This page holds the place until the first release, due in November 2026.</p>
+
+<h2>What will resolve here</h2>
+<p class="status">The namespace below is requested at w3id.org, and resolves once the request is merged.</p>
+<p class="base">https://w3id.org/data-estate/</p>
+<dl class="paths">
+<div><dt>vocab</dt><dd>Classes and properties: a data estate&#8217;s repositories as data products, and the decisions, rulings and jobs that govern them.</dd></div>
+<div><dt>shapes</dt><dd>The rules the estate is checked against, as SHACL shapes.</dd></div>
+<div><dt>scheme</dt><dd>Concept schemes for type, status, tier and domain.</dd></div>
+<div><dt>queries</dt><dd>The competency questions, as SPARQL.</dd></div>
+<div><dt>docs</dt><dd>A documentation page, and an overview of the model in plain language.</dd></div>
+<div><dt>profile</dt><dd class="later">Later: counts and flows by class, domain and tier. It describes the shape of an estate, never its contents.</dd></div>
+</dl>
+
+<h2>Built on open standards</h2>
+<p>DCAT, PROV-O, SKOS, DPROD, schema.org, the W3C Organization Ontology and Dublin Core, with SHACL for the rules, and VoID and the RDF Data Cube for the profile.</p>
+
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>
