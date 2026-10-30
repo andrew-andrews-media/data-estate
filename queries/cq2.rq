@@ -1,0 +1,36 @@
+# CQ2. Which entities appear in the artefacts of more than one tenant or domain?
+# An artefact's tenant is its repository's. Its domain is its own: declared, or taken from its repository.
+# Run it over the estate graph merged with the vocabulary, which supplies the concepts and the subclass links.
+# Published at https://w3id.org/data-estate/queries/cq2 under CC BY 4.0.
+PREFIX de:      <https://w3id.org/data-estate/vocab#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?entity ?slug ?tenants (COALESCE(?nd, 0) AS ?domains) ?tenantList (COALESCE(?dl, "") AS ?domainList)
+WHERE {
+  {
+    SELECT ?entity (COUNT(DISTINCT ?tenant) AS ?tenants)
+           (GROUP_CONCAT(DISTINCT ?tenantLabel; separator=", ") AS ?tenantList)
+    WHERE {
+      ?doc a/rdfs:subClassOf* de:Artefact ; dcterms:subject ?entity ; dcterms:isPartOf ?repo .
+      ?repo de:tenant ?tenant .
+      OPTIONAL { ?tenant skos:prefLabel ?tl }
+      BIND (COALESCE(STR(?tl), STR(?tenant)) AS ?tenantLabel)
+    }
+    GROUP BY ?entity
+  }
+  OPTIONAL {
+    SELECT ?entity (COUNT(DISTINCT ?domain) AS ?nd)
+           (GROUP_CONCAT(DISTINCT ?domainLabel; separator=", ") AS ?dl)
+    WHERE {
+      ?doc a/rdfs:subClassOf* de:Artefact ; dcterms:subject ?entity ; de:domain ?domain .
+      OPTIONAL { ?domain skos:prefLabel ?dlab }
+      BIND (COALESCE(STR(?dlab), STR(?domain)) AS ?domainLabel)
+    }
+    GROUP BY ?entity
+  }
+  OPTIONAL { ?entity skos:notation ?slug }
+  FILTER (?tenants > 1 || COALESCE(?nd, 0) > 1)
+}
+ORDER BY DESC(?tenants) DESC(?domains) ?slug

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: CQ10</title>
+<meta name="description" content="For a task about a given entity, what should an agent load first?">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/queries/cq10">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../../">Home</a> <a href="../../docs/">Overview</a> <a href="../../vocab/">Vocabulary</a> <a href="../../scheme/">Schemes</a> <a href="../../shapes/">Rules</a> <a href="../../queries/" aria-current="page">Queries</a></nav>
+<main>
+<h1>CQ10</h1>
+<p class="lede">For a task about a given entity, what should an agent load first?</p>
+<p>It lists the current artefacts about the entity or anything below it, ranked: canonical copies first, then</p>
+<p>the rest, then copies that derive from a canonical copy; newest first within each rank. Superseded and</p>
+<p>archived files, and artefacts flagged sensitive, are left out.</p>
+<p>Parameter: ?entity, the IRI of an entity. Bind it with initial bindings or with VALUES inside WHERE, or replace it with the IRI.</p>
+<p>Published at https://w3id.org/data-estate/queries/cq10 under CC BY 4.0.</p>
+<p><a href="../cq10.rq">Download the query</a></p>
+<pre><code># CQ10. For a task about a given entity, what should an agent load first?
+# It lists the current artefacts about the entity or anything below it, ranked: canonical copies first, then
+# the rest, then copies that derive from a canonical copy; newest first within each rank. Superseded and
+# archived files, and artefacts flagged sensitive, are left out.
+# Parameter: ?entity, the IRI of an entity. Bind it with initial bindings or with VALUES inside WHERE, or replace it with the IRI.
+# Published at https://w3id.org/data-estate/queries/cq10 under CC BY 4.0.
+PREFIX de:      &lt;https://w3id.org/data-estate/vocab#&gt;
+PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
+PREFIX org:     &lt;http://www.w3.org/ns/org#&gt;
+PREFIX prov:    &lt;http://www.w3.org/ns/prov#&gt;
+PREFIX rdfs:    &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX schema:  &lt;https://schema.org/&gt;
+PREFIX skos:    &lt;http://www.w3.org/2004/02/skos/core#&gt;
+
+SELECT ?entity ?doc ?path ?title ?date ?rank (GROUP_CONCAT(DISTINCT ?slug; separator=&quot;, &quot;) AS ?about)
+WHERE {
+  { ?e org:subOrganizationOf* ?entity }
+  UNION { ?e schema:organizer|dcterms:publisher ?entity }
+  OPTIONAL { ?e skos:notation ?n }
+  BIND (COALESCE(STR(?n), STR(?e)) AS ?slug)
+  ?doc a/rdfs:subClassOf* de:Artefact ; dcterms:subject ?e ; de:path ?path .
+  FILTER NOT EXISTS { ?doc de:sensitive true }
+  FILTER NOT EXISTS { ?doc de:status &lt;https://w3id.org/data-estate/status/superseded&gt; }
+  FILTER NOT EXISTS { ?doc de:archived true }
+  OPTIONAL { ?doc dcterms:title ?title }
+  OPTIONAL { ?doc dcterms:date ?date }
+  BIND (IF(EXISTS { ?doc de:status &lt;https://w3id.org/data-estate/status/canonical&gt; }
+           || EXISTS { ?copy prov:wasDerivedFrom ?doc }, 1,
+           IF(EXISTS { ?doc prov:wasDerivedFrom ?c }, 3, 2)) AS ?rank)
+}
+GROUP BY ?entity ?doc ?path ?title ?date ?rank
+ORDER BY ?rank DESC(?date) ?path
+</code></pre>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# CQ11. Which decisions and rulings govern a given repository, document or entity, and which rulings are superseded?
+# A decision or ruling governs the subject itself, or a document the subject holds. Newest first; on one date,
+# decisions before rulings, then by title, so that an answer keeps one order.
+# A ruling is superseded when its state says so, or a later ruling replaces it.
+# Parameter: ?subject, the IRI of a repository, artefact or entity. Bind it with initial bindings or with VALUES inside WHERE, or replace it with the IRI.
+# Published at https://w3id.org/data-estate/queries/cq11 under CC BY 4.0.
+PREFIX de:      <https://w3id.org/data-estate/vocab#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT DISTINCT ?subject ?x ?kind ?date ?title ?superseded
+WHERE {
+  { ?x de:governs ?subject } UNION { ?x de:governs ?doc . ?doc dcterms:isPartOf ?subject }
+  { ?x a de:Decision . BIND ("decision" AS ?kind) } UNION { ?x a de:Ruling . BIND ("ruling" AS ?kind) }
+  OPTIONAL { ?x dcterms:date ?date }
+  OPTIONAL { ?x dcterms:title ?title }
+  BIND (EXISTS { ?x de:rulingState <https://w3id.org/data-estate/ruling-state/superseded> }
+        || EXISTS { ?later dcterms:replaces ?x } AS ?superseded)
+}
+ORDER BY DESC(?date) ?kind ?title ?x ?subject

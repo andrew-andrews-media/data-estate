@@ -1,0 +1,1271 @@
+# Data Estate Ontology: the vocabulary
+# Classes, properties and concept schemes, with their labels and definitions.
+# Licensed under CC BY 4.0. Published at https://w3id.org/data-estate/vocab
+
+@prefix de:      <https://w3id.org/data-estate/vocab#> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dprod:   <https://ekgf.github.io/dprod/> .
+@prefix org:     <http://www.w3.org/ns/org#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema:  <https://schema.org/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ------------------------------------------------------------------
+# The vocabulary
+# ------------------------------------------------------------------
+
+<https://w3id.org/data-estate/vocab>
+    a owl:Ontology ;
+    dcterms:title "Data Estate Ontology"@en ;
+    dcterms:description "The Data Estate Ontology describes a data estate: the repositories a person or small organisation keeps, the documents in them, and the control plane that governs them. It was built for one working estate, and is published so that others can describe theirs the same way."@en ;
+    rdfs:comment "In these definitions, a matter is an action or question the owner owes; a rulings sheet is a dated list of questions put to the owner; the decision board is where the owner answers matters and rulings, each answer filed back into the estate; the register is the estate's list of its repositories, and the entity register its list of the entities documents may name; a metadata block is the short block of keys at the head of a document; the catalogue is the index of every artefact, built from those blocks and from where files sit; and a lineage file is a repository's own record of its significant changes. Every organisation, community, event, framework, topic, place and person in the entity register is also a skos:Concept in the estate's own entity scheme, which a publication does not include: its concepts are names."@en ;
+    dcterms:creator [ a schema:Person ; schema:name "Andrew Andrews" ; schema:url <https://github.com/andrew-andrews-media> ] ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionInfo "1.0" ;
+    owl:versionIRI <https://w3id.org/data-estate/vocab/2026-10-27> ;
+    dcterms:issued "2026-10-27"^^xsd:date ;
+    vann:preferredNamespacePrefix "de" ;
+    vann:preferredNamespaceUri "https://w3id.org/data-estate/vocab#" ;
+    rdfs:seeAlso <https://w3id.org/data-estate/shapes> , <https://w3id.org/data-estate/docs/> .
+
+# ------------------------------------------------------------------
+# Classes
+# ------------------------------------------------------------------
+
+de:Repository a owl:Class ;
+    rdfs:label "Repository"@en ;
+    skos:definition "A top-level body of work, registered as a unit. From T1 it keeps its own record of what was asked, produced and decided."@en ;
+    rdfs:subClassOf dcat:Catalog ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:NonSensitiveRepository a owl:Class ;
+    rdfs:label "Non-sensitive repository"@en ;
+    skos:definition "A repository not flagged sensitive, and so described in full."@en ;
+    skos:scopeNote "Every non-sensitive repository is also a data product (dprod:DataProduct)."@en ;
+    rdfs:subClassOf de:Repository ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:Artefact a owl:Class ;
+    rdfs:label "Artefact"@en ;
+    skos:definition "A file held in a repository."@en ;
+    rdfs:subClassOf dcat:Resource ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:DeclaredArtefact a owl:Class ;
+    rdfs:label "Declared artefact"@en ;
+    skos:definition "An artefact whose metadata block the metadata rules govern, complete or not."@en ;
+    rdfs:subClassOf de:Artefact ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:LineageEntry a owl:Class ;
+    rdfs:label "Lineage entry"@en ;
+    skos:definition "A record that a significant change was made to a repository: its date, its kind and its evidence."@en ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:Project a owl:Class ;
+    rdfs:label "Project"@en ;
+    skos:definition "A workspace where a body of work is carried on, such as a project in an AI assistant, kept on record by a repository."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:Community a owl:Class ;
+    rdfs:label "Community"@en ;
+    skos:definition "An association, network or community of practice."@en ;
+    rdfs:subClassOf schema:Organization ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:Framework a owl:Class ;
+    rdfs:label "Framework"@en ;
+    skos:definition "A published framework, standard, programme or publication."@en ;
+    rdfs:subClassOf schema:CreativeWork ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:Topic a owl:Class ;
+    rdfs:label "Topic"@en ;
+    skos:definition "A subject that documents concern, other than an organisation, event, framework, place or person."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:Decision a owl:Class ;
+    rdfs:label "Decision"@en ;
+    skos:definition "A dated decision recorded in a repository's decision log."@en ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:Ruling a owl:Class ;
+    rdfs:label "Ruling"@en ;
+    skos:definition "A question put to the owner for a decision, on a rulings sheet or the decision board, with the answer once given."@en ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:Job a owl:Class ;
+    rdfs:label "Job"@en ;
+    skos:definition "A unit of automated work: a prompt staged for an agent to carry out, and the result it records."@en ;
+    rdfs:subClassOf prov:Activity ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:CheckedJob a owl:Class ;
+    rdfs:label "Checked job"@en ;
+    skos:definition "A job staged after results began to record the files they wrote, and so checked by the rules."@en ;
+    rdfs:subClassOf de:Job ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:Action a owl:Class ;
+    rdfs:label "Action"@en ;
+    skos:definition "Something only the owner can do, tracked until it is done or dropped."@en ;
+    rdfs:subClassOf schema:Action ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:Question a owl:Class ;
+    rdfs:label "Question"@en ;
+    skos:definition "A ruling, question or go-ahead the owner owes, outside a rulings sheet."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:Deliverable a owl:Class ;
+    rdfs:label "Deliverable"@en ;
+    skos:definition "A piece of planned work, open until it is delivered or dropped, with its evidence."@en ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:Tenant a owl:Class ;
+    rdfs:label "Tenant"@en ;
+    skos:definition "The person or organisation a repository is kept for."@en ;
+    skos:scopeNote "Tenants name people and organisations, so a publication of an estate lists none."@en ;
+    rdfs:subClassOf prov:Agent ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+# ------------------------------------------------------------------
+# Properties
+# Domains and ranges are stated with schema:domainIncludes and schema:rangeIncludes,
+# so nothing is inferred from them. A concept-valued property names its scheme with rdfs:seeAlso.
+# ------------------------------------------------------------------
+
+de:tenant a owl:ObjectProperty ;
+    rdfs:label "tenant"@en ;
+    skos:definition "The tenant a repository is kept for."@en ;
+    schema:domainIncludes de:Repository ;
+    schema:rangeIncludes de:Tenant ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:domain a owl:ObjectProperty ;
+    rdfs:label "domain"@en ;
+    skos:definition "The domain of work a repository or artefact belongs to."@en ;
+    skos:scopeNote "An artefact's domain is the one its metadata block declares, or else its repository's; de:domainSource says which."@en ;
+    schema:domainIncludes de:Repository , de:Artefact ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/domain> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:category a owl:DatatypeProperty ;
+    rdfs:label "category"@en ;
+    skos:definition "The register's own label for a repository's kind of work, kept beside its domain."@en ;
+    schema:domainIncludes de:Repository ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:tierNow a owl:ObjectProperty ;
+    rdfs:label "tier now"@en ;
+    skos:definition "How managed a repository is today."@en ;
+    schema:domainIncludes de:Repository ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/tier> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:tierTarget a owl:ObjectProperty ;
+    rdfs:label "tier target"@en ;
+    skos:definition "The tier a repository is meant to reach."@en ;
+    schema:domainIncludes de:Repository ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/tier> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:sensitive a owl:DatatypeProperty ;
+    rdfs:label "sensitive"@en ;
+    skos:definition "Whether a repository or artefact is flagged sensitive."@en ;
+    skos:scopeNote "A sensitive repository is recorded by its existence, tenant, tier and this flag alone. A sensitive artefact is listed by path and title only."@en ;
+    schema:domainIncludes de:Repository , de:Artefact ;
+    schema:rangeIncludes xsd:boolean ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:hasLineageFile a owl:DatatypeProperty ;
+    rdfs:label "has lineage file"@en ;
+    skos:definition "Whether a repository keeps a lineage file at its root."@en ;
+    schema:domainIncludes de:NonSensitiveRepository ;
+    schema:rangeIncludes xsd:boolean ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:issueRecord a owl:ObjectProperty ;
+    rdfs:label "issue record"@en ;
+    skos:definition "A lineage entry recording a deliverable the repository issued outside the estate."@en ;
+    schema:domainIncludes de:NonSensitiveRepository ;
+    schema:rangeIncludes de:LineageEntry ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:path a owl:DatatypeProperty ;
+    rdfs:label "path"@en ;
+    skos:definition "Where an artefact sits in its repository."@en ;
+    schema:domainIncludes de:Artefact ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:artefactType a owl:ObjectProperty ;
+    rdfs:label "artefact type"@en ;
+    skos:definition "An artefact's kind."@en ;
+    schema:domainIncludes de:Artefact ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/type> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:status a owl:ObjectProperty ;
+    rdfs:label "status"@en ;
+    skos:definition "Whether an artefact is the copy to cite, a working copy, or superseded."@en ;
+    schema:domainIncludes de:Artefact ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/status> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:domainSource a owl:ObjectProperty ;
+    rdfs:label "domain source"@en ;
+    skos:definition "Where an artefact's domain came from: declared in its metadata block, or inherited from its repository."@en ;
+    schema:domainIncludes de:Artefact ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/domain-source> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:archived a owl:DatatypeProperty ;
+    rdfs:label "archived"@en ;
+    skos:definition "Whether an artefact or job is kept in an archive."@en ;
+    skos:scopeNote "An artefact is kept in an archive once it is superseded. A job is archived once it has been moved to its queue's archive."@en ;
+    schema:domainIncludes de:Artefact , de:Job ;
+    schema:rangeIncludes xsd:boolean ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:metadataSource a owl:ObjectProperty ;
+    rdfs:label "metadata source"@en ;
+    skos:definition "Whether an artefact's metadata was declared in its metadata block, inferred by the catalogue, or is its path alone."@en ;
+    schema:domainIncludes de:Artefact ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/metadata-source> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:sha256 a owl:DatatypeProperty ;
+    rdfs:label "SHA-256"@en ;
+    skos:definition "A hash of an artefact's content, to tell copies apart."@en ;
+    schema:domainIncludes de:Artefact ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:declaredKey a owl:DatatypeProperty ;
+    rdfs:label "declared key"@en ;
+    skos:definition "A key an artefact's metadata block carries, whatever its value."@en ;
+    skos:scopeNote "A validation term: it records what a metadata block declared, so the rules can name the fault."@en ;
+    schema:domainIncludes de:DeclaredArtefact ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:unmappedType a owl:DatatypeProperty ;
+    rdfs:label "unmapped type"@en ;
+    skos:definition "A declared type outside the artefact-type scheme, as written, so the rules can name the fault."@en ;
+    skos:scopeNote "A validation term: it records what a metadata block declared, so the rules can name the fault."@en ;
+    schema:domainIncludes de:DeclaredArtefact ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:unmappedStatus a owl:DatatypeProperty ;
+    rdfs:label "unmapped status"@en ;
+    skos:definition "A declared status outside the status scheme, as written, so the rules can name the fault."@en ;
+    skos:scopeNote "A validation term: it records what a metadata block declared, so the rules can name the fault."@en ;
+    schema:domainIncludes de:DeclaredArtefact ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:unmappedDomain a owl:DatatypeProperty ;
+    rdfs:label "unmapped domain"@en ;
+    skos:definition "A declared domain outside the domain scheme, as written, so the rules can name the fault."@en ;
+    skos:scopeNote "A validation term: it records what a metadata block declared, so the rules can name the fault."@en ;
+    schema:domainIncludes de:DeclaredArtefact ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:unregisteredEntity a owl:DatatypeProperty ;
+    rdfs:label "unregistered entity"@en ;
+    skos:definition "A declared entity that is not in the entity register, as written."@en ;
+    skos:scopeNote "A validation term: it records what a metadata block declared, so the rules can name the fault."@en ;
+    schema:domainIncludes de:DeclaredArtefact ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:homeRepository a owl:ObjectProperty ;
+    rdfs:label "home repository"@en ;
+    skos:definition "The repository that keeps an entity's own record."@en ;
+    schema:domainIncludes schema:Organization , de:Community , schema:Event , de:Framework , de:Topic , schema:Place , schema:Person ;
+    schema:rangeIncludes de:Repository ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:aboutRepository a owl:ObjectProperty ;
+    rdfs:label "about repository"@en ;
+    skos:definition "The repository a lineage entry's change was made to."@en ;
+    schema:domainIncludes de:LineageEntry ;
+    schema:rangeIncludes de:Repository ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:changeType a owl:ObjectProperty ;
+    rdfs:label "change type"@en ;
+    skos:definition "The kind of change a lineage entry records."@en ;
+    schema:domainIncludes de:LineageEntry ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/change-type> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:evidencePath a owl:DatatypeProperty ;
+    rdfs:label "evidence path"@en ;
+    skos:definition "Where the evidence for a lineage entry or deliverable is kept."@en ;
+    skos:scopeNote "For a lineage entry, the evidence for its change; for a deliverable, the evidence that it was delivered."@en ;
+    schema:domainIncludes de:LineageEntry , de:Deliverable ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:evidenceResolves a owl:DatatypeProperty ;
+    rdfs:label "evidence resolves"@en ;
+    skos:definition "Whether every evidence path a lineage entry names exists."@en ;
+    schema:domainIncludes de:LineageEntry ;
+    schema:rangeIncludes xsd:boolean ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:projectRepository a owl:ObjectProperty ;
+    rdfs:label "project repository"@en ;
+    skos:definition "The repository that keeps a project's record."@en ;
+    schema:domainIncludes de:Project ;
+    schema:rangeIncludes de:Repository ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:noRepositoryReason a owl:DatatypeProperty ;
+    rdfs:label "no-repository reason"@en ;
+    skos:definition "Why a project has no repository, where it has none."@en ;
+    schema:domainIncludes de:Project ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:decisionLog a owl:ObjectProperty ;
+    rdfs:label "decision log"@en ;
+    skos:definition "The log a decision is recorded in."@en ;
+    schema:domainIncludes de:Decision ;
+    schema:rangeIncludes de:Artefact ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:governs a owl:ObjectProperty ;
+    rdfs:label "governs"@en ;
+    skos:definition "A repository, document or entity a decision or ruling governs."@en ;
+    schema:domainIncludes de:Decision , de:Ruling ;
+    schema:rangeIncludes de:Repository , de:Artefact , schema:Organization , de:Community , schema:Event , de:Framework , de:Topic , schema:Place , schema:Person ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:citesRuling a owl:ObjectProperty ;
+    rdfs:label "cites ruling"@en ;
+    skos:definition "A ruling a decision cites."@en ;
+    schema:domainIncludes de:Decision ;
+    schema:rangeIncludes de:Ruling ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:citesJob a owl:ObjectProperty ;
+    rdfs:label "cites job"@en ;
+    skos:definition "A job a decision cites."@en ;
+    schema:domainIncludes de:Decision ;
+    schema:rangeIncludes de:Job ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:citesLineage a owl:ObjectProperty ;
+    rdfs:label "cites lineage"@en ;
+    skos:definition "A lineage entry a decision cites."@en ;
+    schema:domainIncludes de:Decision ;
+    schema:rangeIncludes de:LineageEntry ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:rulingSource a owl:ObjectProperty ;
+    rdfs:label "ruling source"@en ;
+    skos:definition "The rulings sheet or decision-board file a ruling is recorded in."@en ;
+    schema:domainIncludes de:Ruling ;
+    schema:rangeIncludes de:Artefact ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:rulingNumber a owl:DatatypeProperty ;
+    rdfs:label "ruling number"@en ;
+    skos:definition "A ruling's number on its sheet."@en ;
+    schema:domainIncludes de:Ruling ;
+    schema:rangeIncludes xsd:integer ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:rulingCode a owl:DatatypeProperty ;
+    rdfs:label "ruling code"@en ;
+    skos:definition "A ruling's code on its sheet."@en ;
+    schema:domainIncludes de:Ruling ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:answersMatter a owl:ObjectProperty ;
+    rdfs:label "answers matter"@en ;
+    skos:definition "What a ruling from the decision board answers: a matter, a ruling of a rulings sheet, or a job."@en ;
+    schema:domainIncludes de:Ruling ;
+    schema:rangeIncludes de:Action , de:Question , de:Ruling , de:Job ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:answer a owl:DatatypeProperty ;
+    rdfs:label "answer"@en ;
+    skos:definition "The option the owner chose."@en ;
+    schema:domainIncludes de:Ruling ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:effect a owl:ObjectProperty ;
+    rdfs:label "effect"@en ;
+    skos:definition "What a ruling's answer does to the matter."@en ;
+    schema:domainIncludes de:Ruling ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/effect> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:rulingState a owl:ObjectProperty ;
+    rdfs:label "ruling state"@en ;
+    skos:definition "Where a ruling stands."@en ;
+    schema:domainIncludes de:Ruling ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/ruling-state> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:jobQueue a owl:DatatypeProperty ;
+    rdfs:label "job queue"@en ;
+    skos:definition "The queue folder a job was staged in."@en ;
+    schema:domainIncludes de:Job ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:jobRepository a owl:ObjectProperty ;
+    rdfs:label "job repository"@en ;
+    skos:definition "The repository a job works for."@en ;
+    schema:domainIncludes de:Job ;
+    schema:rangeIncludes de:Repository ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:stagedOn a owl:DatatypeProperty ;
+    rdfs:label "staged on"@en ;
+    skos:definition "The date a job was staged."@en ;
+    schema:domainIncludes de:Job ;
+    schema:rangeIncludes xsd:date ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:jobStatus a owl:ObjectProperty ;
+    rdfs:label "job status"@en ;
+    skos:definition "How a job ended, from its result; pending while it has none."@en ;
+    schema:domainIncludes de:Job ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/job-status> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:resultRead a owl:DatatypeProperty ;
+    rdfs:label "result read"@en ;
+    skos:definition "Whether a job's result was read: some results are never opened."@en ;
+    schema:domainIncludes de:Job ;
+    schema:rangeIncludes xsd:boolean ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:hasRunLog a owl:DatatypeProperty ;
+    rdfs:label "has run log"@en ;
+    skos:definition "Whether a job kept a run log."@en ;
+    schema:domainIncludes de:Job ;
+    schema:rangeIncludes xsd:boolean ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:backupFiles a owl:DatatypeProperty ;
+    rdfs:label "backup files"@en ;
+    skos:definition "How many backup copies a job made."@en ;
+    schema:domainIncludes de:Job ;
+    schema:rangeIncludes xsd:integer ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:recordsWrites a owl:DatatypeProperty ;
+    rdfs:label "records writes"@en ;
+    skos:definition "Whether a job's result records the files it wrote."@en ;
+    schema:domainIncludes de:Job ;
+    schema:rangeIncludes xsd:boolean ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:wroteDeclared a owl:ObjectProperty ;
+    rdfs:label "wrote (declared)"@en ;
+    skos:definition "A file a job's result says it wrote."@en ;
+    schema:domainIncludes de:Job ;
+    schema:rangeIncludes de:Artefact ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:wroteInferred a owl:ObjectProperty ;
+    rdfs:label "wrote (inferred)"@en ;
+    skos:definition "A file a job appears to have written, read from an older result's prose."@en ;
+    schema:domainIncludes de:Job ;
+    schema:rangeIncludes de:Artefact ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:wrotePath a owl:DatatypeProperty ;
+    rdfs:label "wrote path"@en ;
+    skos:definition "A file a job wrote that the catalogue does not hold, by its path."@en ;
+    schema:domainIncludes de:Job ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:matterId a owl:DatatypeProperty ;
+    rdfs:label "matter id"@en ;
+    skos:definition "A matter's id, the same as the decision board gives it."@en ;
+    schema:domainIncludes de:Action , de:Question ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:alsoId a owl:DatatypeProperty ;
+    rdfs:label "also id"@en ;
+    skos:definition "Another id the same matter goes by in a later source."@en ;
+    schema:domainIncludes de:Action , de:Question ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:matterKind a owl:ObjectProperty ;
+    rdfs:label "matter kind"@en ;
+    skos:definition "Whether the owner is to act, rule or give a go-ahead."@en ;
+    schema:domainIncludes de:Action , de:Question ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/matter-kind> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:matterState a owl:ObjectProperty ;
+    rdfs:label "matter state"@en ;
+    skos:definition "Where an action or question stands."@en ;
+    schema:domainIncludes de:Action , de:Question ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/matter-state> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:deliverableState a owl:ObjectProperty ;
+    rdfs:label "deliverable state"@en ;
+    skos:definition "Where a deliverable stands."@en ;
+    schema:domainIncludes de:Deliverable ;
+    schema:rangeIncludes skos:Concept ;
+    rdfs:seeAlso <https://w3id.org/data-estate/scheme/deliverable-state> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:source a owl:ObjectProperty ;
+    rdfs:label "source"@en ;
+    skos:definition "A document a matter is recorded in."@en ;
+    schema:domainIncludes de:Action , de:Question ;
+    schema:rangeIncludes de:Artefact ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:sourceRef a owl:DatatypeProperty ;
+    rdfs:label "source ref"@en ;
+    skos:definition "A matter's or deliverable's code in the document it is recorded in."@en ;
+    schema:domainIncludes de:Action , de:Question , de:Deliverable ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:due a owl:DatatypeProperty ;
+    rdfs:label "due"@en ;
+    skos:definition "A due date the source states."@en ;
+    schema:domainIncludes de:Action , de:Question ;
+    schema:rangeIncludes xsd:date ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:dueText a owl:DatatypeProperty ;
+    rdfs:label "due text"@en ;
+    skos:definition "The source's own words on timing."@en ;
+    schema:domainIncludes de:Action , de:Question ;
+    schema:rangeIncludes xsd:string ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:statedOverdue a owl:DatatypeProperty ;
+    rdfs:label "stated overdue"@en ;
+    skos:definition "Whether the source says the matter is overdue."@en ;
+    schema:domainIncludes de:Action , de:Question ;
+    schema:rangeIncludes xsd:boolean ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:blockedBy a owl:ObjectProperty ;
+    rdfs:label "blocked by"@en ;
+    skos:definition "A matter or deliverable that must come first."@en ;
+    schema:domainIncludes de:Action , de:Question , de:Deliverable ;
+    schema:rangeIncludes de:Action , de:Question , de:Deliverable ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:blocking a owl:DatatypeProperty ;
+    rdfs:label "blocking"@en ;
+    skos:definition "Whether a deliverable holds up other work."@en ;
+    schema:domainIncludes de:Deliverable ;
+    schema:rangeIncludes xsd:boolean ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:concerns a owl:ObjectProperty ;
+    rdfs:label "concerns"@en ;
+    skos:definition "A repository a matter concerns."@en ;
+    schema:domainIncludes de:Action , de:Question ;
+    schema:rangeIncludes de:Repository ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+de:mentionsInferred a owl:ObjectProperty ;
+    rdfs:label "mentions (inferred)"@en ;
+    skos:definition "An entity a matter's title appears to name."@en ;
+    skos:scopeNote "Mentions that a source declares use schema:mentions."@en ;
+    schema:domainIncludes de:Action , de:Question ;
+    schema:rangeIncludes schema:Organization , de:Community , schema:Event , de:Framework , de:Topic , schema:Place , schema:Person ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+# ------------------------------------------------------------------
+# Reused terms: how this model uses them. Their definitions are their own standards';
+# the notes below only say how this model applies them.
+# ------------------------------------------------------------------
+
+schema:Organization skos:scopeNote "An organisation that documents concern."@en .
+schema:Event skos:scopeNote "An event that documents concern."@en .
+schema:Place skos:scopeNote "A place that documents concern."@en .
+schema:Person skos:scopeNote "A person that documents concern. People are names only, and are never related to another entity."@en .
+dprod:DataProduct skos:scopeNote "Every non-sensitive repository is also a data product."@en .
+dcterms:title skos:scopeNote "A repository's name; an artefact's title; a decision's or ruling's first bold phrase, else its first sentence; what a matter or deliverable asks to be done, answered or delivered."@en .
+dcterms:isPartOf skos:scopeNote "The repository that holds an artefact."@en .
+dcterms:subject skos:scopeNote "An entity an artefact concerns."@en .
+dcterms:date skos:scopeNote "An artefact's own date, not the day it was filed; when a lineage entry's change was made; a decision's date; for a ruling from the decision board, when the owner answered."@en .
+dcterms:replaces skos:scopeNote "The earlier version an artefact supersedes; an earlier answer to the same matter that a ruling replaces."@en .
+dcterms:publisher skos:scopeNote "The organisation or community that publishes a framework."@en .
+prov:wasDerivedFrom skos:scopeNote "The canonical copy that a copy of an artefact derives from."@en .
+skos:notation skos:scopeNote "An entity's slug, or a concept's code: a short key that never changes."@en .
+skos:prefLabel skos:scopeNote "An entity's or concept's name."@en .
+skos:altLabel skos:scopeNote "Another name an entity goes by."@en .
+org:subOrganizationOf skos:scopeNote "An entity is a subsidiary, unit, region or community of the other."@en .
+schema:organizer skos:scopeNote "The organisation or community that organises an event."@en .
+schema:mentions skos:scopeNote "An entity that a matter's source names."@en .
+dprod:purpose skos:scopeNote "What a non-sensitive repository is for, as a data product: its register label."@en .
+dprod:dataProductOwner skos:scopeNote "Who owns a data product: its repository's tenant."@en .
+dprod:inputDataset skos:scopeNote "A repository a data product draws on."@en .
+
+# ------------------------------------------------------------------
+# Concept schemes
+# ------------------------------------------------------------------
+
+<https://w3id.org/data-estate/scheme/type> a skos:ConceptScheme ;
+    skos:prefLabel "Artefact types"@en ;
+    skos:definition "The kinds of artefact a metadata block can declare."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/type/brief> ,
+        <https://w3id.org/data-estate/type/report> ,
+        <https://w3id.org/data-estate/type/deck> ,
+        <https://w3id.org/data-estate/type/register> ,
+        <https://w3id.org/data-estate/type/note> ,
+        <https://w3id.org/data-estate/type/template> ,
+        <https://w3id.org/data-estate/type/dataset> ,
+        <https://w3id.org/data-estate/type/correspondence> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/type/brief> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/type> ;
+    skos:prefLabel "Brief"@en ;
+    skos:notation "brief" ;
+    skos:definition "A document that puts a proposal or a question to someone for a decision."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/type/report> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/type> ;
+    skos:prefLabel "Report"@en ;
+    skos:notation "report" ;
+    skos:definition "A document that sets out findings or analysis."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/type/deck> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/type> ;
+    skos:prefLabel "Deck"@en ;
+    skos:notation "deck" ;
+    skos:definition "Slides, for presenting."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/type/register> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/type> ;
+    skos:prefLabel "Register"@en ;
+    skos:notation "register" ;
+    skos:definition "A list of records of one kind, kept current."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/type/note> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/type> ;
+    skos:prefLabel "Note"@en ;
+    skos:notation "note" ;
+    skos:definition "A shorter record: a working note, a standard or minutes."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/type/template> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/type> ;
+    skos:prefLabel "Template"@en ;
+    skos:notation "template" ;
+    skos:definition "A form that other documents are made from."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/type/dataset> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/type> ;
+    skos:prefLabel "Dataset"@en ;
+    skos:notation "dataset" ;
+    skos:definition "Structured data, such as a table or an export."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/type/correspondence> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/type> ;
+    skos:prefLabel "Correspondence"@en ;
+    skos:notation "correspondence" ;
+    skos:definition "A letter, email or message, sent or received."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/scheme/status> a skos:ConceptScheme ;
+    skos:prefLabel "Statuses"@en ;
+    skos:definition "Whether an artefact is the copy to cite, a working copy, or superseded."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/status/canonical> ,
+        <https://w3id.org/data-estate/status/working> ,
+        <https://w3id.org/data-estate/status/superseded> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/status/canonical> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/status> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/status> ;
+    skos:prefLabel "Canonical"@en ;
+    skos:notation "canonical" ;
+    skos:definition "The copy to cite. Other copies of the same document derive from it."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/status/working> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/status> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/status> ;
+    skos:prefLabel "Working"@en ;
+    skos:notation "working" ;
+    skos:definition "In progress, or derived from the canonical copy."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/status/superseded> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/status> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/status> ;
+    skos:prefLabel "Superseded"@en ;
+    skos:notation "superseded" ;
+    skos:definition "Replaced by a later version, and kept for the record in an archive."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/scheme/tier> a skos:ConceptScheme ;
+    skos:prefLabel "Tiers"@en ;
+    skos:definition "How managed a repository is. Tiers are cumulative: each requires everything the tier below it does. A repository has a tier now and a tier it is meant to reach."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/tier/t0> ,
+        <https://w3id.org/data-estate/tier/t1> ,
+        <https://w3id.org/data-estate/tier/t2> ,
+        <https://w3id.org/data-estate/tier/t3> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/tier/t0> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/tier> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/tier> ;
+    skos:prefLabel "Unmanaged"@en ;
+    skos:notation "T0" ;
+    skos:definition "A folder of files, recorded as existing and no more."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/tier/t1> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/tier> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/tier> ;
+    skos:prefLabel "Registered"@en ;
+    skos:notation "T1" ;
+    skos:definition "Registered with a known owner and purpose; kept in the standard layout, with a README and a decision log. Version control comes at T2."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/tier/t2> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/tier> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/tier> ;
+    skos:prefLabel "Versioned"@en ;
+    skos:notation "T2" ;
+    skos:definition "Also under version control, with a remote copy, so every change can be reviewed and reverted. No credential may ever have entered its history, and confidential client material is either absent or the remote is private."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/tier/t3> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/tier> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/tier> ;
+    skos:prefLabel "Runtime"@en ;
+    skos:notation "T3" ;
+    skos:definition "Also runs something: a service, a timer or a container. It needs pinned dependencies, a way to deploy and a stated backup position."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/scheme/domain> a skos:ConceptScheme ;
+    skos:prefLabel "Domains"@en ;
+    skos:definition "The domains of work in one estate. The scheme is that estate's own: another estate would publish its own scheme, use de:domain with it unchanged, and point the rule des:DomainConcept at it. Seven domains are named, each defined by its field alone. The private ones are published as a single concept, Withheld, with nothing under it."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/domain/community> ,
+        <https://w3id.org/data-estate/domain/broadcasting> ,
+        <https://w3id.org/data-estate/domain/ventures> ,
+        <https://w3id.org/data-estate/domain/enterprise-data> ,
+        <https://w3id.org/data-estate/domain/advocacy> ,
+        <https://w3id.org/data-estate/domain/knowledge> ,
+        <https://w3id.org/data-estate/domain/industry-partnerships> ,
+        <https://w3id.org/data-estate/domain/withheld> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/domain/community> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/domain> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/domain> ;
+    skos:prefLabel "Community and mentoring"@en ;
+    skos:notation "community" ;
+    skos:definition "Professional communities and associations, and mentoring."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/domain/broadcasting> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/domain> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/domain> ;
+    skos:prefLabel "Broadcasting"@en ;
+    skos:notation "broadcasting" ;
+    skos:definition "Radio and other media."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/domain/ventures> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/domain> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/domain> ;
+    skos:prefLabel "Ventures"@en ;
+    skos:notation "ventures" ;
+    skos:definition "New ventures and commercial work."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/domain/enterprise-data> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/domain> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/domain> ;
+    skos:prefLabel "Enterprise data governance"@en ;
+    skos:notation "enterprise-data" ;
+    skos:definition "Enterprise data management and governance, as a discipline."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/domain/advocacy> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/domain> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/domain> ;
+    skos:prefLabel "Advocacy and thought leadership"@en ;
+    skos:notation "advocacy" ;
+    skos:definition "Speaking, writing and representing a field."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/domain/knowledge> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/domain> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/domain> ;
+    skos:prefLabel "Knowledge and automation"@en ;
+    skos:notation "knowledge" ;
+    skos:definition "How the estate itself is run: its standards, catalogue and automation."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/domain/industry-partnerships> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/domain> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/domain> ;
+    skos:prefLabel "Industry partnerships"@en ;
+    skos:notation "industry-partnerships" ;
+    skos:definition "Joint programmes with industry bodies."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/domain/withheld> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/domain> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/domain> ;
+    skos:prefLabel "Withheld"@en ;
+    skos:notation "withheld" ;
+    skos:definition "The estate's private domains. The publication neither names them nor counts what they hold."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/scheme/job-status> a skos:ConceptScheme ;
+    skos:prefLabel "Job statuses"@en ;
+    skos:definition "How a job ended, read from its result."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/job-status/complete> ,
+        <https://w3id.org/data-estate/job-status/partial> ,
+        <https://w3id.org/data-estate/job-status/aborted> ,
+        <https://w3id.org/data-estate/job-status/pending> ,
+        <https://w3id.org/data-estate/job-status/dry-run> ,
+        <https://w3id.org/data-estate/job-status/refused> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/job-status/dry-run> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/job-status> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/job-status> ;
+    skos:prefLabel "Dry run"@en ;
+    skos:notation "dry-run" ;
+    skos:definition "The job ran under alternate law and listed only would- actions; it wrote nothing outside its job folder."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/job-status/refused> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/job-status> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/job-status> ;
+    skos:prefLabel "Refused"@en ;
+    skos:notation "refused" ;
+    skos:definition "The job declined to run under direct law."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/job-status/complete> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/job-status> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/job-status> ;
+    skos:prefLabel "Complete"@en ;
+    skos:notation "complete" ;
+    skos:definition "The job did everything its prompt asked."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/job-status/partial> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/job-status> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/job-status> ;
+    skos:prefLabel "Partial"@en ;
+    skos:notation "partial" ;
+    skos:definition "The job did part of what its prompt asked, and its result says what is left."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/job-status/aborted> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/job-status> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/job-status> ;
+    skos:prefLabel "Aborted"@en ;
+    skos:notation "aborted" ;
+    skos:definition "The job stopped before finishing, and its result says why."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/job-status/pending> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/job-status> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/job-status> ;
+    skos:prefLabel "Pending"@en ;
+    skos:notation "pending" ;
+    skos:definition "The job has no result yet."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/scheme/ruling-state> a skos:ConceptScheme ;
+    skos:prefLabel "Ruling states"@en ;
+    skos:definition "Where a ruling stands."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/ruling-state/open> ,
+        <https://w3id.org/data-estate/ruling-state/answered> ,
+        <https://w3id.org/data-estate/ruling-state/applied> ,
+        <https://w3id.org/data-estate/ruling-state/carried> ,
+        <https://w3id.org/data-estate/ruling-state/superseded> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/ruling-state/open> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/ruling-state> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/ruling-state> ;
+    skos:prefLabel "Open"@en ;
+    skos:notation "open" ;
+    skos:definition "Put to the owner and not yet answered."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/ruling-state/answered> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/ruling-state> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/ruling-state> ;
+    skos:prefLabel "Answered"@en ;
+    skos:notation "answered" ;
+    skos:definition "Answered, not yet applied."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/ruling-state/applied> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/ruling-state> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/ruling-state> ;
+    skos:prefLabel "Applied"@en ;
+    skos:notation "applied" ;
+    skos:definition "Answered and applied."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/ruling-state/carried> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/ruling-state> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/ruling-state> ;
+    skos:prefLabel "Carried"@en ;
+    skos:notation "carried" ;
+    skos:definition "Moved to a later sheet, to be answered there."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/ruling-state/superseded> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/ruling-state> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/ruling-state> ;
+    skos:prefLabel "Superseded"@en ;
+    skos:notation "superseded" ;
+    skos:definition "Replaced by a later ruling."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/scheme/effect> a skos:ConceptScheme ;
+    skos:prefLabel "Effects"@en ;
+    skos:definition "What an answer does to the matter it answers."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/effect/close> ,
+        <https://w3id.org/data-estate/effect/rule> ,
+        <https://w3id.org/data-estate/effect/park> ,
+        <https://w3id.org/data-estate/effect/commit> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/effect/close> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/effect> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/effect> ;
+    skos:prefLabel "Close"@en ;
+    skos:notation "close" ;
+    skos:definition "The answer closes the matter."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/effect/rule> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/effect> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/effect> ;
+    skos:prefLabel "Rule"@en ;
+    skos:notation "rule" ;
+    skos:definition "The answer is a ruling, to be applied."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/effect/park> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/effect> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/effect> ;
+    skos:prefLabel "Park"@en ;
+    skos:notation "park" ;
+    skos:definition "The answer sets the matter aside."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/effect/commit> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/effect> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/effect> ;
+    skos:prefLabel "Commit"@en ;
+    skos:notation "commit" ;
+    skos:definition "The owner commits to act on it soon, and the matter stays open."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/scheme/matter-kind> a skos:ConceptScheme ;
+    skos:prefLabel "Matter kinds"@en ;
+    skos:definition "Whether the owner is to act, rule or give a go-ahead."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/matter-kind/action> ,
+        <https://w3id.org/data-estate/matter-kind/ruling> ,
+        <https://w3id.org/data-estate/matter-kind/go-ahead> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/matter-kind/action> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/matter-kind> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/matter-kind> ;
+    skos:prefLabel "Action"@en ;
+    skos:notation "action" ;
+    skos:definition "The owner is to do something."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/matter-kind/ruling> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/matter-kind> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/matter-kind> ;
+    skos:prefLabel "Ruling"@en ;
+    skos:notation "ruling" ;
+    skos:definition "The owner is to decide something."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/matter-kind/go-ahead> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/matter-kind> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/matter-kind> ;
+    skos:prefLabel "Go-ahead"@en ;
+    skos:notation "go-ahead" ;
+    skos:definition "The owner is to approve work before it starts."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/scheme/matter-state> a skos:ConceptScheme ;
+    skos:prefLabel "Matter states"@en ;
+    skos:definition "Where an action or question stands."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/matter-state/open> ,
+        <https://w3id.org/data-estate/matter-state/parked> ,
+        <https://w3id.org/data-estate/matter-state/answered> ,
+        <https://w3id.org/data-estate/matter-state/closed> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/matter-state/open> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/matter-state> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/matter-state> ;
+    skos:prefLabel "Open"@en ;
+    skos:notation "open" ;
+    skos:definition "Waiting on the owner."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/matter-state/parked> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/matter-state> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/matter-state> ;
+    skos:prefLabel "Parked"@en ;
+    skos:notation "parked" ;
+    skos:definition "Set aside, not dropped."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/matter-state/answered> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/matter-state> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/matter-state> ;
+    skos:prefLabel "Answered"@en ;
+    skos:notation "answered" ;
+    skos:definition "Answered on the decision board, and not yet applied in its source."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/matter-state/closed> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/matter-state> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/matter-state> ;
+    skos:prefLabel "Closed"@en ;
+    skos:notation "closed" ;
+    skos:definition "Done, dropped or superseded."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/scheme/deliverable-state> a skos:ConceptScheme ;
+    skos:prefLabel "Deliverable states"@en ;
+    skos:definition "Where a deliverable stands."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/deliverable-state/open> ,
+        <https://w3id.org/data-estate/deliverable-state/delivered> ,
+        <https://w3id.org/data-estate/deliverable-state/dropped> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/deliverable-state/open> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/deliverable-state> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/deliverable-state> ;
+    skos:prefLabel "Open"@en ;
+    skos:notation "open" ;
+    skos:definition "Not yet delivered."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/deliverable-state/delivered> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/deliverable-state> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/deliverable-state> ;
+    skos:prefLabel "Delivered"@en ;
+    skos:notation "delivered" ;
+    skos:definition "Delivered, with its evidence."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/deliverable-state/dropped> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/deliverable-state> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/deliverable-state> ;
+    skos:prefLabel "Dropped"@en ;
+    skos:notation "dropped" ;
+    skos:definition "Closed without being delivered."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/scheme/change-type> a skos:ConceptScheme ;
+    skos:prefLabel "Change types"@en ;
+    skos:definition "The kinds of significant change a lineage entry records."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/change-type/lifecycle> ,
+        <https://w3id.org/data-estate/change-type/classification> ,
+        <https://w3id.org/data-estate/change-type/rules> ,
+        <https://w3id.org/data-estate/change-type/deliverable-issued> ,
+        <https://w3id.org/data-estate/change-type/cross-repo-decision> ,
+        <https://w3id.org/data-estate/change-type/dependency> ,
+        <https://w3id.org/data-estate/change-type/content> ,
+        <https://w3id.org/data-estate/change-type/control-added> ,
+        <https://w3id.org/data-estate/change-type/source-filed> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/change-type/lifecycle> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:prefLabel "Lifecycle"@en ;
+    skos:notation "lifecycle" ;
+    skos:definition "A repository was created, renamed, moved, archived or retired."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/change-type/classification> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:prefLabel "Classification"@en ;
+    skos:notation "classification" ;
+    skos:definition "The repository's tenant, domain, tier or sensitive flag changed."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/change-type/rules> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:prefLabel "Rules"@en ;
+    skos:notation "rules" ;
+    skos:definition "The repository's layout, its instructions to agents or its standing rules changed."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/change-type/deliverable-issued> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:prefLabel "Deliverable issued"@en ;
+    skos:notation "deliverable-issued" ;
+    skos:definition "A deliverable was issued outside the estate."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/change-type/cross-repo-decision> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:prefLabel "Cross-repository decision"@en ;
+    skos:notation "cross-repo-decision" ;
+    skos:definition "A decision was made that affects another repository."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/change-type/dependency> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:prefLabel "Dependency"@en ;
+    skos:notation "dependency" ;
+    skos:definition "The repository began to depend on, or duplicate, content in another repository."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/change-type/content> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:prefLabel "Content"@en ;
+    skos:notation "content" ;
+    skos:definition "Artefacts were added to, revised in or removed from the repository."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/change-type/control-added> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:prefLabel "Control added"@en ;
+    skos:notation "control-added" ;
+    skos:definition "A governance control was introduced or changed."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/change-type/source-filed> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/change-type> ;
+    skos:prefLabel "Source filed"@en ;
+    skos:notation "source-filed" ;
+    skos:definition "A source document was filed into a repository."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/scheme/domain-source> a skos:ConceptScheme ;
+    skos:prefLabel "Domain sources"@en ;
+    skos:definition "Where an artefact's domain came from."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/domain-source/declared> ,
+        <https://w3id.org/data-estate/domain-source/inherited> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/domain-source/declared> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/domain-source> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/domain-source> ;
+    skos:prefLabel "Declared"@en ;
+    skos:notation "declared" ;
+    skos:definition "Taken from the artefact's own metadata block."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/domain-source/inherited> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/domain-source> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/domain-source> ;
+    skos:prefLabel "Inherited"@en ;
+    skos:notation "inherited" ;
+    skos:definition "Taken from the domain of the artefact's repository."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/scheme/metadata-source> a skos:ConceptScheme ;
+    skos:prefLabel "Metadata sources"@en ;
+    skos:definition "Whether an artefact's metadata was declared, inferred, or is its path alone."@en ;
+    skos:hasTopConcept <https://w3id.org/data-estate/metadata-source/declared> ,
+        <https://w3id.org/data-estate/metadata-source/inferred> ,
+        <https://w3id.org/data-estate/metadata-source/path-only> ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/metadata-source/declared> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/metadata-source> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/metadata-source> ;
+    skos:prefLabel "Declared"@en ;
+    skos:notation "declared" ;
+    skos:definition "Read from the artefact's metadata block."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/metadata-source/inferred> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/metadata-source> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/metadata-source> ;
+    skos:prefLabel "Inferred"@en ;
+    skos:notation "inferred" ;
+    skos:definition "Worked out by the catalogue, from where the file sits and what it is."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/metadata-source/path-only> a skos:Concept ;
+    skos:inScheme <https://w3id.org/data-estate/scheme/metadata-source> ;
+    skos:topConceptOf <https://w3id.org/data-estate/scheme/metadata-source> ;
+    skos:prefLabel "Path only"@en ;
+    skos:notation "path-only" ;
+    skos:definition "Only its path and title are held; its metadata is not read."@en ;
+    rdfs:isDefinedBy <https://w3id.org/data-estate/vocab> .

@@ -1,0 +1,32 @@
+# CQ3. What class is each entity, and which registered entities does no artefact use?
+# It counts the entities of each class, and lists by slug the ones no artefact names. An entity is a SKOS
+# concept that is also an organisation, community, event, framework, topic, place or person.
+# Published at https://w3id.org/data-estate/queries/cq3 under CC BY 4.0.
+PREFIX de:      <https://w3id.org/data-estate/vocab#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema:  <https://schema.org/>
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?class ?entities (COALESCE(?nu, 0) AS ?unusedCount) (COALESCE(?us, "") AS ?unused)
+WHERE {
+  {
+    SELECT ?class (COUNT(DISTINCT ?e) AS ?entities)
+    WHERE {
+      VALUES ?class { schema:Organization de:Community schema:Event de:Framework de:Topic schema:Place schema:Person }
+      ?e a ?class , skos:Concept .
+    }
+    GROUP BY ?class
+  }
+  OPTIONAL {
+    SELECT ?class (COUNT(DISTINCT ?e) AS ?nu) (GROUP_CONCAT(DISTINCT ?slug; separator=", ") AS ?us)
+    WHERE {
+      VALUES ?class { schema:Organization de:Community schema:Event de:Framework de:Topic schema:Place schema:Person }
+      ?e a ?class , skos:Concept .
+      OPTIONAL { ?e skos:notation ?n }
+      BIND (COALESCE(STR(?n), STR(?e)) AS ?slug)
+      FILTER NOT EXISTS { ?doc dcterms:subject ?e }
+    }
+    GROUP BY ?class
+  }
+}
+ORDER BY ?class

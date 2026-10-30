@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: the vocabulary</title>
+<meta name="description" content="The classes and properties of the Data Estate Ontology, with their definitions.">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/vocab">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../">Home</a> <a href="../docs/">Overview</a> <a href="../vocab/" aria-current="page">Vocabulary</a> <a href="../scheme/">Schemes</a> <a href="../shapes/">Rules</a> <a href="../queries/">Queries</a></nav>
+<main>
+<h1>Data Estate Ontology: the vocabulary</h1>
+<p class="lede">The Data Estate Ontology describes a data estate: the repositories a person or small organisation keeps, the documents in them, and the control plane that governs them. It was built for one working estate, and is published so that others can describe theirs the same way.</p>
+<dl class="meta">
+<dt>Namespace</dt><dd class="iri">https://w3id.org/data-estate/vocab#</dd>
+<dt>This version</dt><dd class="iri">https://w3id.org/data-estate/vocab/2026-10-27</dd>
+<dt>Version</dt><dd>1.0, issued 27 October 2026</dd>
+<dt>Formats</dt><dd><a href="../vocab/vocab.ttl">Turtle</a> and <a href="../vocab/vocab.jsonld">JSON-LD</a></dd>
+<dt>Licence</dt><dd><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></dd>
+</dl>
+<p>In these definitions, a matter is an action or question the owner owes; a rulings sheet is a dated list of questions put to the owner; the decision board is where the owner answers matters and rulings, each answer filed back into the estate; the register is the estate&#x27;s list of its repositories, and the entity register its list of the entities documents may name; a metadata block is the short block of keys at the head of a document; the catalogue is the index of every artefact, built from those blocks and from where files sit; and a lineage file is a repository&#x27;s own record of its significant changes. Every organisation, community, event, framework, topic, place and person in the entity register is also a skos:Concept in the estate&#x27;s own entity scheme, which a publication does not include: its concepts are names.</p>
+<p class="note">Domains and ranges are stated with <code>schema:domainIncludes</code> and <code>schema:rangeIncludes</code>, so nothing is inferred from them, and every subclass link is stated outright: no reasoner is needed.</p>
+<h2 id="classes">Classes</h2>
+<p>17 classes are minted here. Each builds on an open-standard class, directly or through another class here, except where none fits.</p>
+<div class="tree" role="list">
+<div class="root" role="listitem"><code>dcat:Catalog</code></div>
+<div role="listitem"><a href="#Repository">Repository</a></div>
+<div class="lvl2" role="listitem"><a href="#NonSensitiveRepository">Non-sensitive repository</a></div>
+<div class="root" role="listitem"><code>dcat:Resource</code></div>
+<div role="listitem"><a href="#Artefact">Artefact</a></div>
+<div class="lvl2" role="listitem"><a href="#DeclaredArtefact">Declared artefact</a></div>
+<div class="root" role="listitem"><code>prov:Activity</code></div>
+<div role="listitem"><a href="#Job">Job</a></div>
+<div class="lvl2" role="listitem"><a href="#CheckedJob">Checked job</a></div>
+<div class="root" role="listitem"><code>prov:Agent</code></div>
+<div role="listitem"><a href="#Tenant">Tenant</a></div>
+<div class="root" role="listitem"><code>prov:Entity</code></div>
+<div role="listitem"><a href="#LineageEntry">Lineage entry</a></div>
+<div role="listitem"><a href="#Decision">Decision</a></div>
+<div role="listitem"><a href="#Ruling">Ruling</a></div>
+<div role="listitem"><a href="#Deliverable">Deliverable</a></div>
+<div class="root" role="listitem"><code>schema:Action</code></div>
+<div role="listitem"><a href="#Action">Action</a></div>
+<div class="root" role="listitem"><code>schema:CreativeWork</code></div>
+<div role="listitem"><a href="#Framework">Framework</a></div>
+<div class="root" role="listitem"><code>schema:Organization</code></div>
+<div role="listitem"><a href="#Community">Community</a></div>
+<div class="root" role="listitem"><span class=muted>(stands alone)</span></div>
+<div role="listitem"><a href="#Project">Project</a></div>
+<div role="listitem"><a href="#Topic">Topic</a></div>
+<div role="listitem"><a href="#Question">Question</a></div>
+</div>
+<section class="term" id="Repository">
+<h3>Repository</h3>
+<span class="iri">de:Repository</span>
+<p>A top-level body of work, registered as a unit. From T1 it keeps its own record of what was asked, produced and decided.</p>
+<dl><dt>Subclass of</dt><dd><code>dcat:Catalog</code></dd><dt>Properties</dt><dd><a href="../vocab/#category"><code>de:category</code></a>, <a href="../vocab/#domain"><code>de:domain</code></a>, <a href="../vocab/#sensitive"><code>de:sensitive</code></a>, <a href="../vocab/#tenant"><code>de:tenant</code></a>, <a href="../vocab/#tierNow"><code>de:tierNow</code></a>, <a href="../vocab/#tierTarget"><code>de:tierTarget</code></a></dd></dl>
+</section>
+<section class="term" id="NonSensitiveRepository">
+<h3>Non-sensitive repository</h3>
+<span class="iri">de:NonSensitiveRepository</span>
+<p>A repository not flagged sensitive, and so described in full.</p>
+<p class="note">Every non-sensitive repository is also a data product (dprod:DataProduct).</p>
+<dl><dt>Subclass of</dt><dd><a href="../vocab/#Repository"><code>de:Repository</code></a></dd><dt>Properties</dt><dd><a href="../vocab/#hasLineageFile"><code>de:hasLineageFile</code></a>, <a href="../vocab/#issueRecord"><code>de:issueRecord</code></a></dd></dl>
+</section>
+<section class="term" id="Artefact">
+<h3>Artefact</h3>
+<span class="iri">de:Artefact</span>
+<p>A file held in a repository.</p>
+<dl><dt>Subclass of</dt><dd><code>dcat:Resource</code></dd><dt>Properties</dt><dd><a href="../vocab/#archived"><code>de:archived</code></a>, <a href="../vocab/#artefactType"><code>de:artefactType</code></a>, <a href="../vocab/#domain"><code>de:domain</code></a>, <a href="../vocab/#domainSource"><code>de:domainSource</code></a>, <a href="../vocab/#metadataSource"><code>de:metadataSource</code></a>, <a href="../vocab/#path"><code>de:path</code></a>, <a href="../vocab/#sensitive"><code>de:sensitive</code></a>, <a href="../vocab/#sha256"><code>de:sha256</code></a>, <a href="../vocab/#status"><code>de:status</code></a></dd></dl>
+</section>
+<section class="term" id="DeclaredArtefact">
+<h3>Declared artefact</h3>
+<span class="iri">de:DeclaredArtefact</span>
+<p>An artefact whose metadata block the metadata rules govern, complete or not.</p>
+<dl><dt>Subclass of</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a></dd><dt>Properties</dt><dd><a href="../vocab/#declaredKey"><code>de:declaredKey</code></a>, <a href="../vocab/#unmappedDomain"><code>de:unmappedDomain</code></a>, <a href="../vocab/#unmappedStatus"><code>de:unmappedStatus</code></a>, <a href="../vocab/#unmappedType"><code>de:unmappedType</code></a>, <a href="../vocab/#unregisteredEntity"><code>de:unregisteredEntity</code></a></dd></dl>
+</section>
+<section class="term" id="LineageEntry">
+<h3>Lineage entry</h3>
+<span class="iri">de:LineageEntry</span>
+<p>A record that a significant change was made to a repository: its date, its kind and its evidence.</p>
+<dl><dt>Subclass of</dt><dd><code>prov:Entity</code></dd><dt>Properties</dt><dd><a href="../vocab/#aboutRepository"><code>de:aboutRepository</code></a>, <a href="../vocab/#changeType"><code>de:changeType</code></a>, <a href="../vocab/#evidencePath"><code>de:evidencePath</code></a>, <a href="../vocab/#evidenceResolves"><code>de:evidenceResolves</code></a></dd></dl>
+</section>
+<section class="term" id="Project">
+<h3>Project</h3>
+<span class="iri">de:Project</span>
+<p>A workspace where a body of work is carried on, such as a project in an AI assistant, kept on record by a repository.</p>
+<dl><dt>Properties</dt><dd><a href="../vocab/#noRepositoryReason"><code>de:noRepositoryReason</code></a>, <a href="../vocab/#projectRepository"><code>de:projectRepository</code></a></dd></dl>
+</section>
+<section class="term" id="Community">
+<h3>Community</h3>
+<span class="iri">de:Community</span>
+<p>An association, network or community of practice.</p>
+<dl><dt>Subclass of</dt><dd><code>schema:Organization</code></dd><dt>Properties</dt><dd><a href="../vocab/#homeRepository"><code>de:homeRepository</code></a></dd></dl>
+</section>
+<section class="term" id="Framework">
+<h3>Framework</h3>
+<span class="iri">de:Framework</span>
+<p>A published framework, standard, programme or publication.</p>
+<dl><dt>Subclass of</dt><dd><code>schema:CreativeWork</code></dd><dt>Properties</dt><dd><a href="../vocab/#homeRepository"><code>de:homeRepository</code></a></dd></dl>
+</section>
+<section class="term" id="Topic">
+<h3>Topic</h3>
+<span class="iri">de:Topic</span>
+<p>A subject that documents concern, other than an organisation, event, framework, place or person.</p>
+<dl><dt>Properties</dt><dd><a href="../vocab/#homeRepository"><code>de:homeRepository</code></a></dd></dl>
+</section>
+<section class="term" id="Decision">
+<h3>Decision</h3>
+<span class="iri">de:Decision</span>
+<p>A dated decision recorded in a repository&#x27;s decision log.</p>
+<dl><dt>Subclass of</dt><dd><code>prov:Entity</code></dd><dt>Properties</dt><dd><a href="../vocab/#citesJob"><code>de:citesJob</code></a>, <a href="../vocab/#citesLineage"><code>de:citesLineage</code></a>, <a href="../vocab/#citesRuling"><code>de:citesRuling</code></a>, <a href="../vocab/#decisionLog"><code>de:decisionLog</code></a>, <a href="../vocab/#governs"><code>de:governs</code></a></dd></dl>
+</section>
+<section class="term" id="Ruling">
+<h3>Ruling</h3>
+<span class="iri">de:Ruling</span>
+<p>A question put to the owner for a decision, on a rulings sheet or the decision board, with the answer once given.</p>
+<dl><dt>Subclass of</dt><dd><code>prov:Entity</code></dd><dt>Properties</dt><dd><a href="../vocab/#answer"><code>de:answer</code></a>, <a href="../vocab/#answersMatter"><code>de:answersMatter</code></a>, <a href="../vocab/#effect"><code>de:effect</code></a>, <a href="../vocab/#governs"><code>de:governs</code></a>, <a href="../vocab/#rulingCode"><code>de:rulingCode</code></a>, <a href="../vocab/#rulingNumber"><code>de:rulingNumber</code></a>, <a href="../vocab/#rulingSource"><code>de:rulingSource</code></a>, <a href="../vocab/#rulingState"><code>de:rulingState</code></a></dd></dl>
+</section>
+<section class="term" id="Job">
+<h3>Job</h3>
+<span class="iri">de:Job</span>
+<p>A unit of automated work: a prompt staged for an agent to carry out, and the result it records.</p>
+<dl><dt>Subclass of</dt><dd><code>prov:Activity</code></dd><dt>Properties</dt><dd><a href="../vocab/#archived"><code>de:archived</code></a>, <a href="../vocab/#backupFiles"><code>de:backupFiles</code></a>, <a href="../vocab/#hasRunLog"><code>de:hasRunLog</code></a>, <a href="../vocab/#jobQueue"><code>de:jobQueue</code></a>, <a href="../vocab/#jobRepository"><code>de:jobRepository</code></a>, <a href="../vocab/#jobStatus"><code>de:jobStatus</code></a>, <a href="../vocab/#recordsWrites"><code>de:recordsWrites</code></a>, <a href="../vocab/#resultRead"><code>de:resultRead</code></a>, <a href="../vocab/#stagedOn"><code>de:stagedOn</code></a>, <a href="../vocab/#wroteDeclared"><code>de:wroteDeclared</code></a>, <a href="../vocab/#wroteInferred"><code>de:wroteInferred</code></a>, <a href="../vocab/#wrotePath"><code>de:wrotePath</code></a></dd></dl>
+</section>
+<section class="term" id="CheckedJob">
+<h3>Checked job</h3>
+<span class="iri">de:CheckedJob</span>
+<p>A job staged after results began to record the files they wrote, and so checked by the rules.</p>
+<dl><dt>Subclass of</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd></dl>
+</section>
+<section class="term" id="Action">
+<h3>Action</h3>
+<span class="iri">de:Action</span>
+<p>Something only the owner can do, tracked until it is done or dropped.</p>
+<dl><dt>Subclass of</dt><dd><code>schema:Action</code></dd><dt>Properties</dt><dd><a href="../vocab/#alsoId"><code>de:alsoId</code></a>, <a href="../vocab/#blockedBy"><code>de:blockedBy</code></a>, <a href="../vocab/#concerns"><code>de:concerns</code></a>, <a href="../vocab/#due"><code>de:due</code></a>, <a href="../vocab/#dueText"><code>de:dueText</code></a>, <a href="../vocab/#matterId"><code>de:matterId</code></a>, <a href="../vocab/#matterKind"><code>de:matterKind</code></a>, <a href="../vocab/#matterState"><code>de:matterState</code></a>, <a href="../vocab/#mentionsInferred"><code>de:mentionsInferred</code></a>, <a href="../vocab/#source"><code>de:source</code></a>, <a href="../vocab/#sourceRef"><code>de:sourceRef</code></a>, <a href="../vocab/#statedOverdue"><code>de:statedOverdue</code></a></dd></dl>
+</section>
+<section class="term" id="Question">
+<h3>Question</h3>
+<span class="iri">de:Question</span>
+<p>A ruling, question or go-ahead the owner owes, outside a rulings sheet.</p>
+<dl><dt>Properties</dt><dd><a href="../vocab/#alsoId"><code>de:alsoId</code></a>, <a href="../vocab/#blockedBy"><code>de:blockedBy</code></a>, <a href="../vocab/#concerns"><code>de:concerns</code></a>, <a href="../vocab/#due"><code>de:due</code></a>, <a href="../vocab/#dueText"><code>de:dueText</code></a>, <a href="../vocab/#matterId"><code>de:matterId</code></a>, <a href="../vocab/#matterKind"><code>de:matterKind</code></a>, <a href="../vocab/#matterState"><code>de:matterState</code></a>, <a href="../vocab/#mentionsInferred"><code>de:mentionsInferred</code></a>, <a href="../vocab/#source"><code>de:source</code></a>, <a href="../vocab/#sourceRef"><code>de:sourceRef</code></a>, <a href="../vocab/#statedOverdue"><code>de:statedOverdue</code></a></dd></dl>
+</section>
+<section class="term" id="Deliverable">
+<h3>Deliverable</h3>
+<span class="iri">de:Deliverable</span>
+<p>A piece of planned work, open until it is delivered or dropped, with its evidence.</p>
+<dl><dt>Subclass of</dt><dd><code>prov:Entity</code></dd><dt>Properties</dt><dd><a href="../vocab/#blockedBy"><code>de:blockedBy</code></a>, <a href="../vocab/#blocking"><code>de:blocking</code></a>, <a href="../vocab/#deliverableState"><code>de:deliverableState</code></a>, <a href="../vocab/#evidencePath"><code>de:evidencePath</code></a>, <a href="../vocab/#sourceRef"><code>de:sourceRef</code></a></dd></dl>
+</section>
+<section class="term" id="Tenant">
+<h3>Tenant</h3>
+<span class="iri">de:Tenant</span>
+<p>The person or organisation a repository is kept for.</p>
+<p class="note">Tenants name people and organisations, so a publication of an estate lists none.</p>
+<dl><dt>Subclass of</dt><dd><code>prov:Agent</code></dd></dl>
+</section>
+<h2 id="properties">Properties</h2>
+<p>64 properties are minted here, grouped by what they describe. Every value list is closed: a value outside its scheme is a finding.</p>
+<h3 style="margin-top:2rem">Repositories and data products</h3>
+<section class="term" id="category">
+<h3>category</h3>
+<span class="iri">de:category</span>
+<p>The register&#x27;s own label for a repository&#x27;s kind of work, kept beside its domain.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Repository"><code>de:Repository</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="domain">
+<h3>domain</h3>
+<span class="iri">de:domain</span>
+<p>The domain of work a repository or artefact belongs to.</p>
+<p class="note">An artefact&#x27;s domain is the one its metadata block declares, or else its repository&#x27;s; de:domainSource says which.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a>, <a href="../vocab/#Repository"><code>de:Repository</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#domain">Domains</a></dd></dl>
+</section>
+<section class="term" id="hasLineageFile">
+<h3>has lineage file</h3>
+<span class="iri">de:hasLineageFile</span>
+<p>Whether a repository keeps a lineage file at its root.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#NonSensitiveRepository"><code>de:NonSensitiveRepository</code></a></dd><dt>Value</dt><dd><code>xsd:boolean</code></dd></dl>
+</section>
+<section class="term" id="issueRecord">
+<h3>issue record</h3>
+<span class="iri">de:issueRecord</span>
+<p>A lineage entry recording a deliverable the repository issued outside the estate.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#NonSensitiveRepository"><code>de:NonSensitiveRepository</code></a></dd><dt>Value</dt><dd><a href="../vocab/#LineageEntry"><code>de:LineageEntry</code></a></dd></dl>
+</section>
+<section class="term" id="sensitive">
+<h3>sensitive</h3>
+<span class="iri">de:sensitive</span>
+<p>Whether a repository or artefact is flagged sensitive.</p>
+<p class="note">A sensitive repository is recorded by its existence, tenant, tier and this flag alone. A sensitive artefact is listed by path and title only.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a>, <a href="../vocab/#Repository"><code>de:Repository</code></a></dd><dt>Value</dt><dd><code>xsd:boolean</code></dd></dl>
+</section>
+<section class="term" id="tenant">
+<h3>tenant</h3>
+<span class="iri">de:tenant</span>
+<p>The tenant a repository is kept for.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Repository"><code>de:Repository</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Tenant"><code>de:Tenant</code></a></dd></dl>
+</section>
+<section class="term" id="tierNow">
+<h3>tier now</h3>
+<span class="iri">de:tierNow</span>
+<p>How managed a repository is today.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Repository"><code>de:Repository</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#tier">Tiers</a></dd></dl>
+</section>
+<section class="term" id="tierTarget">
+<h3>tier target</h3>
+<span class="iri">de:tierTarget</span>
+<p>The tier a repository is meant to reach.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Repository"><code>de:Repository</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#tier">Tiers</a></dd></dl>
+</section>
+<h3 style="margin-top:2rem">Artefacts</h3>
+<section class="term" id="archived">
+<h3>archived</h3>
+<span class="iri">de:archived</span>
+<p>Whether an artefact or job is kept in an archive.</p>
+<p class="note">An artefact is kept in an archive once it is superseded. A job is archived once it has been moved to its queue&#x27;s archive.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a>, <a href="../vocab/#Job"><code>de:Job</code></a></dd><dt>Value</dt><dd><code>xsd:boolean</code></dd></dl>
+</section>
+<section class="term" id="artefactType">
+<h3>artefact type</h3>
+<span class="iri">de:artefactType</span>
+<p>An artefact&#x27;s kind.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#type">Artefact types</a></dd></dl>
+</section>
+<section class="term" id="declaredKey">
+<h3>declared key</h3>
+<span class="iri">de:declaredKey</span>
+<p>A key an artefact&#x27;s metadata block carries, whatever its value.</p>
+<p class="note">A validation term: it records what a metadata block declared, so the rules can name the fault.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#DeclaredArtefact"><code>de:DeclaredArtefact</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="domainSource">
+<h3>domain source</h3>
+<span class="iri">de:domainSource</span>
+<p>Where an artefact&#x27;s domain came from: declared in its metadata block, or inherited from its repository.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#domain-source">Domain sources</a></dd></dl>
+</section>
+<section class="term" id="metadataSource">
+<h3>metadata source</h3>
+<span class="iri">de:metadataSource</span>
+<p>Whether an artefact&#x27;s metadata was declared in its metadata block, inferred by the catalogue, or is its path alone.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#metadata-source">Metadata sources</a></dd></dl>
+</section>
+<section class="term" id="path">
+<h3>path</h3>
+<span class="iri">de:path</span>
+<p>Where an artefact sits in its repository.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="sha256">
+<h3>SHA-256</h3>
+<span class="iri">de:sha256</span>
+<p>A hash of an artefact&#x27;s content, to tell copies apart.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="status">
+<h3>status</h3>
+<span class="iri">de:status</span>
+<p>Whether an artefact is the copy to cite, a working copy, or superseded.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#status">Statuses</a></dd></dl>
+</section>
+<section class="term" id="unmappedDomain">
+<h3>unmapped domain</h3>
+<span class="iri">de:unmappedDomain</span>
+<p>A declared domain outside the domain scheme, as written, so the rules can name the fault.</p>
+<p class="note">A validation term: it records what a metadata block declared, so the rules can name the fault.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#DeclaredArtefact"><code>de:DeclaredArtefact</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="unmappedStatus">
+<h3>unmapped status</h3>
+<span class="iri">de:unmappedStatus</span>
+<p>A declared status outside the status scheme, as written, so the rules can name the fault.</p>
+<p class="note">A validation term: it records what a metadata block declared, so the rules can name the fault.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#DeclaredArtefact"><code>de:DeclaredArtefact</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="unmappedType">
+<h3>unmapped type</h3>
+<span class="iri">de:unmappedType</span>
+<p>A declared type outside the artefact-type scheme, as written, so the rules can name the fault.</p>
+<p class="note">A validation term: it records what a metadata block declared, so the rules can name the fault.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#DeclaredArtefact"><code>de:DeclaredArtefact</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="unregisteredEntity">
+<h3>unregistered entity</h3>
+<span class="iri">de:unregisteredEntity</span>
+<p>A declared entity that is not in the entity register, as written.</p>
+<p class="note">A validation term: it records what a metadata block declared, so the rules can name the fault.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#DeclaredArtefact"><code>de:DeclaredArtefact</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<h3 style="margin-top:2rem">Entities</h3>
+<section class="term" id="homeRepository">
+<h3>home repository</h3>
+<span class="iri">de:homeRepository</span>
+<p>The repository that keeps an entity&#x27;s own record.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Community"><code>de:Community</code></a>, <a href="../vocab/#Framework"><code>de:Framework</code></a>, <a href="../vocab/#Topic"><code>de:Topic</code></a>, <code>schema:Event</code>, <code>schema:Organization</code>, <code>schema:Person</code>, <code>schema:Place</code></dd><dt>Value</dt><dd><a href="../vocab/#Repository"><code>de:Repository</code></a></dd></dl>
+</section>
+<h3 style="margin-top:2rem">Lineage entries and projects</h3>
+<section class="term" id="aboutRepository">
+<h3>about repository</h3>
+<span class="iri">de:aboutRepository</span>
+<p>The repository a lineage entry&#x27;s change was made to.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#LineageEntry"><code>de:LineageEntry</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Repository"><code>de:Repository</code></a></dd></dl>
+</section>
+<section class="term" id="changeType">
+<h3>change type</h3>
+<span class="iri">de:changeType</span>
+<p>The kind of change a lineage entry records.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#LineageEntry"><code>de:LineageEntry</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#change-type">Change types</a></dd></dl>
+</section>
+<section class="term" id="evidencePath">
+<h3>evidence path</h3>
+<span class="iri">de:evidencePath</span>
+<p>Where the evidence for a lineage entry or deliverable is kept.</p>
+<p class="note">For a lineage entry, the evidence for its change; for a deliverable, the evidence that it was delivered.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Deliverable"><code>de:Deliverable</code></a>, <a href="../vocab/#LineageEntry"><code>de:LineageEntry</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="evidenceResolves">
+<h3>evidence resolves</h3>
+<span class="iri">de:evidenceResolves</span>
+<p>Whether every evidence path a lineage entry names exists.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#LineageEntry"><code>de:LineageEntry</code></a></dd><dt>Value</dt><dd><code>xsd:boolean</code></dd></dl>
+</section>
+<section class="term" id="noRepositoryReason">
+<h3>no-repository reason</h3>
+<span class="iri">de:noRepositoryReason</span>
+<p>Why a project has no repository, where it has none.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Project"><code>de:Project</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="projectRepository">
+<h3>project repository</h3>
+<span class="iri">de:projectRepository</span>
+<p>The repository that keeps a project&#x27;s record.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Project"><code>de:Project</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Repository"><code>de:Repository</code></a></dd></dl>
+</section>
+<h3 style="margin-top:2rem">Decisions and rulings</h3>
+<section class="term" id="answer">
+<h3>answer</h3>
+<span class="iri">de:answer</span>
+<p>The option the owner chose.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Ruling"><code>de:Ruling</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="answersMatter">
+<h3>answers matter</h3>
+<span class="iri">de:answersMatter</span>
+<p>What a ruling from the decision board answers: a matter, a ruling of a rulings sheet, or a job.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Ruling"><code>de:Ruling</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Job"><code>de:Job</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a>, <a href="../vocab/#Ruling"><code>de:Ruling</code></a></dd></dl>
+</section>
+<section class="term" id="citesJob">
+<h3>cites job</h3>
+<span class="iri">de:citesJob</span>
+<p>A job a decision cites.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Decision"><code>de:Decision</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd></dl>
+</section>
+<section class="term" id="citesLineage">
+<h3>cites lineage</h3>
+<span class="iri">de:citesLineage</span>
+<p>A lineage entry a decision cites.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Decision"><code>de:Decision</code></a></dd><dt>Value</dt><dd><a href="../vocab/#LineageEntry"><code>de:LineageEntry</code></a></dd></dl>
+</section>
+<section class="term" id="citesRuling">
+<h3>cites ruling</h3>
+<span class="iri">de:citesRuling</span>
+<p>A ruling a decision cites.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Decision"><code>de:Decision</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Ruling"><code>de:Ruling</code></a></dd></dl>
+</section>
+<section class="term" id="decisionLog">
+<h3>decision log</h3>
+<span class="iri">de:decisionLog</span>
+<p>The log a decision is recorded in.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Decision"><code>de:Decision</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a></dd></dl>
+</section>
+<section class="term" id="effect">
+<h3>effect</h3>
+<span class="iri">de:effect</span>
+<p>What a ruling&#x27;s answer does to the matter.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Ruling"><code>de:Ruling</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#effect">Effects</a></dd></dl>
+</section>
+<section class="term" id="governs">
+<h3>governs</h3>
+<span class="iri">de:governs</span>
+<p>A repository, document or entity a decision or ruling governs.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Decision"><code>de:Decision</code></a>, <a href="../vocab/#Ruling"><code>de:Ruling</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a>, <a href="../vocab/#Community"><code>de:Community</code></a>, <a href="../vocab/#Framework"><code>de:Framework</code></a>, <a href="../vocab/#Repository"><code>de:Repository</code></a>, <a href="../vocab/#Topic"><code>de:Topic</code></a>, <code>schema:Event</code>, <code>schema:Organization</code>, <code>schema:Person</code>, <code>schema:Place</code></dd></dl>
+</section>
+<section class="term" id="rulingCode">
+<h3>ruling code</h3>
+<span class="iri">de:rulingCode</span>
+<p>A ruling&#x27;s code on its sheet.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Ruling"><code>de:Ruling</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="rulingNumber">
+<h3>ruling number</h3>
+<span class="iri">de:rulingNumber</span>
+<p>A ruling&#x27;s number on its sheet.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Ruling"><code>de:Ruling</code></a></dd><dt>Value</dt><dd><code>xsd:integer</code></dd></dl>
+</section>
+<section class="term" id="rulingSource">
+<h3>ruling source</h3>
+<span class="iri">de:rulingSource</span>
+<p>The rulings sheet or decision-board file a ruling is recorded in.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Ruling"><code>de:Ruling</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a></dd></dl>
+</section>
+<section class="term" id="rulingState">
+<h3>ruling state</h3>
+<span class="iri">de:rulingState</span>
+<p>Where a ruling stands.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Ruling"><code>de:Ruling</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#ruling-state">Ruling states</a></dd></dl>
+</section>
+<h3 style="margin-top:2rem">Jobs</h3>
+<section class="term" id="backupFiles">
+<h3>backup files</h3>
+<span class="iri">de:backupFiles</span>
+<p>How many backup copies a job made.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd><dt>Value</dt><dd><code>xsd:integer</code></dd></dl>
+</section>
+<section class="term" id="hasRunLog">
+<h3>has run log</h3>
+<span class="iri">de:hasRunLog</span>
+<p>Whether a job kept a run log.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd><dt>Value</dt><dd><code>xsd:boolean</code></dd></dl>
+</section>
+<section class="term" id="jobQueue">
+<h3>job queue</h3>
+<span class="iri">de:jobQueue</span>
+<p>The queue folder a job was staged in.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="jobRepository">
+<h3>job repository</h3>
+<span class="iri">de:jobRepository</span>
+<p>The repository a job works for.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Repository"><code>de:Repository</code></a></dd></dl>
+</section>
+<section class="term" id="jobStatus">
+<h3>job status</h3>
+<span class="iri">de:jobStatus</span>
+<p>How a job ended, from its result; pending while it has none.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#job-status">Job statuses</a></dd></dl>
+</section>
+<section class="term" id="recordsWrites">
+<h3>records writes</h3>
+<span class="iri">de:recordsWrites</span>
+<p>Whether a job&#x27;s result records the files it wrote.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd><dt>Value</dt><dd><code>xsd:boolean</code></dd></dl>
+</section>
+<section class="term" id="resultRead">
+<h3>result read</h3>
+<span class="iri">de:resultRead</span>
+<p>Whether a job&#x27;s result was read: some results are never opened.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd><dt>Value</dt><dd><code>xsd:boolean</code></dd></dl>
+</section>
+<section class="term" id="stagedOn">
+<h3>staged on</h3>
+<span class="iri">de:stagedOn</span>
+<p>The date a job was staged.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd><dt>Value</dt><dd><code>xsd:date</code></dd></dl>
+</section>
+<section class="term" id="wroteDeclared">
+<h3>wrote (declared)</h3>
+<span class="iri">de:wroteDeclared</span>
+<p>A file a job&#x27;s result says it wrote.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a></dd></dl>
+</section>
+<section class="term" id="wroteInferred">
+<h3>wrote (inferred)</h3>
+<span class="iri">de:wroteInferred</span>
+<p>A file a job appears to have written, read from an older result&#x27;s prose.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a></dd></dl>
+</section>
+<section class="term" id="wrotePath">
+<h3>wrote path</h3>
+<span class="iri">de:wrotePath</span>
+<p>A file a job wrote that the catalogue does not hold, by its path.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Job"><code>de:Job</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<h3 style="margin-top:2rem">Actions, questions and deliverables</h3>
+<section class="term" id="alsoId">
+<h3>also id</h3>
+<span class="iri">de:alsoId</span>
+<p>Another id the same matter goes by in a later source.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="blockedBy">
+<h3>blocked by</h3>
+<span class="iri">de:blockedBy</span>
+<p>A matter or deliverable that must come first.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Deliverable"><code>de:Deliverable</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Deliverable"><code>de:Deliverable</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd></dl>
+</section>
+<section class="term" id="blocking">
+<h3>blocking</h3>
+<span class="iri">de:blocking</span>
+<p>Whether a deliverable holds up other work.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Deliverable"><code>de:Deliverable</code></a></dd><dt>Value</dt><dd><code>xsd:boolean</code></dd></dl>
+</section>
+<section class="term" id="concerns">
+<h3>concerns</h3>
+<span class="iri">de:concerns</span>
+<p>A repository a matter concerns.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Repository"><code>de:Repository</code></a></dd></dl>
+</section>
+<section class="term" id="deliverableState">
+<h3>deliverable state</h3>
+<span class="iri">de:deliverableState</span>
+<p>Where a deliverable stands.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Deliverable"><code>de:Deliverable</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#deliverable-state">Deliverable states</a></dd></dl>
+</section>
+<section class="term" id="due">
+<h3>due</h3>
+<span class="iri">de:due</span>
+<p>A due date the source states.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd><dt>Value</dt><dd><code>xsd:date</code></dd></dl>
+</section>
+<section class="term" id="dueText">
+<h3>due text</h3>
+<span class="iri">de:dueText</span>
+<p>The source&#x27;s own words on timing.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="matterId">
+<h3>matter id</h3>
+<span class="iri">de:matterId</span>
+<p>A matter&#x27;s id, the same as the decision board gives it.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="matterKind">
+<h3>matter kind</h3>
+<span class="iri">de:matterKind</span>
+<p>Whether the owner is to act, rule or give a go-ahead.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#matter-kind">Matter kinds</a></dd></dl>
+</section>
+<section class="term" id="matterState">
+<h3>matter state</h3>
+<span class="iri">de:matterState</span>
+<p>Where an action or question stands.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd><dt>Value</dt><dd><code>skos:Concept</code></dd><dt>Values from</dt><dd><a href="../scheme/#matter-state">Matter states</a></dd></dl>
+</section>
+<section class="term" id="mentionsInferred">
+<h3>mentions (inferred)</h3>
+<span class="iri">de:mentionsInferred</span>
+<p>An entity a matter&#x27;s title appears to name.</p>
+<p class="note">Mentions that a source declares use schema:mentions.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Community"><code>de:Community</code></a>, <a href="../vocab/#Framework"><code>de:Framework</code></a>, <a href="../vocab/#Topic"><code>de:Topic</code></a>, <code>schema:Event</code>, <code>schema:Organization</code>, <code>schema:Person</code>, <code>schema:Place</code></dd></dl>
+</section>
+<section class="term" id="source">
+<h3>source</h3>
+<span class="iri">de:source</span>
+<p>A document a matter is recorded in.</p>
+<dl><dt>Kind</dt><dd>Object property</dd><dt>Used on</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd><dt>Value</dt><dd><a href="../vocab/#Artefact"><code>de:Artefact</code></a></dd></dl>
+</section>
+<section class="term" id="sourceRef">
+<h3>source ref</h3>
+<span class="iri">de:sourceRef</span>
+<p>A matter&#x27;s or deliverable&#x27;s code in the document it is recorded in.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Deliverable"><code>de:Deliverable</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd><dt>Value</dt><dd><code>xsd:string</code></dd></dl>
+</section>
+<section class="term" id="statedOverdue">
+<h3>stated overdue</h3>
+<span class="iri">de:statedOverdue</span>
+<p>Whether the source says the matter is overdue.</p>
+<dl><dt>Kind</dt><dd>Datatype property</dd><dt>Used on</dt><dd><a href="../vocab/#Action"><code>de:Action</code></a>, <a href="../vocab/#Question"><code>de:Question</code></a></dd><dt>Value</dt><dd><code>xsd:boolean</code></dd></dl>
+</section>
+<h2 id="reused">Reused terms</h2>
+<p>These terms are reused from open standards, with their own definitions. The notes say only how this model applies them.</p>
+<table>
+<thead><tr><th scope="col">Term</th><th scope="col">How this model uses it</th></tr></thead>
+<tbody>
+<tr><td><code>dcterms:date</code></td><td>An artefact&#x27;s own date, not the day it was filed; when a lineage entry&#x27;s change was made; a decision&#x27;s date; for a ruling from the decision board, when the owner answered.</td></tr>
+<tr><td><code>dcterms:isPartOf</code></td><td>The repository that holds an artefact.</td></tr>
+<tr><td><code>dcterms:publisher</code></td><td>The organisation or community that publishes a framework.</td></tr>
+<tr><td><code>dcterms:replaces</code></td><td>The earlier version an artefact supersedes; an earlier answer to the same matter that a ruling replaces.</td></tr>
+<tr><td><code>dcterms:subject</code></td><td>An entity an artefact concerns.</td></tr>
+<tr><td><code>dcterms:title</code></td><td>A repository&#x27;s name; an artefact&#x27;s title; a decision&#x27;s or ruling&#x27;s first bold phrase, else its first sentence; what a matter or deliverable asks to be done, answered or delivered.</td></tr>
+<tr><td><code>dprod:DataProduct</code></td><td>Every non-sensitive repository is also a data product.</td></tr>
+<tr><td><code>dprod:dataProductOwner</code></td><td>Who owns a data product: its repository&#x27;s tenant.</td></tr>
+<tr><td><code>dprod:inputDataset</code></td><td>A repository a data product draws on.</td></tr>
+<tr><td><code>dprod:purpose</code></td><td>What a non-sensitive repository is for, as a data product: its register label.</td></tr>
+<tr><td><code>org:subOrganizationOf</code></td><td>An entity is a subsidiary, unit, region or community of the other.</td></tr>
+<tr><td><code>prov:wasDerivedFrom</code></td><td>The canonical copy that a copy of an artefact derives from.</td></tr>
+<tr><td><code>schema:Event</code></td><td>An event that documents concern.</td></tr>
+<tr><td><code>schema:Organization</code></td><td>An organisation that documents concern.</td></tr>
+<tr><td><code>schema:Person</code></td><td>A person that documents concern. People are names only, and are never related to another entity.</td></tr>
+<tr><td><code>schema:Place</code></td><td>A place that documents concern.</td></tr>
+<tr><td><code>schema:mentions</code></td><td>An entity that a matter&#x27;s source names.</td></tr>
+<tr><td><code>schema:organizer</code></td><td>The organisation or community that organises an event.</td></tr>
+<tr><td><code>skos:altLabel</code></td><td>Another name an entity goes by.</td></tr>
+<tr><td><code>skos:notation</code></td><td>An entity&#x27;s slug, or a concept&#x27;s code: a short key that never changes.</td></tr>
+<tr><td><code>skos:prefLabel</code></td><td>An entity&#x27;s or concept&#x27;s name.</td></tr>
+</tbody>
+</table>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

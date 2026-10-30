@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: CQ2</title>
+<meta name="description" content="Which entities appear in the artefacts of more than one tenant or domain?">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/queries/cq2">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../../">Home</a> <a href="../../docs/">Overview</a> <a href="../../vocab/">Vocabulary</a> <a href="../../scheme/">Schemes</a> <a href="../../shapes/">Rules</a> <a href="../../queries/" aria-current="page">Queries</a></nav>
+<main>
+<h1>CQ2</h1>
+<p class="lede">Which entities appear in the artefacts of more than one tenant or domain?</p>
+<p>An artefact&#x27;s tenant is its repository&#x27;s. Its domain is its own: declared, or taken from its repository.</p>
+<p>Run it over the estate graph merged with the vocabulary, which supplies the concepts and the subclass links.</p>
+<p>Published at https://w3id.org/data-estate/queries/cq2 under CC BY 4.0.</p>
+<p><a href="../cq2.rq">Download the query</a></p>
+<pre><code># CQ2. Which entities appear in the artefacts of more than one tenant or domain?
+# An artefact&#x27;s tenant is its repository&#x27;s. Its domain is its own: declared, or taken from its repository.
+# Run it over the estate graph merged with the vocabulary, which supplies the concepts and the subclass links.
+# Published at https://w3id.org/data-estate/queries/cq2 under CC BY 4.0.
+PREFIX de:      &lt;https://w3id.org/data-estate/vocab#&gt;
+PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
+PREFIX rdfs:    &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX skos:    &lt;http://www.w3.org/2004/02/skos/core#&gt;
+
+SELECT ?entity ?slug ?tenants (COALESCE(?nd, 0) AS ?domains) ?tenantList (COALESCE(?dl, &quot;&quot;) AS ?domainList)
+WHERE {
+  {
+    SELECT ?entity (COUNT(DISTINCT ?tenant) AS ?tenants)
+           (GROUP_CONCAT(DISTINCT ?tenantLabel; separator=&quot;, &quot;) AS ?tenantList)
+    WHERE {
+      ?doc a/rdfs:subClassOf* de:Artefact ; dcterms:subject ?entity ; dcterms:isPartOf ?repo .
+      ?repo de:tenant ?tenant .
+      OPTIONAL { ?tenant skos:prefLabel ?tl }
+      BIND (COALESCE(STR(?tl), STR(?tenant)) AS ?tenantLabel)
+    }
+    GROUP BY ?entity
+  }
+  OPTIONAL {
+    SELECT ?entity (COUNT(DISTINCT ?domain) AS ?nd)
+           (GROUP_CONCAT(DISTINCT ?domainLabel; separator=&quot;, &quot;) AS ?dl)
+    WHERE {
+      ?doc a/rdfs:subClassOf* de:Artefact ; dcterms:subject ?entity ; de:domain ?domain .
+      OPTIONAL { ?domain skos:prefLabel ?dlab }
+      BIND (COALESCE(STR(?dlab), STR(?domain)) AS ?domainLabel)
+    }
+    GROUP BY ?entity
+  }
+  OPTIONAL { ?entity skos:notation ?slug }
+  FILTER (?tenants &gt; 1 || COALESCE(?nd, 0) &gt; 1)
+}
+ORDER BY DESC(?tenants) DESC(?domains) ?slug
+</code></pre>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

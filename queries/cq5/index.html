@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: CQ5</title>
+<meta name="description" content="For each set of duplicate files, which copy is canonical, and which copies derive from it?">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/queries/cq5">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../../">Home</a> <a href="../../docs/">Overview</a> <a href="../../vocab/">Vocabulary</a> <a href="../../scheme/">Schemes</a> <a href="../../shapes/">Rules</a> <a href="../../queries/" aria-current="page">Queries</a></nav>
+<main>
+<h1>CQ5</h1>
+<p class="lede">For each set of duplicate files, which copy is canonical, and which copies derive from it?</p>
+<p>Each row is a copy and the canonical copy it derives from.</p>
+<p>Published at https://w3id.org/data-estate/queries/cq5 under CC BY 4.0.</p>
+<p><a href="../cq5.rq">Download the query</a></p>
+<pre><code># CQ5. For each set of duplicate files, which copy is canonical, and which copies derive from it?
+# Each row is a copy and the canonical copy it derives from.
+# Published at https://w3id.org/data-estate/queries/cq5 under CC BY 4.0.
+PREFIX de:   &lt;https://w3id.org/data-estate/vocab#&gt;
+PREFIX prov: &lt;http://www.w3.org/ns/prov#&gt;
+
+SELECT ?canonical ?canonicalPath ?copy ?copyPath
+WHERE {
+  ?copy prov:wasDerivedFrom ?canonical .
+  ?copy de:path ?copyPath .
+  ?canonical de:path ?canonicalPath .
+}
+ORDER BY ?canonicalPath ?copyPath
+</code></pre>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

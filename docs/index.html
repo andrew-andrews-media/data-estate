@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: overview</title>
+<meta name="description" content="What the Data Estate Ontology describes, how its control plane runs, and how it keeps an estate&#x27;s contents private.">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/docs">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../">Home</a> <a href="../docs/" aria-current="page">Overview</a> <a href="../vocab/">Vocabulary</a> <a href="../scheme/">Schemes</a> <a href="../shapes/">Rules</a> <a href="../queries/">Queries</a></nav>
+<main>
+<h1>Overview</h1>
+<p><strong>The Data Estate Ontology</strong> describes a data estate: the repositories a person or small organisation keeps, the documents in them, and the control plane that governs them. It was built for one working estate, and is published so that others can describe theirs the same way.</p>
+<p><strong>Three ideas carry it.</strong> A repository not flagged sensitive is a data product, with a purpose, an owner, a tier and the repositories it draws on. New documents carry a short block of metadata (their type, status, domain, date and the entities they concern), and the catalogue infers the rest, marking which is which, so it can index everything without guessing. And the decisions, rulings and automated jobs that change the estate sit in the same graph, so a reader can follow a ruling to the decisions that cite it, the jobs those decisions cite and the files those jobs wrote.</p>
+<p><strong>The control plane</strong> has four parts. A catalogue build reads the registers and documents and writes the graph. SHACL shapes check the graph at every build and report what breaks a rule; nothing is fixed automatically. A nightly sweep reports when the graph has fallen behind its sources. A decision board lists every decision and action waiting on the estate&#x27;s owner, and files each answer back into the estate.</p>
+<p><strong>Privacy is built in.</strong> The private graph holds names; the publication never does. What is published is the model and, in later releases, the estate&#x27;s shape in banded counts. Instance data, names, paths, and anything in a repository flagged sensitive stay inside the estate. A leak gate checks every file before it is released.</p>
+<p><strong>It reuses open standards:</strong> DCAT, PROV-O, SKOS, DPROD, schema.org, the W3C Organization Ontology and Dublin Core, with SHACL for the rules. Where a standard has the term, the ontology uses it rather than minting its own.</p>
+<h2 id="at-a-glance">The model at a glance</h2>
+<figure>
+<div style="overflow-x:auto"><svg viewBox="0 0 770 380" role="img" aria-labelledby="model-title model-desc" style="width:100%;min-width:620px;height:auto">
+<title id="model-title">The model at a glance</title>
+<desc id="model-desc">A decision cites a ruling and a job; the job wrote an artefact; the artefact is part of a repository and has entities as its subject. A lineage entry is about a repository, an action or question concerns one, and a ruling from the decision board answers an action or question.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker><marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker></defs>
+<line x1="220.0" y1="52.0" x2="150.0" y2="52.0" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrow-accent)"/>
+<text x="185.0" y="44.0" font-size="13" fill="var(--accent)" text-anchor="middle">cites ruling</text>
+<line x1="350.0" y1="52.0" x2="420.0" y2="52.0" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrow-accent)"/>
+<text x="385.0" y="44.0" font-size="13" fill="var(--accent)" text-anchor="middle">cites job</text>
+<line x1="485.0" y1="74.0" x2="485.0" y2="170.0" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrow-accent)"/>
+<text x="493.0" y="122.0" font-size="13" fill="var(--accent)" text-anchor="start">wrote</text>
+<line x1="420.0" y1="192.0" x2="350.0" y2="192.0" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrow-accent)"/>
+<text x="385.0" y="184.0" font-size="13" fill="var(--accent)" text-anchor="middle">is part of</text>
+<line x1="550.0" y1="192.0" x2="620.0" y2="192.0" stroke="var(--muted)" stroke-width="1.1" marker-end="url(#arrow)"/>
+<text x="585.0" y="184.0" font-size="13" fill="var(--muted)" text-anchor="middle">subject</text>
+<line x1="285.0" y1="310.0" x2="285.0" y2="214.0" stroke="var(--muted)" stroke-width="1.1" marker-end="url(#arrow)"/>
+<text x="293.0" y="262.0" font-size="13" fill="var(--muted)" text-anchor="start">about repository</text>
+<line x1="150.0" y1="192.0" x2="220.0" y2="192.0" stroke="var(--muted)" stroke-width="1.1" marker-end="url(#arrow)"/>
+<text x="185.0" y="184.0" font-size="13" fill="var(--muted)" text-anchor="middle">concerns</text>
+<line x1="85.0" y1="74.0" x2="85.0" y2="170.0" stroke="var(--muted)" stroke-width="1.1" marker-end="url(#arrow)"/>
+<text x="93.0" y="122.0" font-size="13" fill="var(--muted)" text-anchor="start">answers matter</text>
+<rect x="20" y="30" width="130" height="44" rx="3" fill="var(--paper)" stroke="var(--accent)" stroke-width="1.6"/>
+<text x="85.0" y="57.0" font-size="15" text-anchor="middle" fill="var(--ink)">Ruling</text>
+<rect x="220" y="30" width="130" height="44" rx="3" fill="var(--paper)" stroke="var(--accent)" stroke-width="1.6"/>
+<text x="285.0" y="57.0" font-size="15" text-anchor="middle" fill="var(--ink)">Decision</text>
+<rect x="420" y="30" width="130" height="44" rx="3" fill="var(--paper)" stroke="var(--accent)" stroke-width="1.6"/>
+<text x="485.0" y="57.0" font-size="15" text-anchor="middle" fill="var(--ink)">Job</text>
+<rect x="20" y="170" width="130" height="44" rx="3" fill="var(--paper)" stroke="var(--line)" stroke-width="1.2"/>
+<text x="85.0" y="197.0" font-size="15" text-anchor="middle" fill="var(--ink)">Action or question</text>
+<rect x="220" y="170" width="130" height="44" rx="3" fill="var(--paper)" stroke="var(--accent)" stroke-width="1.6"/>
+<text x="285.0" y="197.0" font-size="15" text-anchor="middle" fill="var(--ink)">Repository</text>
+<rect x="420" y="170" width="130" height="44" rx="3" fill="var(--paper)" stroke="var(--accent)" stroke-width="1.6"/>
+<text x="485.0" y="197.0" font-size="15" text-anchor="middle" fill="var(--ink)">Artefact</text>
+<rect x="620" y="170" width="130" height="44" rx="3" fill="var(--paper)" stroke="var(--line)" stroke-width="1.2"/>
+<text x="685.0" y="197.0" font-size="15" text-anchor="middle" fill="var(--ink)">Entity</text>
+<rect x="220" y="310" width="130" height="44" rx="3" fill="var(--paper)" stroke="var(--line)" stroke-width="1.2"/>
+<text x="285.0" y="337.0" font-size="15" text-anchor="middle" fill="var(--ink)">Lineage entry</text>
+</svg></div>
+<figcaption>The accent marks the trace from a ruling to the decisions that cite it, the jobs those decisions cite and the files those jobs wrote. Entities stand for the organisations, communities, events, frameworks, topics, places and people that documents concern.</figcaption>
+</figure>
+<h2 id="parts">The parts</h2>
+<div class="tree" role="list"><div role="listitem"><a href="../vocab/">Vocabulary</a>: the classes and properties, and the standard terms they reuse.</div><div role="listitem"><a href="../scheme/">Concept schemes</a>: the closed value lists, from artefact types to job statuses.</div><div role="listitem"><a href="../shapes/">Rules</a>: the SHACL shapes an estate is checked against.</div><div role="listitem"><a href="../queries/">Queries</a>: the competency questions, as SPARQL.</div></div>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

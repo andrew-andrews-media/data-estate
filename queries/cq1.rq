@@ -1,0 +1,32 @@
+# CQ1. Which canonical artefacts, in any repository, concern a given entity or anything below it:
+# its parts, the events it organises and the frameworks it publishes?
+# Parts are followed through every level. Canonical here means current and original: copies that derive
+# from a canonical copy, superseded and archived files, and artefacts flagged sensitive are left out.
+# Parameter: ?entity, the IRI of an entity. Bind it with initial bindings or with VALUES inside WHERE, or replace it with the IRI.
+# Published at https://w3id.org/data-estate/queries/cq1 under CC BY 4.0.
+PREFIX de:      <https://w3id.org/data-estate/vocab#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX org:     <http://www.w3.org/ns/org#>
+PREFIX prov:    <http://www.w3.org/ns/prov#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema:  <https://schema.org/>
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
+
+SELECT DISTINCT ?entity ?about ?slug ?relation ?doc ?path ?title ?date
+WHERE {
+  {
+    ?about org:subOrganizationOf* ?entity .
+    BIND (IF(sameTerm(?about, ?entity), "itself", "part") AS ?relation)
+  }
+  UNION { ?about schema:organizer ?entity . BIND ("event it organises" AS ?relation) }
+  UNION { ?about dcterms:publisher ?entity . BIND ("framework it publishes" AS ?relation) }
+  OPTIONAL { ?about skos:notation ?slug }
+  ?doc a/rdfs:subClassOf* de:Artefact ; dcterms:subject ?about ; de:path ?path .
+  FILTER NOT EXISTS { ?doc de:sensitive true }
+  FILTER NOT EXISTS { ?doc prov:wasDerivedFrom ?canonical }
+  FILTER NOT EXISTS { ?doc de:status <https://w3id.org/data-estate/status/superseded> }
+  FILTER NOT EXISTS { ?doc de:archived true }
+  OPTIONAL { ?doc dcterms:title ?title }
+  OPTIONAL { ?doc dcterms:date ?date }
+}
+ORDER BY DESC(?relation = "itself") ?relation ?slug DESC(?date) ?path

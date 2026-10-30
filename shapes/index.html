@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: rules</title>
+<meta name="description" content="The SHACL rules a data estate described with the Data Estate Ontology is checked against.">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/shapes">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../">Home</a> <a href="../docs/">Overview</a> <a href="../vocab/">Vocabulary</a> <a href="../scheme/">Schemes</a> <a href="../shapes/" aria-current="page">Rules</a> <a href="../queries/">Queries</a></nav>
+<main>
+<h1>Rules</h1>
+<p class="lede">SHACL shapes that check a data estate described with the Data Estate Ontology. Validate the estate graph merged with the vocabulary, whose concepts and subclass links the rules read. A result is a finding: the build reports it, and nothing is fixed automatically.</p>
+<dl class="meta">
+<dt>Namespace</dt><dd class="iri">https://w3id.org/data-estate/shapes#</dd>
+<dt>Formats</dt><dd><a href="shapes.ttl">Turtle</a></dd>
+<dt>Licence</dt><dd><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></dd>
+</dl>
+<p>A rule is a SHACL shape. Its message is what the build reports for each artefact, repository, entry or job that breaks it. Helper shapes, one for each scheme, test that a value is a concept of that scheme.</p>
+<h2>The metadata block</h2>
+<p>These apply to every declared artefact.</p>
+<section class="term" id="HasTitle">
+<h3>HasTitle</h3>
+<span class="iri">des:HasTitle</span>
+<p>The metadata block carries its title key.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The metadata block has no title.”</dd></dl>
+</section>
+<section class="term" id="HasType">
+<h3>HasType</h3>
+<span class="iri">des:HasType</span>
+<p>The metadata block carries its type key.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The metadata block has no type.”</dd></dl>
+</section>
+<section class="term" id="HasStatus">
+<h3>HasStatus</h3>
+<span class="iri">des:HasStatus</span>
+<p>The metadata block carries its status key.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The metadata block has no status.”</dd></dl>
+</section>
+<section class="term" id="HasDomain">
+<h3>HasDomain</h3>
+<span class="iri">des:HasDomain</span>
+<p>The metadata block carries its domain key.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The metadata block has no domain.”</dd></dl>
+</section>
+<section class="term" id="HasEntities">
+<h3>HasEntities</h3>
+<span class="iri">des:HasEntities</span>
+<p>The metadata block carries its entities key.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The metadata block has no entities. An empty list is allowed.”</dd></dl>
+</section>
+<section class="term" id="HasDate">
+<h3>HasDate</h3>
+<span class="iri">des:HasDate</span>
+<p>The metadata block carries its date key.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The metadata block has no date.”</dd></dl>
+</section>
+<section class="term" id="HasSensitive">
+<h3>HasSensitive</h3>
+<span class="iri">des:HasSensitive</span>
+<p>The metadata block carries its sensitive key.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The metadata block has no sensitive flag.”</dd></dl>
+</section>
+<section class="term" id="HasSummary">
+<h3>HasSummary</h3>
+<span class="iri">des:HasSummary</span>
+<p>The metadata block carries its summary key. The summary itself is free text, and is not held in the graph.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The metadata block has no summary.”</dd></dl>
+</section>
+<section class="term" id="ValidType">
+<h3>ValidType</h3>
+<span class="iri">des:ValidType</span>
+<p>The type is in the artefact-type scheme.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The type is not in the artefact-type scheme.”</dd></dl>
+</section>
+<section class="term" id="ValidStatus">
+<h3>ValidStatus</h3>
+<span class="iri">des:ValidStatus</span>
+<p>The status is in the status scheme.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The status is not canonical, working or superseded.”</dd></dl>
+</section>
+<section class="term" id="ValidDomain">
+<h3>ValidDomain</h3>
+<span class="iri">des:ValidDomain</span>
+<p>The domain is in the domain scheme.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The domain is not in the domain scheme.”</dd></dl>
+</section>
+<section class="term" id="ValidDate">
+<h3>ValidDate</h3>
+<span class="iri">des:ValidDate</span>
+<p>The date is an ISO date.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The date is not an ISO date (YYYY-MM-DD).”</dd></dl>
+</section>
+<section class="term" id="RegisteredEntities">
+<h3>RegisteredEntities</h3>
+<span class="iri">des:RegisteredEntities</span>
+<p>Every entity the block names is registered: a SKOS concept that is an organisation, community, event, framework, topic, place or person.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“An entity it names is not in the entity register.”</dd></dl>
+</section>
+<section class="term" id="SupersedesResolves">
+<h3>SupersedesResolves</h3>
+<span class="iri">des:SupersedesResolves</span>
+<p>The version it says it supersedes is a file the catalogue holds.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“The version it supersedes is not a file the catalogue holds.”</dd></dl>
+</section>
+<section class="term" id="SupersededInArchive">
+<h3>SupersededInArchive</h3>
+<span class="iri">des:SupersededInArchive</span>
+<p>A superseded file is kept in an archive: de:archived is true.</p>
+<dl><dt>Applies to</dt><dd><code>de:DeclaredArtefact</code></dd><dt>Message</dt><dd>“It is superseded, but not kept in an archive.”</dd></dl>
+</section>
+<h2>The lineage chain</h2>
+<p>The two repository rules apply to non-sensitive repositories at T1 or above, or that keep a project&#x27;s record. An unmanaged T0 folder that serves no project is not checked.</p>
+<section class="term" id="RepositoryHasLineageFile">
+<h3>RepositoryHasLineageFile</h3>
+<span class="iri">des:RepositoryHasLineageFile</span>
+<p>A non-sensitive repository at T1 or above, or that keeps a project&#x27;s record, keeps a lineage file at its root.</p>
+<dl><dt>Applies to</dt><dd><code>de:NonSensitiveRepository</code></dd><dt>Message</dt><dd>“It is at T1 or above, or keeps a project&#x27;s record, and has no lineage file.”</dd></dl>
+</section>
+<section class="term" id="RepositoryHasLineageEntry">
+<h3>RepositoryHasLineageEntry</h3>
+<span class="iri">des:RepositoryHasLineageEntry</span>
+<p>A non-sensitive repository at T1 or above, or that keeps a project&#x27;s record, has at least one lineage entry about it.</p>
+<dl><dt>Applies to</dt><dd><code>de:NonSensitiveRepository</code></dd><dt>Message</dt><dd>“It is at T1 or above, or keeps a project&#x27;s record, and has no lineage entry.”</dd></dl>
+</section>
+<section class="term" id="LineageEvidenceResolves">
+<h3>LineageEvidenceResolves</h3>
+<span class="iri">des:LineageEvidenceResolves</span>
+<p>Every evidence path a lineage entry names exists.</p>
+<dl><dt>Applies to</dt><dd><code>de:LineageEntry</code></dd><dt>Message</dt><dd>“The evidence it names cannot be found.”</dd></dl>
+</section>
+<section class="term" id="ProjectHasRepository">
+<h3>ProjectHasRepository</h3>
+<span class="iri">des:ProjectHasRepository</span>
+<p>A project has a repository, or a stated reason for having none.</p>
+<dl><dt>Applies to</dt><dd><code>de:Project</code></dd><dt>Message</dt><dd>“The project has no repository, and no reason is given.”</dd></dl>
+</section>
+<h2>Job records</h2>
+<p>These apply to checked jobs: those staged after results began to record the files they wrote.</p>
+<section class="term" id="JobResultStatus">
+<h3>JobResultStatus</h3>
+<span class="iri">des:JobResultStatus</span>
+<p>The result&#x27;s status is complete, partial, aborted, dry-run or refused. A job with no result yet is pending.</p>
+<dl><dt>Applies to</dt><dd><code>de:CheckedJob</code></dd><dt>Message</dt><dd>“The job&#x27;s result does not end as complete, partial, aborted, dry-run or refused.”</dd></dl>
+</section>
+<section class="term" id="JobRecordsWrites">
+<h3>JobRecordsWrites</h3>
+<span class="iri">des:JobRecordsWrites</span>
+<p>A finished job&#x27;s result records the files it wrote (de:recordsWrites).</p>
+<dl><dt>Applies to</dt><dd><code>de:CheckedJob</code></dd><dt>Message</dt><dd>“The job&#x27;s result does not record the files it wrote.”</dd></dl>
+</section>
+<h2>Value lists</h2>
+<p>Every value-list property holds a concept of its own scheme.</p>
+<section class="term" id="ValidValue">
+<h3>ValidValue</h3>
+<span class="iri">des:ValidValue</span>
+<p>Every value of the tiers and of the nine control-plane lists is a concept of its own scheme. Artefact types, statuses and domains are checked by ValidType, ValidStatus and ValidDomain.</p>
+<dl><dt>Applies to</dt><dd><code>de:changeType</code>, <code>de:deliverableState</code>, <code>de:domainSource</code>, <code>de:effect</code>, <code>de:jobStatus</code>, <code>de:matterKind</code>, <code>de:matterState</code>, <code>de:metadataSource</code>, <code>de:rulingState</code>, <code>de:tierNow</code>, <code>de:tierTarget</code></dd><dt>Messages</dt><dd>“The tier now is not T0, T1, T2 or T3.”<br>“The target tier is not T0, T1, T2 or T3.”<br>“The domain source is not declared or inherited.”<br>“The metadata source is not declared, inferred or path-only.”<br>“The change type is not lifecycle, classification, rules, deliverable-issued, cross-repo-decision, dependency, content, control-added or source-filed.”<br>“The effect is not close, rule, park or commit.”<br>“The ruling state is not open, answered, applied, carried or superseded.”<br>“The job status is not complete, partial, aborted, pending, dry-run or refused.”<br>“The matter kind is not action, ruling or go-ahead.”<br>“The matter state is not open, parked, answered or closed.”<br>“The deliverable state is not open, delivered or dropped.”</dd></dl>
+</section>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

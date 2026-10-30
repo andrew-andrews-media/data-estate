@@ -1,0 +1,13 @@
+# CQ5. For each set of duplicate files, which copy is canonical, and which copies derive from it?
+# Each row is a copy and the canonical copy it derives from.
+# Published at https://w3id.org/data-estate/queries/cq5 under CC BY 4.0.
+PREFIX de:   <https://w3id.org/data-estate/vocab#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+
+SELECT ?canonical ?canonicalPath ?copy ?copyPath
+WHERE {
+  ?copy prov:wasDerivedFrom ?canonical .
+  ?copy de:path ?copyPath .
+  ?canonical de:path ?canonicalPath .
+}
+ORDER BY ?canonicalPath ?copyPath

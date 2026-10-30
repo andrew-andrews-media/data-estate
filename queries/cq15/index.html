@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: CQ15</title>
+<meta name="description" content="Which repositories are data products, with their purpose, owner, tier, inputs and consumers?">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/queries/cq15">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../../">Home</a> <a href="../../docs/">Overview</a> <a href="../../vocab/">Vocabulary</a> <a href="../../scheme/">Schemes</a> <a href="../../shapes/">Rules</a> <a href="../../queries/" aria-current="page">Queries</a></nav>
+<main>
+<h1>CQ15</h1>
+<p class="lede">Which repositories are data products, with their purpose, owner, tier, inputs and consumers?</p>
+<p>One row for each repository typed dprod:DataProduct; its inputs, consumers, projects and issue records</p>
+<p>are each listed in one cell, gathered in their own subqueries so that no gathered value is ever unbound.</p>
+<p>Published at https://w3id.org/data-estate/queries/cq15 under CC BY 4.0.</p>
+<p><a href="../cq15.rq">Download the query</a></p>
+<pre><code># CQ15. Which repositories are data products, with their purpose, owner, tier, inputs and consumers?
+# One row for each repository typed dprod:DataProduct; its inputs, consumers, projects and issue records
+# are each listed in one cell, gathered in their own subqueries so that no gathered value is ever unbound.
+# Published at https://w3id.org/data-estate/queries/cq15 under CC BY 4.0.
+PREFIX de:      &lt;https://w3id.org/data-estate/vocab#&gt;
+PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
+PREFIX dprod:   &lt;https://ekgf.github.io/dprod/&gt;
+PREFIX skos:    &lt;http://www.w3.org/2004/02/skos/core#&gt;
+
+SELECT ?repo ?name ?purpose ?owner ?tier ?target ?inputs ?consumers ?projects ?issueRecords
+WHERE {
+  ?repo a dprod:DataProduct .
+  OPTIONAL { ?repo dcterms:title ?name }
+  OPTIONAL { ?repo dprod:purpose ?purpose }
+  OPTIONAL { ?repo dprod:dataProductOwner ?o . ?o skos:prefLabel ?owner }
+  OPTIONAL { ?repo de:tierNow ?t1 . ?t1 skos:notation ?tier }
+  OPTIONAL { ?repo de:tierTarget ?t2 . ?t2 skos:notation ?target }
+  OPTIONAL {
+    SELECT ?repo (GROUP_CONCAT(DISTINCT ?in; separator=&quot;, &quot;) AS ?inputs)
+    WHERE { ?repo dprod:inputDataset ?i . ?i dcterms:title ?in }
+    GROUP BY ?repo
+  }
+  OPTIONAL {
+    SELECT ?repo (GROUP_CONCAT(DISTINCT ?out; separator=&quot;, &quot;) AS ?consumers)
+    WHERE { ?c dprod:inputDataset ?repo . ?c dcterms:title ?out }
+    GROUP BY ?repo
+  }
+  OPTIONAL {
+    SELECT ?repo (GROUP_CONCAT(DISTINCT ?pt; separator=&quot;, &quot;) AS ?projects)
+    WHERE { ?pr de:projectRepository ?repo ; dcterms:title ?pt }
+    GROUP BY ?repo
+  }
+  OPTIONAL {
+    SELECT ?repo (GROUP_CONCAT(DISTINCT STR(?iss); separator=&quot;, &quot;) AS ?issueRecords)
+    WHERE { ?repo de:issueRecord ?iss }
+    GROUP BY ?repo
+  }
+}
+ORDER BY ?name
+</code></pre>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

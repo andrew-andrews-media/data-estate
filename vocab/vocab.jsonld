@@ -1,0 +1,3894 @@
+{
+  "@context": {
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "de": "https://w3id.org/data-estate/vocab#",
+    "des": "https://w3id.org/data-estate/shapes#",
+    "dprod": "https://ekgf.github.io/dprod/",
+    "org": "http://www.w3.org/ns/org#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "schema": "https://schema.org/",
+    "sh": "http://www.w3.org/ns/shacl#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "vann": "http://purl.org/vocab/vann/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:cb0",
+      "@type": "schema:Person",
+      "schema:name": "Andrew Andrews",
+      "schema:url": {
+        "@id": "https://github.com/andrew-andrews-media"
+      }
+    },
+    {
+      "@id": "dcterms:date",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "An artefact's own date, not the day it was filed; when a lineage entry's change was made; a decision's date; for a ruling from the decision board, when the owner answered."
+      }
+    },
+    {
+      "@id": "dcterms:isPartOf",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "The repository that holds an artefact."
+      }
+    },
+    {
+      "@id": "dcterms:publisher",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "The organisation or community that publishes a framework."
+      }
+    },
+    {
+      "@id": "dcterms:replaces",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "The earlier version an artefact supersedes; an earlier answer to the same matter that a ruling replaces."
+      }
+    },
+    {
+      "@id": "dcterms:subject",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "An entity an artefact concerns."
+      }
+    },
+    {
+      "@id": "dcterms:title",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "A repository's name; an artefact's title; a decision's or ruling's first bold phrase, else its first sentence; what a matter or deliverable asks to be done, answered or delivered."
+      }
+    },
+    {
+      "@id": "de:Action",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Action"
+      },
+      "rdfs:subClassOf": {
+        "@id": "schema:Action"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Something only the owner can do, tracked until it is done or dropped."
+      }
+    },
+    {
+      "@id": "de:Artefact",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Artefact"
+      },
+      "rdfs:subClassOf": {
+        "@id": "dcat:Resource"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A file held in a repository."
+      }
+    },
+    {
+      "@id": "de:CheckedJob",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Checked job"
+      },
+      "rdfs:subClassOf": {
+        "@id": "de:Job"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A job staged after results began to record the files they wrote, and so checked by the rules."
+      }
+    },
+    {
+      "@id": "de:Community",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Community"
+      },
+      "rdfs:subClassOf": {
+        "@id": "schema:Organization"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "An association, network or community of practice."
+      }
+    },
+    {
+      "@id": "de:Decision",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Decision"
+      },
+      "rdfs:subClassOf": {
+        "@id": "prov:Entity"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A dated decision recorded in a repository's decision log."
+      }
+    },
+    {
+      "@id": "de:DeclaredArtefact",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Declared artefact"
+      },
+      "rdfs:subClassOf": {
+        "@id": "de:Artefact"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "An artefact whose metadata block the metadata rules govern, complete or not."
+      }
+    },
+    {
+      "@id": "de:Deliverable",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Deliverable"
+      },
+      "rdfs:subClassOf": {
+        "@id": "prov:Entity"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A piece of planned work, open until it is delivered or dropped, with its evidence."
+      }
+    },
+    {
+      "@id": "de:Framework",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Framework"
+      },
+      "rdfs:subClassOf": {
+        "@id": "schema:CreativeWork"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A published framework, standard, programme or publication."
+      }
+    },
+    {
+      "@id": "de:Job",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Job"
+      },
+      "rdfs:subClassOf": {
+        "@id": "prov:Activity"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A unit of automated work: a prompt staged for an agent to carry out, and the result it records."
+      }
+    },
+    {
+      "@id": "de:LineageEntry",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Lineage entry"
+      },
+      "rdfs:subClassOf": {
+        "@id": "prov:Entity"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A record that a significant change was made to a repository: its date, its kind and its evidence."
+      }
+    },
+    {
+      "@id": "de:NonSensitiveRepository",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Non-sensitive repository"
+      },
+      "rdfs:subClassOf": {
+        "@id": "de:Repository"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A repository not flagged sensitive, and so described in full."
+      },
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "Every non-sensitive repository is also a data product (dprod:DataProduct)."
+      }
+    },
+    {
+      "@id": "de:Project",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Project"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A workspace where a body of work is carried on, such as a project in an AI assistant, kept on record by a repository."
+      }
+    },
+    {
+      "@id": "de:Question",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Question"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A ruling, question or go-ahead the owner owes, outside a rulings sheet."
+      }
+    },
+    {
+      "@id": "de:Repository",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Repository"
+      },
+      "rdfs:subClassOf": {
+        "@id": "dcat:Catalog"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A top-level body of work, registered as a unit. From T1 it keeps its own record of what was asked, produced and decided."
+      }
+    },
+    {
+      "@id": "de:Ruling",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Ruling"
+      },
+      "rdfs:subClassOf": {
+        "@id": "prov:Entity"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A question put to the owner for a decision, on a rulings sheet or the decision board, with the answer once given."
+      }
+    },
+    {
+      "@id": "de:Tenant",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Tenant"
+      },
+      "rdfs:subClassOf": {
+        "@id": "prov:Agent"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The person or organisation a repository is kept for."
+      },
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "Tenants name people and organisations, so a publication of an estate lists none."
+      }
+    },
+    {
+      "@id": "de:Topic",
+      "@type": "owl:Class",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "Topic"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A subject that documents concern, other than an organisation, event, framework, place or person."
+      }
+    },
+    {
+      "@id": "de:aboutRepository",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "about repository"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:LineageEntry"
+      },
+      "schema:rangeIncludes": {
+        "@id": "de:Repository"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The repository a lineage entry's change was made to."
+      }
+    },
+    {
+      "@id": "de:alsoId",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "also id"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Another id the same matter goes by in a later source."
+      }
+    },
+    {
+      "@id": "de:answer",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "answer"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Ruling"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The option the owner chose."
+      }
+    },
+    {
+      "@id": "de:answersMatter",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "answers matter"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Ruling"
+      },
+      "schema:rangeIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Job"
+        },
+        {
+          "@id": "de:Question"
+        },
+        {
+          "@id": "de:Ruling"
+        }
+      ],
+      "skos:definition": {
+        "@language": "en",
+        "@value": "What a ruling from the decision board answers: a matter, a ruling of a rulings sheet, or a job."
+      }
+    },
+    {
+      "@id": "de:archived",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "archived"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Artefact"
+        },
+        {
+          "@id": "de:Job"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "xsd:boolean"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether an artefact or job is kept in an archive."
+      },
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "An artefact is kept in an archive once it is superseded. A job is archived once it has been moved to its queue's archive."
+      }
+    },
+    {
+      "@id": "de:artefactType",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "artefact type"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Artefact"
+      },
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "An artefact's kind."
+      }
+    },
+    {
+      "@id": "de:backupFiles",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "backup files"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Job"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:integer"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "How many backup copies a job made."
+      }
+    },
+    {
+      "@id": "de:blockedBy",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "blocked by"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Deliverable"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Deliverable"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A matter or deliverable that must come first."
+      }
+    },
+    {
+      "@id": "de:blocking",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "blocking"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Deliverable"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:boolean"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether a deliverable holds up other work."
+      }
+    },
+    {
+      "@id": "de:category",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "category"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Repository"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The register's own label for a repository's kind of work, kept beside its domain."
+      }
+    },
+    {
+      "@id": "de:changeType",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "change type"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:LineageEntry"
+      },
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The kind of change a lineage entry records."
+      }
+    },
+    {
+      "@id": "de:citesJob",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "cites job"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Decision"
+      },
+      "schema:rangeIncludes": {
+        "@id": "de:Job"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A job a decision cites."
+      }
+    },
+    {
+      "@id": "de:citesLineage",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "cites lineage"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Decision"
+      },
+      "schema:rangeIncludes": {
+        "@id": "de:LineageEntry"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A lineage entry a decision cites."
+      }
+    },
+    {
+      "@id": "de:citesRuling",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "cites ruling"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Decision"
+      },
+      "schema:rangeIncludes": {
+        "@id": "de:Ruling"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A ruling a decision cites."
+      }
+    },
+    {
+      "@id": "de:concerns",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "concerns"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "de:Repository"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A repository a matter concerns."
+      }
+    },
+    {
+      "@id": "de:decisionLog",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "decision log"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Decision"
+      },
+      "schema:rangeIncludes": {
+        "@id": "de:Artefact"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The log a decision is recorded in."
+      }
+    },
+    {
+      "@id": "de:declaredKey",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "declared key"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:DeclaredArtefact"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A key an artefact's metadata block carries, whatever its value."
+      },
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "A validation term: it records what a metadata block declared, so the rules can name the fault."
+      }
+    },
+    {
+      "@id": "de:deliverableState",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "deliverable state"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/deliverable-state"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Deliverable"
+      },
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Where a deliverable stands."
+      }
+    },
+    {
+      "@id": "de:domain",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "domain"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Artefact"
+        },
+        {
+          "@id": "de:Repository"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The domain of work a repository or artefact belongs to."
+      },
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "An artefact's domain is the one its metadata block declares, or else its repository's; de:domainSource says which."
+      }
+    },
+    {
+      "@id": "de:domainSource",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "domain source"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/domain-source"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Artefact"
+      },
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Where an artefact's domain came from: declared in its metadata block, or inherited from its repository."
+      }
+    },
+    {
+      "@id": "de:due",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "due"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "xsd:date"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A due date the source states."
+      }
+    },
+    {
+      "@id": "de:dueText",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "due text"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The source's own words on timing."
+      }
+    },
+    {
+      "@id": "de:effect",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "effect"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/effect"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Ruling"
+      },
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "What a ruling's answer does to the matter."
+      }
+    },
+    {
+      "@id": "de:evidencePath",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "evidence path"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Deliverable"
+        },
+        {
+          "@id": "de:LineageEntry"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Where the evidence for a lineage entry or deliverable is kept."
+      },
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "For a lineage entry, the evidence for its change; for a deliverable, the evidence that it was delivered."
+      }
+    },
+    {
+      "@id": "de:evidenceResolves",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "evidence resolves"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:LineageEntry"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:boolean"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether every evidence path a lineage entry names exists."
+      }
+    },
+    {
+      "@id": "de:governs",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "governs"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Decision"
+        },
+        {
+          "@id": "de:Ruling"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "de:Artefact"
+        },
+        {
+          "@id": "de:Community"
+        },
+        {
+          "@id": "de:Framework"
+        },
+        {
+          "@id": "de:Repository"
+        },
+        {
+          "@id": "de:Topic"
+        },
+        {
+          "@id": "schema:Event"
+        },
+        {
+          "@id": "schema:Organization"
+        },
+        {
+          "@id": "schema:Person"
+        },
+        {
+          "@id": "schema:Place"
+        }
+      ],
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A repository, document or entity a decision or ruling governs."
+      }
+    },
+    {
+      "@id": "de:hasLineageFile",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "has lineage file"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:NonSensitiveRepository"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:boolean"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether a repository keeps a lineage file at its root."
+      }
+    },
+    {
+      "@id": "de:hasRunLog",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "has run log"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Job"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:boolean"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether a job kept a run log."
+      }
+    },
+    {
+      "@id": "de:homeRepository",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "home repository"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Community"
+        },
+        {
+          "@id": "de:Framework"
+        },
+        {
+          "@id": "de:Topic"
+        },
+        {
+          "@id": "schema:Event"
+        },
+        {
+          "@id": "schema:Organization"
+        },
+        {
+          "@id": "schema:Person"
+        },
+        {
+          "@id": "schema:Place"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "de:Repository"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The repository that keeps an entity's own record."
+      }
+    },
+    {
+      "@id": "de:issueRecord",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "issue record"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:NonSensitiveRepository"
+      },
+      "schema:rangeIncludes": {
+        "@id": "de:LineageEntry"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A lineage entry recording a deliverable the repository issued outside the estate."
+      }
+    },
+    {
+      "@id": "de:jobQueue",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "job queue"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Job"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The queue folder a job was staged in."
+      }
+    },
+    {
+      "@id": "de:jobRepository",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "job repository"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Job"
+      },
+      "schema:rangeIncludes": {
+        "@id": "de:Repository"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The repository a job works for."
+      }
+    },
+    {
+      "@id": "de:jobStatus",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "job status"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Job"
+      },
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "How a job ended, from its result; pending while it has none."
+      }
+    },
+    {
+      "@id": "de:matterId",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "matter id"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A matter's id, the same as the decision board gives it."
+      }
+    },
+    {
+      "@id": "de:matterKind",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "matter kind"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-kind"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether the owner is to act, rule or give a go-ahead."
+      }
+    },
+    {
+      "@id": "de:matterState",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "matter state"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-state"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Where an action or question stands."
+      }
+    },
+    {
+      "@id": "de:mentionsInferred",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "mentions (inferred)"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "de:Community"
+        },
+        {
+          "@id": "de:Framework"
+        },
+        {
+          "@id": "de:Topic"
+        },
+        {
+          "@id": "schema:Event"
+        },
+        {
+          "@id": "schema:Organization"
+        },
+        {
+          "@id": "schema:Person"
+        },
+        {
+          "@id": "schema:Place"
+        }
+      ],
+      "skos:definition": {
+        "@language": "en",
+        "@value": "An entity a matter's title appears to name."
+      },
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "Mentions that a source declares use schema:mentions."
+      }
+    },
+    {
+      "@id": "de:metadataSource",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "metadata source"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/metadata-source"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Artefact"
+      },
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether an artefact's metadata was declared in its metadata block, inferred by the catalogue, or is its path alone."
+      }
+    },
+    {
+      "@id": "de:noRepositoryReason",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "no-repository reason"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Project"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Why a project has no repository, where it has none."
+      }
+    },
+    {
+      "@id": "de:path",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "path"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Artefact"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Where an artefact sits in its repository."
+      }
+    },
+    {
+      "@id": "de:projectRepository",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "project repository"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Project"
+      },
+      "schema:rangeIncludes": {
+        "@id": "de:Repository"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The repository that keeps a project's record."
+      }
+    },
+    {
+      "@id": "de:recordsWrites",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "records writes"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Job"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:boolean"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether a job's result records the files it wrote."
+      }
+    },
+    {
+      "@id": "de:resultRead",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "result read"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Job"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:boolean"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether a job's result was read: some results are never opened."
+      }
+    },
+    {
+      "@id": "de:rulingCode",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "ruling code"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Ruling"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A ruling's code on its sheet."
+      }
+    },
+    {
+      "@id": "de:rulingNumber",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "ruling number"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Ruling"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:integer"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A ruling's number on its sheet."
+      }
+    },
+    {
+      "@id": "de:rulingSource",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "ruling source"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Ruling"
+      },
+      "schema:rangeIncludes": {
+        "@id": "de:Artefact"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The rulings sheet or decision-board file a ruling is recorded in."
+      }
+    },
+    {
+      "@id": "de:rulingState",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "ruling state"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/ruling-state"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Ruling"
+      },
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Where a ruling stands."
+      }
+    },
+    {
+      "@id": "de:sensitive",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "sensitive"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Artefact"
+        },
+        {
+          "@id": "de:Repository"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "xsd:boolean"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether a repository or artefact is flagged sensitive."
+      },
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "A sensitive repository is recorded by its existence, tenant, tier and this flag alone. A sensitive artefact is listed by path and title only."
+      }
+    },
+    {
+      "@id": "de:sha256",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "SHA-256"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Artefact"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A hash of an artefact's content, to tell copies apart."
+      }
+    },
+    {
+      "@id": "de:source",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "source"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "de:Artefact"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A document a matter is recorded in."
+      }
+    },
+    {
+      "@id": "de:sourceRef",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "source ref"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Deliverable"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A matter's or deliverable's code in the document it is recorded in."
+      }
+    },
+    {
+      "@id": "de:stagedOn",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "staged on"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Job"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:date"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The date a job was staged."
+      }
+    },
+    {
+      "@id": "de:statedOverdue",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "stated overdue"
+      },
+      "schema:domainIncludes": [
+        {
+          "@id": "de:Action"
+        },
+        {
+          "@id": "de:Question"
+        }
+      ],
+      "schema:rangeIncludes": {
+        "@id": "xsd:boolean"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether the source says the matter is overdue."
+      }
+    },
+    {
+      "@id": "de:status",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "status"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/status"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Artefact"
+      },
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether an artefact is the copy to cite, a working copy, or superseded."
+      }
+    },
+    {
+      "@id": "de:tenant",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "tenant"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Repository"
+      },
+      "schema:rangeIncludes": {
+        "@id": "de:Tenant"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The tenant a repository is kept for."
+      }
+    },
+    {
+      "@id": "de:tierNow",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "tier now"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/tier"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Repository"
+      },
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "How managed a repository is today."
+      }
+    },
+    {
+      "@id": "de:tierTarget",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "tier target"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://w3id.org/data-estate/scheme/tier"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Repository"
+      },
+      "schema:rangeIncludes": {
+        "@id": "skos:Concept"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The tier a repository is meant to reach."
+      }
+    },
+    {
+      "@id": "de:unmappedDomain",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "unmapped domain"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:DeclaredArtefact"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A declared domain outside the domain scheme, as written, so the rules can name the fault."
+      },
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "A validation term: it records what a metadata block declared, so the rules can name the fault."
+      }
+    },
+    {
+      "@id": "de:unmappedStatus",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "unmapped status"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:DeclaredArtefact"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A declared status outside the status scheme, as written, so the rules can name the fault."
+      },
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "A validation term: it records what a metadata block declared, so the rules can name the fault."
+      }
+    },
+    {
+      "@id": "de:unmappedType",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "unmapped type"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:DeclaredArtefact"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A declared type outside the artefact-type scheme, as written, so the rules can name the fault."
+      },
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "A validation term: it records what a metadata block declared, so the rules can name the fault."
+      }
+    },
+    {
+      "@id": "de:unregisteredEntity",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "unregistered entity"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:DeclaredArtefact"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A declared entity that is not in the entity register, as written."
+      },
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "A validation term: it records what a metadata block declared, so the rules can name the fault."
+      }
+    },
+    {
+      "@id": "de:wroteDeclared",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "wrote (declared)"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Job"
+      },
+      "schema:rangeIncludes": {
+        "@id": "de:Artefact"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A file a job's result says it wrote."
+      }
+    },
+    {
+      "@id": "de:wroteInferred",
+      "@type": "owl:ObjectProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "wrote (inferred)"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Job"
+      },
+      "schema:rangeIncludes": {
+        "@id": "de:Artefact"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A file a job appears to have written, read from an older result's prose."
+      }
+    },
+    {
+      "@id": "de:wrotePath",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "rdfs:label": {
+        "@language": "en",
+        "@value": "wrote path"
+      },
+      "schema:domainIncludes": {
+        "@id": "de:Job"
+      },
+      "schema:rangeIncludes": {
+        "@id": "xsd:string"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A file a job wrote that the catalogue does not hold, by its path."
+      }
+    },
+    {
+      "@id": "dprod:DataProduct",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "Every non-sensitive repository is also a data product."
+      }
+    },
+    {
+      "@id": "dprod:dataProductOwner",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "Who owns a data product: its repository's tenant."
+      }
+    },
+    {
+      "@id": "dprod:inputDataset",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "A repository a data product draws on."
+      }
+    },
+    {
+      "@id": "dprod:purpose",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "What a non-sensitive repository is for, as a data product: its register label."
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/change-type/classification",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The repository's tenant, domain, tier or sensitive flag changed."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      },
+      "skos:notation": "classification",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Classification"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/change-type/content",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Artefacts were added to, revised in or removed from the repository."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      },
+      "skos:notation": "content",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Content"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/change-type/control-added",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A governance control was introduced or changed."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      },
+      "skos:notation": "control-added",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Control added"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/change-type/cross-repo-decision",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A decision was made that affects another repository."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      },
+      "skos:notation": "cross-repo-decision",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Cross-repository decision"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/change-type/deliverable-issued",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A deliverable was issued outside the estate."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      },
+      "skos:notation": "deliverable-issued",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Deliverable issued"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/change-type/dependency",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The repository began to depend on, or duplicate, content in another repository."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      },
+      "skos:notation": "dependency",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Dependency"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/change-type/lifecycle",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A repository was created, renamed, moved, archived or retired."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      },
+      "skos:notation": "lifecycle",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Lifecycle"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/change-type/rules",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The repository's layout, its instructions to agents or its standing rules changed."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      },
+      "skos:notation": "rules",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Rules"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/change-type/source-filed",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A source document was filed into a repository."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      },
+      "skos:notation": "source-filed",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Source filed"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/change-type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/deliverable-state/delivered",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Delivered, with its evidence."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/deliverable-state"
+      },
+      "skos:notation": "delivered",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Delivered"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/deliverable-state"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/deliverable-state/dropped",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Closed without being delivered."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/deliverable-state"
+      },
+      "skos:notation": "dropped",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Dropped"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/deliverable-state"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/deliverable-state/open",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Not yet delivered."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/deliverable-state"
+      },
+      "skos:notation": "open",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Open"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/deliverable-state"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/domain-source/declared",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Taken from the artefact's own metadata block."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/domain-source"
+      },
+      "skos:notation": "declared",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Declared"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/domain-source"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/domain-source/inherited",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Taken from the domain of the artefact's repository."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/domain-source"
+      },
+      "skos:notation": "inherited",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Inherited"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/domain-source"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/domain/advocacy",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Speaking, writing and representing a field."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      },
+      "skos:notation": "advocacy",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Advocacy and thought leadership"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/domain/broadcasting",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Radio and other media."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      },
+      "skos:notation": "broadcasting",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Broadcasting"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/domain/community",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Professional communities and associations, and mentoring."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      },
+      "skos:notation": "community",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Community and mentoring"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/domain/enterprise-data",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Enterprise data management and governance, as a discipline."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      },
+      "skos:notation": "enterprise-data",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Enterprise data governance"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/domain/industry-partnerships",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Joint programmes with industry bodies."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      },
+      "skos:notation": "industry-partnerships",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Industry partnerships"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/domain/knowledge",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "How the estate itself is run: its standards, catalogue and automation."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      },
+      "skos:notation": "knowledge",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Knowledge and automation"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/domain/ventures",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "New ventures and commercial work."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      },
+      "skos:notation": "ventures",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Ventures"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/domain/withheld",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The estate's private domains. The publication neither names them nor counts what they hold."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      },
+      "skos:notation": "withheld",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Withheld"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/domain"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/effect/close",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The answer closes the matter."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/effect"
+      },
+      "skos:notation": "close",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Close"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/effect"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/effect/commit",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The owner commits to act on it soon, and the matter stays open."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/effect"
+      },
+      "skos:notation": "commit",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Commit"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/effect"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/effect/park",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The answer sets the matter aside."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/effect"
+      },
+      "skos:notation": "park",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Park"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/effect"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/effect/rule",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The answer is a ruling, to be applied."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/effect"
+      },
+      "skos:notation": "rule",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Rule"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/effect"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/job-status/aborted",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The job stopped before finishing, and its result says why."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      },
+      "skos:notation": "aborted",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Aborted"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/job-status/complete",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The job did everything its prompt asked."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      },
+      "skos:notation": "complete",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Complete"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/job-status/dry-run",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The job ran under alternate law and listed only would- actions; it wrote nothing outside its job folder."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      },
+      "skos:notation": "dry-run",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Dry run"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/job-status/partial",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The job did part of what its prompt asked, and its result says what is left."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      },
+      "skos:notation": "partial",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Partial"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/job-status/pending",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The job has no result yet."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      },
+      "skos:notation": "pending",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Pending"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/job-status/refused",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The job declined to run under direct law."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      },
+      "skos:notation": "refused",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Refused"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/job-status"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/matter-kind/action",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The owner is to do something."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-kind"
+      },
+      "skos:notation": "action",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Action"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-kind"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/matter-kind/go-ahead",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The owner is to approve work before it starts."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-kind"
+      },
+      "skos:notation": "go-ahead",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Go-ahead"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-kind"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/matter-kind/ruling",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The owner is to decide something."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-kind"
+      },
+      "skos:notation": "ruling",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Ruling"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-kind"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/matter-state/answered",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Answered on the decision board, and not yet applied in its source."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-state"
+      },
+      "skos:notation": "answered",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Answered"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-state"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/matter-state/closed",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Done, dropped or superseded."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-state"
+      },
+      "skos:notation": "closed",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Closed"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-state"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/matter-state/open",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Waiting on the owner."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-state"
+      },
+      "skos:notation": "open",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Open"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-state"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/matter-state/parked",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Set aside, not dropped."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-state"
+      },
+      "skos:notation": "parked",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Parked"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/matter-state"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/metadata-source/declared",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Read from the artefact's metadata block."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/metadata-source"
+      },
+      "skos:notation": "declared",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Declared"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/metadata-source"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/metadata-source/inferred",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Worked out by the catalogue, from where the file sits and what it is."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/metadata-source"
+      },
+      "skos:notation": "inferred",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Inferred"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/metadata-source"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/metadata-source/path-only",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Only its path and title are held; its metadata is not read."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/metadata-source"
+      },
+      "skos:notation": "path-only",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Path only"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/metadata-source"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/ruling-state/answered",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Answered, not yet applied."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/ruling-state"
+      },
+      "skos:notation": "answered",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Answered"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/ruling-state"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/ruling-state/applied",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Answered and applied."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/ruling-state"
+      },
+      "skos:notation": "applied",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Applied"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/ruling-state"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/ruling-state/carried",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Moved to a later sheet, to be answered there."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/ruling-state"
+      },
+      "skos:notation": "carried",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Carried"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/ruling-state"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/ruling-state/open",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Put to the owner and not yet answered."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/ruling-state"
+      },
+      "skos:notation": "open",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Open"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/ruling-state"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/ruling-state/superseded",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Replaced by a later ruling."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/ruling-state"
+      },
+      "skos:notation": "superseded",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Superseded"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/ruling-state"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/change-type",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The kinds of significant change a lineage entry records."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/change-type/classification"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/change-type/content"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/change-type/control-added"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/change-type/cross-repo-decision"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/change-type/deliverable-issued"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/change-type/dependency"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/change-type/lifecycle"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/change-type/rules"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/change-type/source-filed"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Change types"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/deliverable-state",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Where a deliverable stands."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/deliverable-state/delivered"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/deliverable-state/dropped"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/deliverable-state/open"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Deliverable states"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/domain",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The domains of work in one estate. The scheme is that estate's own: another estate would publish its own scheme, use de:domain with it unchanged, and point the rule des:DomainConcept at it. Seven domains are named, each defined by its field alone. The private ones are published as a single concept, Withheld, with nothing under it."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/domain/advocacy"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/domain/broadcasting"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/domain/community"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/domain/enterprise-data"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/domain/industry-partnerships"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/domain/knowledge"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/domain/ventures"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/domain/withheld"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Domains"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/domain-source",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Where an artefact's domain came from."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/domain-source/declared"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/domain-source/inherited"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Domain sources"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/effect",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "What an answer does to the matter it answers."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/effect/close"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/effect/commit"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/effect/park"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/effect/rule"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Effects"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/job-status",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "How a job ended, read from its result."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/job-status/aborted"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/job-status/complete"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/job-status/dry-run"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/job-status/partial"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/job-status/pending"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/job-status/refused"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Job statuses"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/matter-kind",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether the owner is to act, rule or give a go-ahead."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/matter-kind/action"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/matter-kind/go-ahead"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/matter-kind/ruling"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Matter kinds"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/matter-state",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Where an action or question stands."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/matter-state/answered"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/matter-state/closed"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/matter-state/open"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/matter-state/parked"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Matter states"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/metadata-source",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether an artefact's metadata was declared, inferred, or is its path alone."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/metadata-source/declared"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/metadata-source/inferred"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/metadata-source/path-only"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Metadata sources"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/ruling-state",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Where a ruling stands."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/ruling-state/answered"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/ruling-state/applied"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/ruling-state/carried"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/ruling-state/open"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/ruling-state/superseded"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Ruling states"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/status",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Whether an artefact is the copy to cite, a working copy, or superseded."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/status/canonical"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/status/superseded"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/status/working"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Statuses"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/tier",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "How managed a repository is. Tiers are cumulative: each requires everything the tier below it does. A repository has a tier now and a tier it is meant to reach."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/tier/t0"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/tier/t1"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/tier/t2"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/tier/t3"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Tiers"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/scheme/type",
+      "@type": "skos:ConceptScheme",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The kinds of artefact a metadata block can declare."
+      },
+      "skos:hasTopConcept": [
+        {
+          "@id": "https://w3id.org/data-estate/type/brief"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/type/correspondence"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/type/dataset"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/type/deck"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/type/note"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/type/register"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/type/report"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/type/template"
+        }
+      ],
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Artefact types"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/status/canonical",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "The copy to cite. Other copies of the same document derive from it."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/status"
+      },
+      "skos:notation": "canonical",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Canonical"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/status"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/status/superseded",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Replaced by a later version, and kept for the record in an archive."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/status"
+      },
+      "skos:notation": "superseded",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Superseded"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/status"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/status/working",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "In progress, or derived from the canonical copy."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/status"
+      },
+      "skos:notation": "working",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Working"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/status"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/tier/t0",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A folder of files, recorded as existing and no more."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/tier"
+      },
+      "skos:notation": "T0",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Unmanaged"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/tier"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/tier/t1",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Registered with a known owner and purpose; kept in the standard layout, with a README and a decision log. Version control comes at T2."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/tier"
+      },
+      "skos:notation": "T1",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Registered"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/tier"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/tier/t2",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Also under version control, with a remote copy, so every change can be reviewed and reverted. No credential may ever have entered its history, and confidential client material is either absent or the remote is private."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/tier"
+      },
+      "skos:notation": "T2",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Versioned"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/tier"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/tier/t3",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Also runs something: a service, a timer or a container. It needs pinned dependencies, a way to deploy and a stated backup position."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/tier"
+      },
+      "skos:notation": "T3",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Runtime"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/tier"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/type/brief",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A document that puts a proposal or a question to someone for a decision."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      },
+      "skos:notation": "brief",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Brief"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/type/correspondence",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A letter, email or message, sent or received."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      },
+      "skos:notation": "correspondence",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Correspondence"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/type/dataset",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Structured data, such as a table or an export."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      },
+      "skos:notation": "dataset",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Dataset"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/type/deck",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "Slides, for presenting."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      },
+      "skos:notation": "deck",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Deck"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/type/note",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A shorter record: a working note, a standard or minutes."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      },
+      "skos:notation": "note",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Note"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/type/register",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A list of records of one kind, kept current."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      },
+      "skos:notation": "register",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Register"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/type/report",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A document that sets out findings or analysis."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      },
+      "skos:notation": "report",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Report"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/type/template",
+      "@type": "skos:Concept",
+      "rdfs:isDefinedBy": {
+        "@id": "https://w3id.org/data-estate/vocab"
+      },
+      "skos:definition": {
+        "@language": "en",
+        "@value": "A form that other documents are made from."
+      },
+      "skos:inScheme": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      },
+      "skos:notation": "template",
+      "skos:prefLabel": {
+        "@language": "en",
+        "@value": "Template"
+      },
+      "skos:topConceptOf": {
+        "@id": "https://w3id.org/data-estate/scheme/type"
+      }
+    },
+    {
+      "@id": "https://w3id.org/data-estate/vocab",
+      "@type": "owl:Ontology",
+      "dcterms:creator": {
+        "@id": "_:cb0"
+      },
+      "dcterms:description": {
+        "@language": "en",
+        "@value": "The Data Estate Ontology describes a data estate: the repositories a person or small organisation keeps, the documents in them, and the control plane that governs them. It was built for one working estate, and is published so that others can describe theirs the same way."
+      },
+      "dcterms:issued": {
+        "@type": "xsd:date",
+        "@value": "2026-10-27"
+      },
+      "dcterms:license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "dcterms:title": {
+        "@language": "en",
+        "@value": "Data Estate Ontology"
+      },
+      "owl:versionIRI": {
+        "@id": "https://w3id.org/data-estate/vocab/2026-10-27"
+      },
+      "owl:versionInfo": "1.0",
+      "rdfs:comment": {
+        "@language": "en",
+        "@value": "In these definitions, a matter is an action or question the owner owes; a rulings sheet is a dated list of questions put to the owner; the decision board is where the owner answers matters and rulings, each answer filed back into the estate; the register is the estate's list of its repositories, and the entity register its list of the entities documents may name; a metadata block is the short block of keys at the head of a document; the catalogue is the index of every artefact, built from those blocks and from where files sit; and a lineage file is a repository's own record of its significant changes. Every organisation, community, event, framework, topic, place and person in the entity register is also a skos:Concept in the estate's own entity scheme, which a publication does not include: its concepts are names."
+      },
+      "rdfs:seeAlso": [
+        {
+          "@id": "https://w3id.org/data-estate/docs/"
+        },
+        {
+          "@id": "https://w3id.org/data-estate/shapes"
+        }
+      ],
+      "vann:preferredNamespacePrefix": "de",
+      "vann:preferredNamespaceUri": "https://w3id.org/data-estate/vocab#"
+    },
+    {
+      "@id": "org:subOrganizationOf",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "An entity is a subsidiary, unit, region or community of the other."
+      }
+    },
+    {
+      "@id": "prov:wasDerivedFrom",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "The canonical copy that a copy of an artefact derives from."
+      }
+    },
+    {
+      "@id": "schema:Event",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "An event that documents concern."
+      }
+    },
+    {
+      "@id": "schema:Organization",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "An organisation that documents concern."
+      }
+    },
+    {
+      "@id": "schema:Person",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "A person that documents concern. People are names only, and are never related to another entity."
+      }
+    },
+    {
+      "@id": "schema:Place",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "A place that documents concern."
+      }
+    },
+    {
+      "@id": "schema:mentions",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "An entity that a matter's source names."
+      }
+    },
+    {
+      "@id": "schema:organizer",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "The organisation or community that organises an event."
+      }
+    },
+    {
+      "@id": "skos:altLabel",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "Another name an entity goes by."
+      }
+    },
+    {
+      "@id": "skos:notation",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "An entity's slug, or a concept's code: a short key that never changes."
+      }
+    },
+    {
+      "@id": "skos:prefLabel",
+      "skos:scopeNote": {
+        "@language": "en",
+        "@value": "An entity's or concept's name."
+      }
+    }
+  ]
+}

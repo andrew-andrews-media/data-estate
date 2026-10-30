@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: CQ14</title>
+<meta name="description" content="Which jobs wrote to a given file or repository: when was each staged, how did it end, and is the write declared or inferred?">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/queries/cq14">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../../">Home</a> <a href="../../docs/">Overview</a> <a href="../../vocab/">Vocabulary</a> <a href="../../scheme/">Schemes</a> <a href="../../shapes/">Rules</a> <a href="../../queries/" aria-current="page">Queries</a></nav>
+<main>
+<h1>CQ14</h1>
+<p class="lede">Which jobs wrote to a given file or repository: when was each staged, how did it end, and is the write declared or inferred?</p>
+<p>A declared write is one the job&#x27;s result records; an inferred one is read from an older result&#x27;s prose.</p>
+<p>Files the catalogue does not hold are recorded with de:wrotePath, and are not listed here.</p>
+<p>Parameter: ?doc, the IRI of an artefact, or ?repo, the IRI of a repository. Bind one of them with initial</p>
+<p>bindings or with VALUES inside WHERE, or replace it with the IRI.</p>
+<p>Published at https://w3id.org/data-estate/queries/cq14 under CC BY 4.0.</p>
+<p><a href="../cq14.rq">Download the query</a></p>
+<pre><code># CQ14. Which jobs wrote to a given file or repository: when was each staged, how did it end,
+# and is the write declared or inferred?
+# A declared write is one the job&#x27;s result records; an inferred one is read from an older result&#x27;s prose.
+# Files the catalogue does not hold are recorded with de:wrotePath, and are not listed here.
+# Parameter: ?doc, the IRI of an artefact, or ?repo, the IRI of a repository. Bind one of them with initial
+# bindings or with VALUES inside WHERE, or replace it with the IRI.
+# Published at https://w3id.org/data-estate/queries/cq14 under CC BY 4.0.
+PREFIX de:      &lt;https://w3id.org/data-estate/vocab#&gt;
+PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
+
+SELECT DISTINCT ?doc ?repo ?job ?queue ?staged ?status ?how ?path
+WHERE {
+  { ?job de:wroteDeclared ?doc . BIND (&quot;declared&quot; AS ?how) }
+  UNION { ?job de:wroteInferred ?doc . BIND (&quot;inferred&quot; AS ?how) }
+  ?doc de:path ?path ; dcterms:isPartOf ?repo .
+  OPTIONAL { ?job de:jobQueue ?queue }
+  OPTIONAL { ?job de:stagedOn ?staged }
+  OPTIONAL { ?job de:jobStatus ?status }
+}
+ORDER BY DESC(?staged) ?queue ?job
+</code></pre>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

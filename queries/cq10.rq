@@ -1,0 +1,32 @@
+# CQ10. For a task about a given entity, what should an agent load first?
+# It lists the current artefacts about the entity or anything below it, ranked: canonical copies first, then
+# the rest, then copies that derive from a canonical copy; newest first within each rank. Superseded and
+# archived files, and artefacts flagged sensitive, are left out.
+# Parameter: ?entity, the IRI of an entity. Bind it with initial bindings or with VALUES inside WHERE, or replace it with the IRI.
+# Published at https://w3id.org/data-estate/queries/cq10 under CC BY 4.0.
+PREFIX de:      <https://w3id.org/data-estate/vocab#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX org:     <http://www.w3.org/ns/org#>
+PREFIX prov:    <http://www.w3.org/ns/prov#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema:  <https://schema.org/>
+PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?entity ?doc ?path ?title ?date ?rank (GROUP_CONCAT(DISTINCT ?slug; separator=", ") AS ?about)
+WHERE {
+  { ?e org:subOrganizationOf* ?entity }
+  UNION { ?e schema:organizer|dcterms:publisher ?entity }
+  OPTIONAL { ?e skos:notation ?n }
+  BIND (COALESCE(STR(?n), STR(?e)) AS ?slug)
+  ?doc a/rdfs:subClassOf* de:Artefact ; dcterms:subject ?e ; de:path ?path .
+  FILTER NOT EXISTS { ?doc de:sensitive true }
+  FILTER NOT EXISTS { ?doc de:status <https://w3id.org/data-estate/status/superseded> }
+  FILTER NOT EXISTS { ?doc de:archived true }
+  OPTIONAL { ?doc dcterms:title ?title }
+  OPTIONAL { ?doc dcterms:date ?date }
+  BIND (IF(EXISTS { ?doc de:status <https://w3id.org/data-estate/status/canonical> }
+           || EXISTS { ?copy prov:wasDerivedFrom ?doc }, 1,
+           IF(EXISTS { ?doc prov:wasDerivedFrom ?c }, 3, 2)) AS ?rank)
+}
+GROUP BY ?entity ?doc ?path ?title ?date ?rank
+ORDER BY ?rank DESC(?date) ?path

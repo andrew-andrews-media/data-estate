@@ -1,0 +1,103 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/data-estate/> a dcat:Catalog ;
+    dcterms:issued "2026-10-27"^^xsd:date ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "Data Estate Ontology"@en ;
+    dcat:dataset <https://w3id.org/data-estate/queries>,
+        <https://w3id.org/data-estate/shapes>,
+        <https://w3id.org/data-estate/vocab> .
+
+<https://w3id.org/data-estate/queries> a dcat:Dataset ;
+    dcterms:issued "2026-10-27"^^xsd:date ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "The competency queries"@en ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:byteSize "1813"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/queries/cq1.rq> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/sparql-query> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "1819"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/queries/cq10.rq> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/sparql-query> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "1257"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/queries/cq11.rq> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/sparql-query> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "929"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/queries/cq12.rq> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/sparql-query> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "1370"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/queries/cq13.rq> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/sparql-query> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "1090"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/queries/cq14.rq> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/sparql-query> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "1714"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/queries/cq15.rq> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/sparql-query> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "1637"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/queries/cq2.rq> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/sparql-query> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "1367"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/queries/cq3.rq> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/sparql-query> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "526"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/queries/cq5.rq> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/sparql-query> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "2599"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/queries/cq7.rq> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/sparql-query> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "1015"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/queries/cq8.rq> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/sparql-query> ] ;
+    prov:wasGeneratedBy _:build .
+
+<https://w3id.org/data-estate/shapes> a dcat:Dataset ;
+    dcterms:issued "2026-10-27"^^xsd:date ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "The rules"@en ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:byteSize "11057"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/shapes/index.html> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/text/html> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "19397"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/shapes/shapes.ttl> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/text/turtle> ] ;
+    prov:wasGeneratedBy _:build .
+
+<https://w3id.org/data-estate/vocab> a dcat:Dataset ;
+    dcterms:issued "2026-10-27"^^xsd:date ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "The vocabulary"@en ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:byteSize "46109"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/vocab/index.html> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/text/html> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "108261"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/vocab/vocab.jsonld> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/application/ld+json> ],
+        [ a dcat:Distribution ;
+            dcat:byteSize "65274"^^xsd:nonNegativeInteger ;
+            dcat:downloadURL <https://w3id.org/data-estate/vocab/vocab.ttl> ;
+            dcat:mediaType <https://www.iana.org/assignments/media-types/text/turtle> ] ;
+    prov:wasGeneratedBy _:build .
+
+_:build a prov:Activity ;
+    rdfs:label "Publication build"@en .
+

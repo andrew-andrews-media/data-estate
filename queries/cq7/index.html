@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: CQ7</title>
+<meta name="description" content="How many repositories, artefacts and entities are there, by tenant, domain, tier and class?">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/queries/cq7">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../../">Home</a> <a href="../../docs/">Overview</a> <a href="../../vocab/">Vocabulary</a> <a href="../../scheme/">Schemes</a> <a href="../../shapes/">Rules</a> <a href="../../queries/" aria-current="page">Queries</a></nav>
+<main>
+<h1>CQ7</h1>
+<p class="lede">How many repositories, artefacts and entities are there, by tenant, domain, tier and class?</p>
+<p>It selects counts and the labels of tenants, domains, tiers and classes, and no other names.</p>
+<p>Run it over the estate graph merged with the vocabulary, which supplies the concepts and the subclass links.</p>
+<p>Published at https://w3id.org/data-estate/queries/cq7 under CC BY 4.0.</p>
+<p><a href="../cq7.rq">Download the query</a></p>
+<pre><code># CQ7. How many repositories, artefacts and entities are there, by tenant, domain, tier and class?
+# It selects counts and the labels of tenants, domains, tiers and classes, and no other names.
+# Run it over the estate graph merged with the vocabulary, which supplies the concepts and the subclass links.
+# Published at https://w3id.org/data-estate/queries/cq7 under CC BY 4.0.
+PREFIX de:      &lt;https://w3id.org/data-estate/vocab#&gt;
+PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
+PREFIX rdfs:    &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX schema:  &lt;https://schema.org/&gt;
+PREFIX skos:    &lt;http://www.w3.org/2004/02/skos/core#&gt;
+
+SELECT ?facet ?value (COUNT(DISTINCT ?x) AS ?n)
+WHERE {
+  {
+    { ?x a/rdfs:subClassOf* de:Repository . BIND (&quot;repositories&quot; AS ?value) }
+    UNION { ?x a/rdfs:subClassOf* de:Artefact . BIND (&quot;artefacts&quot; AS ?value) }
+    UNION {
+      VALUES ?c { schema:Organization de:Community schema:Event de:Framework de:Topic schema:Place schema:Person }
+      ?x a ?c , skos:Concept .
+      BIND (&quot;entities&quot; AS ?value)
+    }
+    BIND (&quot;0 totals&quot; AS ?facet)
+  }
+  UNION {
+    ?x a/rdfs:subClassOf* de:Repository .
+    OPTIONAL { ?x de:tenant/skos:prefLabel ?t }
+    BIND (COALESCE(STR(?t), &quot;(none)&quot;) AS ?value)
+    BIND (&quot;1 repositories by tenant&quot; AS ?facet)
+  }
+  UNION {
+    ?x a/rdfs:subClassOf* de:Repository .
+    OPTIONAL { ?x de:domain/skos:prefLabel ?d }
+    BIND (COALESCE(STR(?d), &quot;(none)&quot;) AS ?value)
+    BIND (&quot;2 repositories by domain&quot; AS ?facet)
+  }
+  UNION {
+    ?x a/rdfs:subClassOf* de:Repository .
+    OPTIONAL { ?x de:tierNow/skos:notation ?r }
+    BIND (COALESCE(STR(?r), &quot;(none)&quot;) AS ?value)
+    BIND (&quot;3 repositories by tier now&quot; AS ?facet)
+  }
+  UNION {
+    ?x a/rdfs:subClassOf* de:Repository ; de:sensitive ?s .
+    BIND (IF(?s, &quot;sensitive&quot;, &quot;not sensitive&quot;) AS ?value)
+    BIND (&quot;4 repositories by sensitive flag&quot; AS ?facet)
+  }
+  UNION {
+    ?x a/rdfs:subClassOf* de:Artefact ; dcterms:isPartOf ?repo .
+    OPTIONAL { ?repo de:tenant/skos:prefLabel ?t }
+    BIND (COALESCE(STR(?t), &quot;(none)&quot;) AS ?value)
+    BIND (&quot;5 artefacts by tenant&quot; AS ?facet)
+  }
+  UNION {
+    ?x a/rdfs:subClassOf* de:Artefact .
+    OPTIONAL { ?x de:domain/skos:prefLabel ?d }
+    BIND (COALESCE(STR(?d), &quot;(none)&quot;) AS ?value)
+    BIND (&quot;6 artefacts by domain&quot; AS ?facet)
+  }
+  UNION {
+    VALUES ?c { schema:Organization de:Community schema:Event de:Framework de:Topic schema:Place schema:Person }
+    ?x a ?c , skos:Concept .
+    BIND (REPLACE(STR(?c), &quot;^.*[/#]&quot;, &quot;&quot;) AS ?value)
+    BIND (&quot;7 entities by class&quot; AS ?facet)
+  }
+}
+GROUP BY ?facet ?value
+ORDER BY ?facet DESC(?n) ?value
+</code></pre>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

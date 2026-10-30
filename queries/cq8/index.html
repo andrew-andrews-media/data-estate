@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: CQ8</title>
+<meta name="description" content="For each repository, artefact or entity, is what is held declared, inferred or path-only?">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/queries/cq8">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../../">Home</a> <a href="../../docs/">Overview</a> <a href="../../vocab/">Vocabulary</a> <a href="../../scheme/">Schemes</a> <a href="../../shapes/">Rules</a> <a href="../../queries/" aria-current="page">Queries</a></nav>
+<main>
+<h1>CQ8</h1>
+<p class="lede">For each repository, artefact or entity, is what is held declared, inferred or path-only?</p>
+<p>Only artefacts carry a metadata source, so it counts artefacts by theirs, for the whole estate and for each</p>
+<p>repository. Run it over the estate graph merged with the vocabulary, which supplies the concepts and the subclass links.</p>
+<p>Published at https://w3id.org/data-estate/queries/cq8 under CC BY 4.0.</p>
+<p><a href="../cq8.rq">Download the query</a></p>
+<pre><code># CQ8. For each repository, artefact or entity, is what is held declared, inferred or path-only?
+# Only artefacts carry a metadata source, so it counts artefacts by theirs, for the whole estate and for each
+# repository. Run it over the estate graph merged with the vocabulary, which supplies the concepts and the subclass links.
+# Published at https://w3id.org/data-estate/queries/cq8 under CC BY 4.0.
+PREFIX de:      &lt;https://w3id.org/data-estate/vocab#&gt;
+PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
+PREFIX rdfs:    &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX skos:    &lt;http://www.w3.org/2004/02/skos/core#&gt;
+
+SELECT ?repository ?source (COUNT(DISTINCT ?doc) AS ?n)
+WHERE {
+  ?doc a/rdfs:subClassOf* de:Artefact ; de:metadataSource ?s .
+  OPTIONAL { ?s skos:notation ?sn }
+  BIND (COALESCE(STR(?sn), STR(?s)) AS ?source)
+  {
+    BIND (&quot;(estate)&quot; AS ?repository)
+  }
+  UNION {
+    ?doc dcterms:isPartOf ?repo .
+    ?repo dcterms:title ?repository .
+  }
+}
+GROUP BY ?repository ?source
+ORDER BY ?repository ?source
+</code></pre>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

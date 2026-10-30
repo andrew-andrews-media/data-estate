@@ -1,0 +1,24 @@
+# CQ13. Which open actions and questions block which deliverables, and which are overdue?
+# One row for each open or answered matter and for each matter or deliverable waiting on it, directly or
+# through others, that is not yet closed, delivered or dropped. A matter is overdue when its source says so,
+# or when its due date has passed.
+# Published at https://w3id.org/data-estate/queries/cq13 under CC BY 4.0.
+PREFIX de:      <https://w3id.org/data-estate/vocab#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT DISTINCT ?matter ?id ?kind ?state ?title ?due ?overdue ?blocked
+WHERE {
+  ?matter de:matterState ?state ; dcterms:title ?title .
+  FILTER (?state IN (<https://w3id.org/data-estate/matter-state/open>, <https://w3id.org/data-estate/matter-state/answered>))
+  OPTIONAL { ?matter de:matterId ?id }
+  OPTIONAL { ?matter de:matterKind ?kind }
+  OPTIONAL { ?matter de:due ?due }
+  OPTIONAL { ?matter de:statedOverdue ?stated }
+  BIND (COALESCE(?stated, false) || (BOUND(?due) && STR(?due) < SUBSTR(STR(NOW()), 1, 10)) AS ?overdue)
+  OPTIONAL {
+    ?blocked de:blockedBy+ ?matter .
+    ?blocked de:matterState|de:deliverableState ?bs .
+    FILTER (?bs NOT IN (<https://w3id.org/data-estate/matter-state/closed>, <https://w3id.org/data-estate/deliverable-state/delivered>, <https://w3id.org/data-estate/deliverable-state/dropped>))
+  }
+}
+ORDER BY ?id ?blocked

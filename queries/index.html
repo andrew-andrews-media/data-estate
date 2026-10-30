@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: competency queries</title>
+<meta name="description" content="The competency questions of the Data Estate Ontology, as SPARQL queries.">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/queries">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../">Home</a> <a href="../docs/">Overview</a> <a href="../vocab/">Vocabulary</a> <a href="../scheme/">Schemes</a> <a href="../shapes/">Rules</a> <a href="../queries/" aria-current="page">Queries</a></nav>
+<main>
+<h1>Competency queries</h1>
+<p class="lede">The questions the model was built to answer, each published as a SPARQL query.</p>
+<p>A query names its parameters in its header, as variables to bind before it runs. Each runs over an estate graph together with the vocabulary, which supplies the concepts and the subclass links.</p>
+<table>
+<thead><tr><th scope="col">Question</th><th scope="col">Answered by</th></tr></thead>
+<tbody>
+<tr><td><strong>CQ1.</strong> Which canonical artefacts, in any repository, concern a given entity or anything below it: its parts, the events it organises and the frameworks it publishes?</td><td><a href="cq1/">Read it</a>, or <a href="cq1.rq">download it</a></td></tr>
+<tr><td><strong>CQ2.</strong> Which entities appear in the artefacts of more than one tenant or domain?</td><td><a href="cq2/">Read it</a>, or <a href="cq2.rq">download it</a></td></tr>
+<tr><td><strong>CQ3.</strong> What class is each entity, and which registered entities does no artefact use?</td><td><a href="cq3/">Read it</a>, or <a href="cq3.rq">download it</a></td></tr>
+<tr><td><strong>CQ4.</strong> Which artefacts break a metadata rule?</td><td>The rules: the metadata block</td></tr>
+<tr><td><strong>CQ5.</strong> For each set of duplicate files, which copy is canonical, and which copies derive from it?</td><td><a href="cq5/">Read it</a>, or <a href="cq5.rq">download it</a></td></tr>
+<tr><td><strong>CQ6.</strong> Which repositories break the lineage chain, from project to repository to lineage entries?</td><td>The rules: the lineage chain</td></tr>
+<tr><td><strong>CQ7.</strong> How many repositories, artefacts and entities are there, by tenant, domain, tier and class?</td><td><a href="cq7/">Read it</a>, or <a href="cq7.rq">download it</a></td></tr>
+<tr><td><strong>CQ8.</strong> For each repository, artefact or entity, is what is held declared, inferred or path-only?</td><td><a href="cq8/">Read it</a>, or <a href="cq8.rq">download it</a></td></tr>
+<tr><td><strong>CQ9.</strong> Is any generated view older than the newest change to its sources?</td><td>A nightly freshness check, not published as a rule</td></tr>
+<tr><td><strong>CQ10.</strong> For a task about a given entity, what should an agent load first?</td><td><a href="cq10/">Read it</a>, or <a href="cq10.rq">download it</a></td></tr>
+<tr><td><strong>CQ11.</strong> Which decisions and rulings govern a given repository, document or entity, and which rulings are superseded?</td><td><a href="cq11/">Read it</a>, or <a href="cq11.rq">download it</a></td></tr>
+<tr><td><strong>CQ12.</strong> What followed from a ruling?</td><td><a href="cq12/">Read it</a>, or <a href="cq12.rq">download it</a></td></tr>
+<tr><td><strong>CQ13.</strong> Which open actions and questions block which deliverables, and which are overdue?</td><td><a href="cq13/">Read it</a>, or <a href="cq13.rq">download it</a></td></tr>
+<tr><td><strong>CQ14.</strong> Which jobs wrote to a given file or repository: when was each staged, how did it end, and is the write declared or inferred?</td><td><a href="cq14/">Read it</a>, or <a href="cq14.rq">download it</a></td></tr>
+<tr><td><strong>CQ15.</strong> Which repositories are data products, with their purpose, owner, tier, inputs and consumers?</td><td><a href="cq15/">Read it</a>, or <a href="cq15.rq">download it</a></td></tr>
+</tbody>
+</table>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

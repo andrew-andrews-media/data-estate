@@ -1,0 +1,449 @@
+# Data Estate Ontology: the rules
+# SHACL shapes that check an estate graph described with the vocabulary at https://w3id.org/data-estate/vocab.
+# A result is a finding: it is reported, and nothing is fixed automatically.
+# Validate an estate graph merged with the vocabulary: the rules read its concepts and its subclass links.
+# Licensed under CC BY 4.0. Published at https://w3id.org/data-estate/shapes
+
+@prefix des:     <https://w3id.org/data-estate/shapes#> .
+@prefix de:      <https://w3id.org/data-estate/vocab#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema:  <https://schema.org/> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/data-estate/shapes>
+    a owl:Ontology ;
+    dcterms:title "Data Estate Ontology: the rules"@en ;
+    dcterms:description "SHACL shapes that check a data estate described with the Data Estate Ontology. Validate the estate graph merged with the vocabulary, whose concepts and subclass links the rules read. A result is a finding: the build reports it, and nothing is fixed automatically."@en ;
+    dcterms:creator [ a schema:Person ; schema:name "Andrew Andrews" ; schema:url <https://github.com/andrew-andrews-media> ] ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionInfo "1.0" ;
+    owl:versionIRI <https://w3id.org/data-estate/shapes/2026-10-27> ;
+    dcterms:issued "2026-10-27"^^xsd:date ;
+    vann:preferredNamespacePrefix "des" ;
+    vann:preferredNamespaceUri "https://w3id.org/data-estate/shapes#" ;
+    rdfs:seeAlso <https://w3id.org/data-estate/vocab> ;
+    sh:declare
+        [ sh:prefix "de" ; sh:namespace "https://w3id.org/data-estate/vocab#"^^xsd:anyURI ] ,
+        [ sh:prefix "dcterms" ; sh:namespace "http://purl.org/dc/terms/"^^xsd:anyURI ] ,
+        [ sh:prefix "skos" ; sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ] .
+
+# ------------------------------------------------------------------
+# Helper shapes: each tests that a value is a concept of one scheme
+# ------------------------------------------------------------------
+
+des:TypeConcept a sh:NodeShape ;
+    sh:description "A value is a concept of the scheme type."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/type> ] .
+
+des:StatusConcept a sh:NodeShape ;
+    sh:description "A value is a concept of the scheme status."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/status> ] .
+
+des:DomainConcept a sh:NodeShape ;
+    sh:description "A value is a concept of this estate's domain scheme. Another estate points this shape at its own scheme."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/domain> ] .
+
+des:TierConcept a sh:NodeShape ;
+    sh:description "A value is a concept of the scheme tier."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/tier> ] .
+
+des:DomainSourceConcept a sh:NodeShape ;
+    sh:description "A value is a concept of the scheme domain-source."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/domain-source> ] .
+
+des:MetadataSourceConcept a sh:NodeShape ;
+    sh:description "A value is a concept of the scheme metadata-source."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/metadata-source> ] .
+
+des:ChangeTypeConcept a sh:NodeShape ;
+    sh:description "A value is a concept of the scheme change-type."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/change-type> ] .
+
+des:EffectConcept a sh:NodeShape ;
+    sh:description "A value is a concept of the scheme effect."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/effect> ] .
+
+des:RulingStateConcept a sh:NodeShape ;
+    sh:description "A value is a concept of the scheme ruling-state."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/ruling-state> ] .
+
+des:JobStatusConcept a sh:NodeShape ;
+    sh:description "A value is a concept of the scheme job-status."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/job-status> ] .
+
+des:MatterKindConcept a sh:NodeShape ;
+    sh:description "A value is a concept of the scheme matter-kind."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/matter-kind> ] .
+
+des:MatterStateConcept a sh:NodeShape ;
+    sh:description "A value is a concept of the scheme matter-state."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/matter-state> ] .
+
+des:DeliverableStateConcept a sh:NodeShape ;
+    sh:description "A value is a concept of the scheme deliverable-state."@en ;
+    sh:property [ sh:path skos:inScheme ; sh:hasValue <https://w3id.org/data-estate/scheme/deliverable-state> ] .
+
+# ------------------------------------------------------------------
+# The metadata block
+# These apply to every declared artefact. supersedes is optional, so no shape requires it.
+# ------------------------------------------------------------------
+
+des:HasTitle a sh:NodeShape ;
+    rdfs:label "HasTitle" ;
+    sh:description "The metadata block carries its title key."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path de:declaredKey ;
+        sh:hasValue "title" ;
+        sh:message "The metadata block has no title."@en ;
+    ] .
+
+des:HasType a sh:NodeShape ;
+    rdfs:label "HasType" ;
+    sh:description "The metadata block carries its type key."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path de:declaredKey ;
+        sh:hasValue "type" ;
+        sh:message "The metadata block has no type."@en ;
+    ] .
+
+des:HasStatus a sh:NodeShape ;
+    rdfs:label "HasStatus" ;
+    sh:description "The metadata block carries its status key."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path de:declaredKey ;
+        sh:hasValue "status" ;
+        sh:message "The metadata block has no status."@en ;
+    ] .
+
+des:HasDomain a sh:NodeShape ;
+    rdfs:label "HasDomain" ;
+    sh:description "The metadata block carries its domain key."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path de:declaredKey ;
+        sh:hasValue "domain" ;
+        sh:message "The metadata block has no domain."@en ;
+    ] .
+
+des:HasEntities a sh:NodeShape ;
+    rdfs:label "HasEntities" ;
+    sh:description "The metadata block carries its entities key."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path de:declaredKey ;
+        sh:hasValue "entities" ;
+        sh:message "The metadata block has no entities. An empty list is allowed."@en ;
+    ] .
+
+des:HasDate a sh:NodeShape ;
+    rdfs:label "HasDate" ;
+    sh:description "The metadata block carries its date key."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path de:declaredKey ;
+        sh:hasValue "date" ;
+        sh:message "The metadata block has no date."@en ;
+    ] .
+
+des:HasSensitive a sh:NodeShape ;
+    rdfs:label "HasSensitive" ;
+    sh:description "The metadata block carries its sensitive key."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path de:declaredKey ;
+        sh:hasValue "sensitive" ;
+        sh:message "The metadata block has no sensitive flag."@en ;
+    ] .
+
+des:HasSummary a sh:NodeShape ;
+    rdfs:label "HasSummary" ;
+    sh:description "The metadata block carries its summary key. The summary itself is free text, and is not held in the graph."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path de:declaredKey ;
+        sh:hasValue "summary" ;
+        sh:message "The metadata block has no summary."@en ;
+    ] .
+
+des:ValidType a sh:NodeShape ;
+    rdfs:label "ValidType" ;
+    sh:description "The type is in the artefact-type scheme."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path de:unmappedType ;
+        sh:maxCount 0 ;
+        sh:message "The type is not in the artefact-type scheme."@en ;
+    ] ;
+    sh:property [
+        sh:path de:artefactType ;
+        sh:node des:TypeConcept ;
+        sh:message "The type is not in the artefact-type scheme."@en ;
+    ] .
+
+des:ValidStatus a sh:NodeShape ;
+    rdfs:label "ValidStatus" ;
+    sh:description "The status is in the status scheme."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path de:unmappedStatus ;
+        sh:maxCount 0 ;
+        sh:message "The status is not canonical, working or superseded."@en ;
+    ] ;
+    sh:property [
+        sh:path de:status ;
+        sh:node des:StatusConcept ;
+        sh:message "The status is not canonical, working or superseded."@en ;
+    ] .
+
+des:ValidDomain a sh:NodeShape ;
+    rdfs:label "ValidDomain" ;
+    sh:description "The domain is in the domain scheme."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path de:unmappedDomain ;
+        sh:maxCount 0 ;
+        sh:message "The domain is not in the domain scheme."@en ;
+    ] ;
+    sh:property [
+        sh:path de:domain ;
+        sh:node des:DomainConcept ;
+        sh:message "The domain is not in the domain scheme."@en ;
+    ] .
+
+des:ValidDate a sh:NodeShape ;
+    rdfs:label "ValidDate" ;
+    sh:description "The date is an ISO date."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path dcterms:date ;
+        sh:datatype xsd:date ;
+        sh:message "The date is not an ISO date (YYYY-MM-DD)."@en ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "The date is not an ISO date (YYYY-MM-DD)."@en ;
+        sh:prefixes <https://w3id.org/data-estate/shapes> ;
+        sh:select """
+            SELECT $this
+            WHERE {
+                $this de:declaredKey "date" .
+                FILTER NOT EXISTS { $this dcterms:date ?date }
+            }
+        """ ;
+    ] .
+
+des:RegisteredEntities a sh:NodeShape ;
+    rdfs:label "RegisteredEntities" ;
+    sh:description "Every entity the block names is registered: a SKOS concept that is an organisation, community, event, framework, topic, place or person."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path de:unregisteredEntity ;
+        sh:maxCount 0 ;
+        sh:message "An entity it names is not in the entity register."@en ;
+    ] ;
+    sh:property [
+        sh:path dcterms:subject ;
+        sh:class skos:Concept ;
+        sh:or (
+            [ sh:class schema:Organization ] [ sh:class schema:Event ] [ sh:class de:Framework ]
+            [ sh:class de:Topic ] [ sh:class schema:Place ] [ sh:class schema:Person ]
+        ) ;
+        sh:message "An entity it names is not in the entity register."@en ;
+    ] .
+
+des:SupersedesResolves a sh:NodeShape ;
+    rdfs:label "SupersedesResolves" ;
+    sh:description "The version it says it supersedes is a file the catalogue holds."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:property [
+        sh:path dcterms:replaces ;
+        sh:class de:Artefact ;
+        sh:message "The version it supersedes is not a file the catalogue holds."@en ;
+    ] .
+
+des:SupersededInArchive a sh:NodeShape ;
+    rdfs:label "SupersededInArchive" ;
+    sh:description "A superseded file is kept in an archive: de:archived is true."@en ;
+    sh:targetClass de:DeclaredArtefact ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "It is superseded, but not kept in an archive."@en ;
+        sh:prefixes <https://w3id.org/data-estate/shapes> ;
+        sh:select """
+            SELECT $this
+            WHERE {
+                $this de:status <https://w3id.org/data-estate/status/superseded> .
+                FILTER NOT EXISTS { $this de:archived true }
+            }
+        """ ;
+    ] .
+
+# ------------------------------------------------------------------
+# The lineage chain
+# The two repository shapes apply to non-sensitive repositories at T1 or above, or that keep
+# a project's record. An unmanaged T0 folder that serves no project is not checked.
+# ------------------------------------------------------------------
+
+des:RepositoryHasLineageFile a sh:NodeShape ;
+    rdfs:label "RepositoryHasLineageFile" ;
+    sh:description "A non-sensitive repository at T1 or above, or that keeps a project's record, keeps a lineage file at its root."@en ;
+    sh:targetClass de:NonSensitiveRepository ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "It is at T1 or above, or keeps a project's record, and has no lineage file."@en ;
+        sh:prefixes <https://w3id.org/data-estate/shapes> ;
+        sh:select """
+            SELECT DISTINCT $this
+            WHERE {
+                {
+                    $this de:tierNow ?tier .
+                    FILTER (?tier != <https://w3id.org/data-estate/tier/t0>)
+                }
+                UNION
+                { ?project de:projectRepository $this . }
+                FILTER NOT EXISTS { $this de:hasLineageFile true }
+            }
+        """ ;
+    ] .
+
+des:RepositoryHasLineageEntry a sh:NodeShape ;
+    rdfs:label "RepositoryHasLineageEntry" ;
+    sh:description "A non-sensitive repository at T1 or above, or that keeps a project's record, has at least one lineage entry about it."@en ;
+    sh:targetClass de:NonSensitiveRepository ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "It is at T1 or above, or keeps a project's record, and has no lineage entry."@en ;
+        sh:prefixes <https://w3id.org/data-estate/shapes> ;
+        sh:select """
+            SELECT DISTINCT $this
+            WHERE {
+                {
+                    $this de:tierNow ?tier .
+                    FILTER (?tier != <https://w3id.org/data-estate/tier/t0>)
+                }
+                UNION
+                { ?project de:projectRepository $this . }
+                FILTER NOT EXISTS { ?entry de:aboutRepository $this }
+            }
+        """ ;
+    ] .
+
+des:LineageEvidenceResolves a sh:NodeShape ;
+    rdfs:label "LineageEvidenceResolves" ;
+    sh:description "Every evidence path a lineage entry names exists."@en ;
+    sh:targetClass de:LineageEntry ;
+    sh:property [
+        sh:path de:evidenceResolves ;
+        sh:in ( true ) ;
+        sh:message "The evidence it names cannot be found."@en ;
+    ] .
+
+des:ProjectHasRepository a sh:NodeShape ;
+    rdfs:label "ProjectHasRepository" ;
+    sh:description "A project has a repository, or a stated reason for having none."@en ;
+    sh:targetClass de:Project ;
+    sh:message "The project has no repository, and no reason is given."@en ;
+    sh:or (
+        [ sh:path de:projectRepository ; sh:minCount 1 ]
+        [ sh:path de:noRepositoryReason ; sh:minCount 1 ]
+    ) .
+
+# ------------------------------------------------------------------
+# Job records
+# These apply to checked jobs: those staged after results began to record the files they wrote.
+# ------------------------------------------------------------------
+
+des:JobResultStatus a sh:NodeShape ;
+    rdfs:label "JobResultStatus" ;
+    sh:description "The result's status is complete, partial, aborted, dry-run or refused. A job with no result yet is pending."@en ;
+    sh:targetClass de:CheckedJob ;
+    sh:property [
+        sh:path de:jobStatus ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( <https://w3id.org/data-estate/job-status/complete> <https://w3id.org/data-estate/job-status/partial> <https://w3id.org/data-estate/job-status/aborted> <https://w3id.org/data-estate/job-status/pending> <https://w3id.org/data-estate/job-status/dry-run> <https://w3id.org/data-estate/job-status/refused> ) ;
+        sh:message "The job's result does not end as complete, partial, aborted, dry-run or refused."@en ;
+    ] .
+
+des:JobRecordsWrites a sh:NodeShape ;
+    rdfs:label "JobRecordsWrites" ;
+    sh:description "A finished job's result records the files it wrote (de:recordsWrites)."@en ;
+    sh:targetClass de:CheckedJob ;
+    sh:message "The job's result does not record the files it wrote."@en ;
+    sh:or (
+        [ sh:path de:jobStatus ; sh:hasValue <https://w3id.org/data-estate/job-status/pending> ]
+        [ sh:path de:recordsWrites ; sh:hasValue true ]
+    ) .
+
+# ------------------------------------------------------------------
+# Value lists
+# Every value of the tiers and of the nine control-plane lists is a concept of its own scheme.
+# ------------------------------------------------------------------
+
+des:ValidValue a sh:NodeShape ;
+    rdfs:label "ValidValue" ;
+    sh:description "Every value of the tiers and of the nine control-plane lists is a concept of its own scheme. Artefact types, statuses and domains are checked by ValidType, ValidStatus and ValidDomain."@en ;
+    sh:targetSubjectsOf de:tierNow , de:tierTarget , de:domainSource , de:metadataSource , de:changeType , de:effect , de:rulingState , de:jobStatus , de:matterKind , de:matterState , de:deliverableState ;
+    sh:property [
+        sh:path de:tierNow ;
+        sh:node des:TierConcept ;
+        sh:message "The tier now is not T0, T1, T2 or T3."@en ;
+    ] ;
+    sh:property [
+        sh:path de:tierTarget ;
+        sh:node des:TierConcept ;
+        sh:message "The target tier is not T0, T1, T2 or T3."@en ;
+    ] ;
+    sh:property [
+        sh:path de:domainSource ;
+        sh:node des:DomainSourceConcept ;
+        sh:message "The domain source is not declared or inherited."@en ;
+    ] ;
+    sh:property [
+        sh:path de:metadataSource ;
+        sh:node des:MetadataSourceConcept ;
+        sh:message "The metadata source is not declared, inferred or path-only."@en ;
+    ] ;
+    sh:property [
+        sh:path de:changeType ;
+        sh:node des:ChangeTypeConcept ;
+        sh:message "The change type is not lifecycle, classification, rules, deliverable-issued, cross-repo-decision, dependency, content, control-added or source-filed."@en ;
+    ] ;
+    sh:property [
+        sh:path de:effect ;
+        sh:node des:EffectConcept ;
+        sh:message "The effect is not close, rule, park or commit."@en ;
+    ] ;
+    sh:property [
+        sh:path de:rulingState ;
+        sh:node des:RulingStateConcept ;
+        sh:message "The ruling state is not open, answered, applied, carried or superseded."@en ;
+    ] ;
+    sh:property [
+        sh:path de:jobStatus ;
+        sh:node des:JobStatusConcept ;
+        sh:message "The job status is not complete, partial, aborted, pending, dry-run or refused."@en ;
+    ] ;
+    sh:property [
+        sh:path de:matterKind ;
+        sh:node des:MatterKindConcept ;
+        sh:message "The matter kind is not action, ruling or go-ahead."@en ;
+    ] ;
+    sh:property [
+        sh:path de:matterState ;
+        sh:node des:MatterStateConcept ;
+        sh:message "The matter state is not open, parked, answered or closed."@en ;
+    ] ;
+    sh:property [
+        sh:path de:deliverableState ;
+        sh:node des:DeliverableStateConcept ;
+        sh:message "The deliverable state is not open, delivered or dropped."@en ;
+    ] .

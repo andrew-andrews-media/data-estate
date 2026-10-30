@@ -1,0 +1,23 @@
+# CQ12. What followed from a ruling?
+# The decisions that cite it, the jobs those decisions cite, and the files those jobs wrote.
+# Parameter: ?ruling, the IRI of a de:Ruling. Bind it with initial bindings or with VALUES inside WHERE, or replace it with the IRI.
+# Published at https://w3id.org/data-estate/queries/cq12 under CC BY 4.0.
+PREFIX de:      <https://w3id.org/data-estate/vocab#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT DISTINCT ?ruling ?decision ?decided ?title ?job ?status ?file
+WHERE {
+  ?decision de:citesRuling ?ruling .
+  OPTIONAL { ?decision dcterms:date ?decided }
+  OPTIONAL { ?decision dcterms:title ?title }
+  OPTIONAL {
+    ?decision de:citesJob ?job .
+    OPTIONAL { ?job de:jobStatus ?status }
+    OPTIONAL {
+      { ?job de:wroteDeclared|de:wroteInferred ?artefact . ?artefact de:path ?file }
+      UNION
+      { ?job de:wrotePath ?file }
+    }
+  }
+}
+ORDER BY ?decided ?decision ?job ?file

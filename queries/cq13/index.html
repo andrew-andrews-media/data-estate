@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: CQ13</title>
+<meta name="description" content="Which open actions and questions block which deliverables, and which are overdue?">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/queries/cq13">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../../">Home</a> <a href="../../docs/">Overview</a> <a href="../../vocab/">Vocabulary</a> <a href="../../scheme/">Schemes</a> <a href="../../shapes/">Rules</a> <a href="../../queries/" aria-current="page">Queries</a></nav>
+<main>
+<h1>CQ13</h1>
+<p class="lede">Which open actions and questions block which deliverables, and which are overdue?</p>
+<p>One row for each open or answered matter and for each matter or deliverable waiting on it, directly or</p>
+<p>through others, that is not yet closed, delivered or dropped. A matter is overdue when its source says so,</p>
+<p>or when its due date has passed.</p>
+<p>Published at https://w3id.org/data-estate/queries/cq13 under CC BY 4.0.</p>
+<p><a href="../cq13.rq">Download the query</a></p>
+<pre><code># CQ13. Which open actions and questions block which deliverables, and which are overdue?
+# One row for each open or answered matter and for each matter or deliverable waiting on it, directly or
+# through others, that is not yet closed, delivered or dropped. A matter is overdue when its source says so,
+# or when its due date has passed.
+# Published at https://w3id.org/data-estate/queries/cq13 under CC BY 4.0.
+PREFIX de:      &lt;https://w3id.org/data-estate/vocab#&gt;
+PREFIX dcterms: &lt;http://purl.org/dc/terms/&gt;
+
+SELECT DISTINCT ?matter ?id ?kind ?state ?title ?due ?overdue ?blocked
+WHERE {
+  ?matter de:matterState ?state ; dcterms:title ?title .
+  FILTER (?state IN (&lt;https://w3id.org/data-estate/matter-state/open&gt;, &lt;https://w3id.org/data-estate/matter-state/answered&gt;))
+  OPTIONAL { ?matter de:matterId ?id }
+  OPTIONAL { ?matter de:matterKind ?kind }
+  OPTIONAL { ?matter de:due ?due }
+  OPTIONAL { ?matter de:statedOverdue ?stated }
+  BIND (COALESCE(?stated, false) || (BOUND(?due) &amp;&amp; STR(?due) &lt; SUBSTR(STR(NOW()), 1, 10)) AS ?overdue)
+  OPTIONAL {
+    ?blocked de:blockedBy+ ?matter .
+    ?blocked de:matterState|de:deliverableState ?bs .
+    FILTER (?bs NOT IN (&lt;https://w3id.org/data-estate/matter-state/closed&gt;, &lt;https://w3id.org/data-estate/deliverable-state/delivered&gt;, &lt;https://w3id.org/data-estate/deliverable-state/dropped&gt;))
+  }
+}
+ORDER BY ?id ?blocked
+</code></pre>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Data Estate Ontology: concept schemes</title>
+<meta name="description" content="The concept schemes of the Data Estate Ontology, with every concept&#x27;s label and definition.">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="canonical" href="https://w3id.org/data-estate/scheme">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="../">Home</a> <a href="../docs/">Overview</a> <a href="../vocab/">Vocabulary</a> <a href="../scheme/" aria-current="page">Schemes</a> <a href="../shapes/">Rules</a> <a href="../queries/">Queries</a></nav>
+<main>
+<h1>Concept schemes</h1>
+<p class="lede">13 schemes hold the vocabulary's closed value lists. Every concept carries a label, a notation and a definition.</p>
+<p>The word in a metadata block maps straight to its concept: <code>type: brief</code> becomes <span class="iri">https://w3id.org/data-estate/type/brief</span>. Two more schemes, of entities and tenants, stay in each estate's private graph, because their concepts are names.</p>
+<div class="tree" role="list">
+<div role="listitem"><a href="#type">Artefact types</a></div>
+<div role="listitem"><a href="#status">Statuses</a></div>
+<div role="listitem"><a href="#tier">Tiers</a></div>
+<div role="listitem"><a href="#domain">Domains</a></div>
+<div role="listitem"><a href="#job-status">Job statuses</a></div>
+<div role="listitem"><a href="#ruling-state">Ruling states</a></div>
+<div role="listitem"><a href="#effect">Effects</a></div>
+<div role="listitem"><a href="#matter-kind">Matter kinds</a></div>
+<div role="listitem"><a href="#matter-state">Matter states</a></div>
+<div role="listitem"><a href="#deliverable-state">Deliverable states</a></div>
+<div role="listitem"><a href="#change-type">Change types</a></div>
+<div role="listitem"><a href="#domain-source">Domain sources</a></div>
+<div role="listitem"><a href="#metadata-source">Metadata sources</a></div>
+</div>
+<section class="term" id="type">
+<h2 style="margin-top:.5rem">Artefact types</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/type</span>
+<p>The kinds of artefact a metadata block can declare.</p>
+<p class="note">Values of <a href="../vocab/#artefactType"><code>de:artefactType</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="type-brief"><td><code>brief</code></td><td>Brief</td><td>A document that puts a proposal or a question to someone for a decision.</td></tr>
+<tr id="type-report"><td><code>report</code></td><td>Report</td><td>A document that sets out findings or analysis.</td></tr>
+<tr id="type-deck"><td><code>deck</code></td><td>Deck</td><td>Slides, for presenting.</td></tr>
+<tr id="type-register"><td><code>register</code></td><td>Register</td><td>A list of records of one kind, kept current.</td></tr>
+<tr id="type-note"><td><code>note</code></td><td>Note</td><td>A shorter record: a working note, a standard or minutes.</td></tr>
+<tr id="type-template"><td><code>template</code></td><td>Template</td><td>A form that other documents are made from.</td></tr>
+<tr id="type-dataset"><td><code>dataset</code></td><td>Dataset</td><td>Structured data, such as a table or an export.</td></tr>
+<tr id="type-correspondence"><td><code>correspondence</code></td><td>Correspondence</td><td>A letter, email or message, sent or received.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="term" id="status">
+<h2 style="margin-top:.5rem">Statuses</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/status</span>
+<p>Whether an artefact is the copy to cite, a working copy, or superseded.</p>
+<p class="note">Values of <a href="../vocab/#status"><code>de:status</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="status-canonical"><td><code>canonical</code></td><td>Canonical</td><td>The copy to cite. Other copies of the same document derive from it.</td></tr>
+<tr id="status-working"><td><code>working</code></td><td>Working</td><td>In progress, or derived from the canonical copy.</td></tr>
+<tr id="status-superseded"><td><code>superseded</code></td><td>Superseded</td><td>Replaced by a later version, and kept for the record in an archive.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="term" id="tier">
+<h2 style="margin-top:.5rem">Tiers</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/tier</span>
+<p>How managed a repository is. Tiers are cumulative: each requires everything the tier below it does. A repository has a tier now and a tier it is meant to reach.</p>
+<p class="note">Values of <a href="../vocab/#tierNow"><code>de:tierNow</code></a>, <a href="../vocab/#tierTarget"><code>de:tierTarget</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="tier-t0"><td><code>T0</code></td><td>Unmanaged</td><td>A folder of files, recorded as existing and no more.</td></tr>
+<tr id="tier-t1"><td><code>T1</code></td><td>Registered</td><td>Registered with a known owner and purpose; kept in the standard layout, with a README and a decision log. Version control comes at T2.</td></tr>
+<tr id="tier-t2"><td><code>T2</code></td><td>Versioned</td><td>Also under version control, with a remote copy, so every change can be reviewed and reverted. No credential may ever have entered its history, and confidential client material is either absent or the remote is private.</td></tr>
+<tr id="tier-t3"><td><code>T3</code></td><td>Runtime</td><td>Also runs something: a service, a timer or a container. It needs pinned dependencies, a way to deploy and a stated backup position.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="term" id="domain">
+<h2 style="margin-top:.5rem">Domains</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/domain</span>
+<p>The domains of work in one estate. The scheme is that estate&#x27;s own: another estate would publish its own scheme, use de:domain with it unchanged, and point the rule des:DomainConcept at it. Seven domains are named, each defined by its field alone. The private ones are published as a single concept, Withheld, with nothing under it.</p>
+<p class="note">Values of <a href="../vocab/#domain"><code>de:domain</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="domain-community"><td><code>community</code></td><td>Community and mentoring</td><td>Professional communities and associations, and mentoring.</td></tr>
+<tr id="domain-broadcasting"><td><code>broadcasting</code></td><td>Broadcasting</td><td>Radio and other media.</td></tr>
+<tr id="domain-ventures"><td><code>ventures</code></td><td>Ventures</td><td>New ventures and commercial work.</td></tr>
+<tr id="domain-enterprise-data"><td><code>enterprise-data</code></td><td>Enterprise data governance</td><td>Enterprise data management and governance, as a discipline.</td></tr>
+<tr id="domain-advocacy"><td><code>advocacy</code></td><td>Advocacy and thought leadership</td><td>Speaking, writing and representing a field.</td></tr>
+<tr id="domain-knowledge"><td><code>knowledge</code></td><td>Knowledge and automation</td><td>How the estate itself is run: its standards, catalogue and automation.</td></tr>
+<tr id="domain-industry-partnerships"><td><code>industry-partnerships</code></td><td>Industry partnerships</td><td>Joint programmes with industry bodies.</td></tr>
+<tr id="domain-withheld"><td><code>withheld</code></td><td>Withheld</td><td>The estate&#x27;s private domains. The publication neither names them nor counts what they hold.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="term" id="job-status">
+<h2 style="margin-top:.5rem">Job statuses</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/job-status</span>
+<p>How a job ended, read from its result.</p>
+<p class="note">Values of <a href="../vocab/#jobStatus"><code>de:jobStatus</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="job-status-dry-run"><td><code>dry-run</code></td><td>Dry run</td><td>The job ran under alternate law and listed only would- actions; it wrote nothing outside its job folder.</td></tr>
+<tr id="job-status-refused"><td><code>refused</code></td><td>Refused</td><td>The job declined to run under direct law.</td></tr>
+<tr id="job-status-complete"><td><code>complete</code></td><td>Complete</td><td>The job did everything its prompt asked.</td></tr>
+<tr id="job-status-partial"><td><code>partial</code></td><td>Partial</td><td>The job did part of what its prompt asked, and its result says what is left.</td></tr>
+<tr id="job-status-aborted"><td><code>aborted</code></td><td>Aborted</td><td>The job stopped before finishing, and its result says why.</td></tr>
+<tr id="job-status-pending"><td><code>pending</code></td><td>Pending</td><td>The job has no result yet.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="term" id="ruling-state">
+<h2 style="margin-top:.5rem">Ruling states</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/ruling-state</span>
+<p>Where a ruling stands.</p>
+<p class="note">Values of <a href="../vocab/#rulingState"><code>de:rulingState</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="ruling-state-open"><td><code>open</code></td><td>Open</td><td>Put to the owner and not yet answered.</td></tr>
+<tr id="ruling-state-answered"><td><code>answered</code></td><td>Answered</td><td>Answered, not yet applied.</td></tr>
+<tr id="ruling-state-applied"><td><code>applied</code></td><td>Applied</td><td>Answered and applied.</td></tr>
+<tr id="ruling-state-carried"><td><code>carried</code></td><td>Carried</td><td>Moved to a later sheet, to be answered there.</td></tr>
+<tr id="ruling-state-superseded"><td><code>superseded</code></td><td>Superseded</td><td>Replaced by a later ruling.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="term" id="effect">
+<h2 style="margin-top:.5rem">Effects</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/effect</span>
+<p>What an answer does to the matter it answers.</p>
+<p class="note">Values of <a href="../vocab/#effect"><code>de:effect</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="effect-close"><td><code>close</code></td><td>Close</td><td>The answer closes the matter.</td></tr>
+<tr id="effect-rule"><td><code>rule</code></td><td>Rule</td><td>The answer is a ruling, to be applied.</td></tr>
+<tr id="effect-park"><td><code>park</code></td><td>Park</td><td>The answer sets the matter aside.</td></tr>
+<tr id="effect-commit"><td><code>commit</code></td><td>Commit</td><td>The owner commits to act on it soon, and the matter stays open.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="term" id="matter-kind">
+<h2 style="margin-top:.5rem">Matter kinds</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/matter-kind</span>
+<p>Whether the owner is to act, rule or give a go-ahead.</p>
+<p class="note">Values of <a href="../vocab/#matterKind"><code>de:matterKind</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="matter-kind-action"><td><code>action</code></td><td>Action</td><td>The owner is to do something.</td></tr>
+<tr id="matter-kind-ruling"><td><code>ruling</code></td><td>Ruling</td><td>The owner is to decide something.</td></tr>
+<tr id="matter-kind-go-ahead"><td><code>go-ahead</code></td><td>Go-ahead</td><td>The owner is to approve work before it starts.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="term" id="matter-state">
+<h2 style="margin-top:.5rem">Matter states</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/matter-state</span>
+<p>Where an action or question stands.</p>
+<p class="note">Values of <a href="../vocab/#matterState"><code>de:matterState</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="matter-state-open"><td><code>open</code></td><td>Open</td><td>Waiting on the owner.</td></tr>
+<tr id="matter-state-parked"><td><code>parked</code></td><td>Parked</td><td>Set aside, not dropped.</td></tr>
+<tr id="matter-state-answered"><td><code>answered</code></td><td>Answered</td><td>Answered on the decision board, and not yet applied in its source.</td></tr>
+<tr id="matter-state-closed"><td><code>closed</code></td><td>Closed</td><td>Done, dropped or superseded.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="term" id="deliverable-state">
+<h2 style="margin-top:.5rem">Deliverable states</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/deliverable-state</span>
+<p>Where a deliverable stands.</p>
+<p class="note">Values of <a href="../vocab/#deliverableState"><code>de:deliverableState</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="deliverable-state-open"><td><code>open</code></td><td>Open</td><td>Not yet delivered.</td></tr>
+<tr id="deliverable-state-delivered"><td><code>delivered</code></td><td>Delivered</td><td>Delivered, with its evidence.</td></tr>
+<tr id="deliverable-state-dropped"><td><code>dropped</code></td><td>Dropped</td><td>Closed without being delivered.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="term" id="change-type">
+<h2 style="margin-top:.5rem">Change types</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/change-type</span>
+<p>The kinds of significant change a lineage entry records.</p>
+<p class="note">Values of <a href="../vocab/#changeType"><code>de:changeType</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="change-type-lifecycle"><td><code>lifecycle</code></td><td>Lifecycle</td><td>A repository was created, renamed, moved, archived or retired.</td></tr>
+<tr id="change-type-classification"><td><code>classification</code></td><td>Classification</td><td>The repository&#x27;s tenant, domain, tier or sensitive flag changed.</td></tr>
+<tr id="change-type-rules"><td><code>rules</code></td><td>Rules</td><td>The repository&#x27;s layout, its instructions to agents or its standing rules changed.</td></tr>
+<tr id="change-type-deliverable-issued"><td><code>deliverable-issued</code></td><td>Deliverable issued</td><td>A deliverable was issued outside the estate.</td></tr>
+<tr id="change-type-cross-repo-decision"><td><code>cross-repo-decision</code></td><td>Cross-repository decision</td><td>A decision was made that affects another repository.</td></tr>
+<tr id="change-type-dependency"><td><code>dependency</code></td><td>Dependency</td><td>The repository began to depend on, or duplicate, content in another repository.</td></tr>
+<tr id="change-type-content"><td><code>content</code></td><td>Content</td><td>Artefacts were added to, revised in or removed from the repository.</td></tr>
+<tr id="change-type-control-added"><td><code>control-added</code></td><td>Control added</td><td>A governance control was introduced or changed.</td></tr>
+<tr id="change-type-source-filed"><td><code>source-filed</code></td><td>Source filed</td><td>A source document was filed into a repository.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="term" id="domain-source">
+<h2 style="margin-top:.5rem">Domain sources</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/domain-source</span>
+<p>Where an artefact&#x27;s domain came from.</p>
+<p class="note">Values of <a href="../vocab/#domainSource"><code>de:domainSource</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="domain-source-declared"><td><code>declared</code></td><td>Declared</td><td>Taken from the artefact&#x27;s own metadata block.</td></tr>
+<tr id="domain-source-inherited"><td><code>inherited</code></td><td>Inherited</td><td>Taken from the domain of the artefact&#x27;s repository.</td></tr>
+</tbody>
+</table>
+</section>
+<section class="term" id="metadata-source">
+<h2 style="margin-top:.5rem">Metadata sources</h2>
+<span class="iri">https://w3id.org/data-estate/scheme/metadata-source</span>
+<p>Whether an artefact&#x27;s metadata was declared, inferred, or is its path alone.</p>
+<p class="note">Values of <a href="../vocab/#metadataSource"><code>de:metadataSource</code></a>.</p>
+<table>
+<thead><tr><th scope="col">Notation</th><th scope="col">Label</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr id="metadata-source-declared"><td><code>declared</code></td><td>Declared</td><td>Read from the artefact&#x27;s metadata block.</td></tr>
+<tr id="metadata-source-inferred"><td><code>inferred</code></td><td>Inferred</td><td>Worked out by the catalogue, from where the file sits and what it is.</td></tr>
+<tr id="metadata-source-path-only"><td><code>path-only</code></td><td>Path only</td><td>Only its path and title are held; its metadata is not read.</td></tr>
+</tbody>
+</table>
+</section>
+<footer>
+<p>Published by Andrew Andrews under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source on <a href="https://github.com/andrew-andrews-media/data-estate">GitHub</a>.</p>
+<p>Maintained by <a href="https://github.com/andrew-andrews-media">@andrew-andrews-media</a>.</p>
+</footer>
+</main>
+</body>
+</html>

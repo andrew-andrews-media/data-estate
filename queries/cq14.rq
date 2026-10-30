@@ -1,0 +1,20 @@
+# CQ14. Which jobs wrote to a given file or repository: when was each staged, how did it end,
+# and is the write declared or inferred?
+# A declared write is one the job's result records; an inferred one is read from an older result's prose.
+# Files the catalogue does not hold are recorded with de:wrotePath, and are not listed here.
+# Parameter: ?doc, the IRI of an artefact, or ?repo, the IRI of a repository. Bind one of them with initial
+# bindings or with VALUES inside WHERE, or replace it with the IRI.
+# Published at https://w3id.org/data-estate/queries/cq14 under CC BY 4.0.
+PREFIX de:      <https://w3id.org/data-estate/vocab#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT DISTINCT ?doc ?repo ?job ?queue ?staged ?status ?how ?path
+WHERE {
+  { ?job de:wroteDeclared ?doc . BIND ("declared" AS ?how) }
+  UNION { ?job de:wroteInferred ?doc . BIND ("inferred" AS ?how) }
+  ?doc de:path ?path ; dcterms:isPartOf ?repo .
+  OPTIONAL { ?job de:jobQueue ?queue }
+  OPTIONAL { ?job de:stagedOn ?staged }
+  OPTIONAL { ?job de:jobStatus ?status }
+}
+ORDER BY DESC(?staged) ?queue ?job
